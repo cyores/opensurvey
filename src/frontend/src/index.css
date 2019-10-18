@@ -1,13 +1,129 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/**
+ * Colors:
+ * BG:              #FFFFFF
+ * Primary:         #4A148C
+ * Analogous Left:  #141A8C
+ * Complement:      #148C4A // actually Triadic Right
+ */
+
+ :root {
+    /* Colors */
+    --color-bg: rgb(255, 255, 255);
+
+
+    --color-primary: #4A148C;
+    --color-primary-light: #7C43BD;
+    --color-primary-dark: #12005E;
+
+
+    --color-analogous: #141A8C;
+
+    --color-complement: #148C4A;
+
+    --color-text-light: hsl(267, 75%, 97%);
+    --color-text-dark: #000000;
+
+    /* Text Sizing */
+    --text-base-size: 1em;
+    --text-scale-ratio: 1.2;
+    --text-xs: calc((1em / var(--text-scale-ratio)) / var(--text-scale-ratio));
+    --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
+    --text-md: calc(
+        var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio)
+    );
+    --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
+    --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+    --text-xxl: calc(var(--text-xl) * var(--text-scale-ratio));
+    --text-xxxl: calc(var(--text-xxl) * var(--text-scale-ratio));
+    --text-xxxxl: calc(var(--text-xxxl) * var(--text-scale-ratio));
+
+    /* Space */
+    --space-unit: 1em;
+    --space-xxxxs: calc(0.125 * var(--space-unit));
+    --space-xxxs: calc(0.25 * var(--space-unit));
+    --space-xxs: calc(0.375 * var(--space-unit));
+    --space-xs: calc(0.5 * var(--space-unit));
+    --space-sm: calc(0.75 * var(--space-unit));
+    --space-md: calc(1.25 * var(--space-unit));
+    --space-lg: calc(2 * var(--space-unit));
+    --space-xl: calc(3.25 * var(--space-unit));
+    --space-xxl: calc(5.25 * var(--space-unit));
+    --space-xxxl: calc(8.5 * var(--space-unit));
+    --space-xxxxl: calc(13.75 * var(--space-unit));
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: var(--text-base-size);
+    line-height: calc(var(--space-unit) * 1.5);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+/* Containers */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 80rem;
+    min-height: 75vh;
+    margin: var(--space-lg) auto;
+    padding: 0 var(--space-lg);
+    box-sizing: border-box;
+}
+.container-full {
+    position: relative;
+    width: 100vw;
+    min-height: 75vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 300;
+    letter-spacing: -0.1rem;
+    margin-bottom: var(--space-xs);
+}
+h1 {
+    font-size: var(--text-xxxxl);
+    line-height: 1.125;
+}
+h2 {
+    font-size: var(--text-xxxl);
+    line-height: 1.13;
+}
+h3 {
+    font-size: var(--text-xxl);
+    line-height: 1.135;
+}
+h4 {
+    font-size: var(--text-xl);
+    line-height: 1.14;
+}
+h5 {
+    font-size: var(--text-lg);
+    line-height: 1.15;
+}
+h6 {
+    font-size: var(--text-md);
+    line-height: 1.2;
+}
+p {
+    font-size: var(--text-base-size);
+}
+a {
+    color: var(--color-primary);
 }
