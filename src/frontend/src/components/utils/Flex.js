@@ -34,13 +34,17 @@ const FlexColCenter = styled.div`
 
 export default function Flex(props) {
     if (props.dir === "col") {
-        return <FlexCol>{props.children}</FlexCol>;
+        return <FlexCol style={props.style}>{props.children}</FlexCol>;
     } else if (props.dir === "colcenter") {
-        return <FlexColCenter>{props.children}</FlexColCenter>;
+        return (
+            <FlexColCenter style={props.style}>{props.children}</FlexColCenter>
+        );
     } else if (props.dir === "rowleft") {
-        return <FlexRowLeft>{props.children}</FlexRowLeft>;
+        return <FlexRowLeft style={props.style}>{props.children}</FlexRowLeft>;
     } else if (props.dir === "rowright") {
-        return <FlexRowRight>{props.children}</FlexRowRight>;
+        return (
+            <FlexRowRight style={props.style}>{props.children}</FlexRowRight>
+        );
     }
-    return <FlexRow>{props.children}</FlexRow>;
+    return <FlexRow style={props.style}>{props.children}</FlexRow>;
 }

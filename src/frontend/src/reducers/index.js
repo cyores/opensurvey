@@ -1,2 +1,5 @@
 import { combineReducers } from "redux";
-export default combineReducers({});
+
+import surveyReducer from "./surveyReducer";
+
+export default combineReducers({ surveyReducer });
