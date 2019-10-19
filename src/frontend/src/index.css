@@ -71,11 +71,9 @@ body {
 /* Containers */
 .container {
     position: relative;
-    width: 100%;
-    max-width: 80rem;
+    width: 66vw;
     min-height: 75vh;
     margin: var(--space-lg) auto;
-    padding: 0 var(--space-lg);
     box-sizing: border-box;
 }
 .container-full {
@@ -84,6 +82,12 @@ body {
     min-height: 75vh;
     margin: 0;
     box-sizing: border-box;
+}
+@media only screen and (max-width: 1366px) {
+    .container {
+        width: 96vw;
+        padding: 0 2vw;
+    }
 }
 
 /* Text */

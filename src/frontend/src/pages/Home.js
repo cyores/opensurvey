@@ -36,12 +36,13 @@ class Home extends Component {
                 </Button>
 
                 <br></br>
-                
+
                 <h4>Open Surveys:</h4>
                 <Flex dir="rowleft">
                     {surveys.length > 0 ? (
-                        surveys.map(survey => (
+                        surveys.map((survey, i) => (
                             <Card
+                                key={i}
                                 title={survey.name}
                                 desc={survey.desc}
                                 buttonText="View"

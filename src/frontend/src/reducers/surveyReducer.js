@@ -1,7 +1,12 @@
 import { ADD_SURVEY } from "../actions/index";
 
 const initialState = {
-    surveys: [{ name: "Test", desc: "A test description." }]
+    surveys: [
+        { name: "Test", desc: "A test description." },
+        { name: "Test", desc: "A test description." },
+        { name: "Test", desc: "A test description." },
+        { name: "Test", desc: "A test description." }
+    ]
 };
 
 export default function surveyReducer(state = initialState, action) {
