@@ -23,7 +23,7 @@ export default function Card(props) {
                 style={{ height: "100%", justifyContent: "flex-end" }}
             >
                 <div style={{flex: "1 0"}}>
-                    <h5>Image not found</h5>
+                    <h5>Image here</h5>
                 </div>
                 <div>
                     <h5 style={{ margin: 0 }}>{props.title}</h5>

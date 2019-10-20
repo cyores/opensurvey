@@ -1,19 +1,33 @@
-import { ADD_SURVEY } from "../actions/index";
+import {
+    FETCH_SURVEYS,
+    FETCH_SURVEYS_SUCCESS,
+    FETCH_SURVEYS_FAILURE
+} from "../actions/index";
 
 const initialState = {
-    surveys: [
-        { name: "Test", desc: "A test description." },
-        { name: "Test", desc: "A test description." },
-        { name: "Test", desc: "A test description." },
-        { name: "Test", desc: "A test description." }
-    ]
+    surveys: [],
+    isLoading: false,
+    error: null
 };
 
 export default function surveyReducer(state = initialState, action) {
     switch (action.type) {
-        case ADD_SURVEY:
+        case FETCH_SURVEYS:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case FETCH_SURVEYS_SUCCESS:
             return Object.assign({}, state, {
-                surveys: state.surveys.concat(action.survey)
+                ...state,
+                surveys: action.payload,
+                isLoading: false
+            });
+        case FETCH_SURVEYS_FAILURE:
+            return Object.assign({}, state, {
+                ...state,
+                error: action.payload,
+                isLoading: false
             });
         default:
             return state;

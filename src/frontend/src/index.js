@@ -4,11 +4,19 @@ import "normalize.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
+
+// Redux
+import { createStore, applyMiddleware } from "redux";
+import { createEpicMiddleware } from "redux-observable";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/index";
+import { rootEpic } from "./epics/index";
 
-const store = createStore(rootReducer);
+// https://redux-observable.js.org/MIGRATION.html#setting-up-the-middleware
+const epicMiddleware = createEpicMiddleware();
+const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
+
+epicMiddleware.run(rootEpic);
 
 ReactDOM.render(
     <Provider store={store}>

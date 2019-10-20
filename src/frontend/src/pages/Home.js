@@ -7,23 +7,28 @@ import Button from "../components/utils/Button";
 import Card from "../components/utils/Card";
 
 // actions
-import { addSurvey } from "../actions/index";
+import { fetchSurveys } from "../actions/index";
 
 const mapStateToProps = state => {
     return {
-        surveys: state.surveyReducer.surveys
+        surveys: state.surveyReducer.surveys,
+        isLoading: state.surveyReducer.isLoading,
+        error: state.surveyReducer.error
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        addSurvey: survey => dispatch(addSurvey(survey))
+        fetchSurveys: () => dispatch(fetchSurveys())
     };
 }
 
 class Home extends Component {
+    componentDidMount() {
+        this.props.fetchSurveys();
+    }
     render() {
-        const { surveys } = this.props;
+        const { surveys, isLoading, error } = this.props;
         return (
             <div className="container">
                 <h1>Open Survey</h1>
@@ -39,7 +44,9 @@ class Home extends Component {
 
                 <h4>Open Surveys:</h4>
                 <Flex dir="rowleft">
-                    {surveys.length > 0 ? (
+                    {isLoading ? (
+                        <p>Loading . . . </p>
+                    ) : surveys.length > 0 ? (
                         surveys.map((survey, i) => (
                             <Card
                                 key={i}
@@ -51,6 +58,7 @@ class Home extends Component {
                     ) : (
                         <p>There are no open surveys at this time.</p>
                     )}
+                    {error && <p>Error: {error}</p>}
                 </Flex>
             </div>
         );

@@ -1,12 +1,12 @@
 require("dotenv").config({ path: "../../.env" });
 
-const { pool } = require("../dbconnect");
+const db = require("../db/db");
 const fs = require("fs");
 
 fs.readFile("./dbinit.sql", (err, data) => {
     if (err) throw err;
 
-    pool.query(data.toString())
+    db.query(data.toString())
         .then(done => {
             console.log("done", done);
             process.exit();
