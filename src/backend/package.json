@@ -2,9 +2,9 @@
   "name": "opensurvey-server",
   "version": "0.1.0",
   "description": "Open Survey",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "Christian Yores",

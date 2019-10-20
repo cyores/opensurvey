@@ -10,4 +10,8 @@ const pool = new Pool({
     ssl: isProduction
 });
 
-module.exports = { pool };
+module.exports = {
+    query: (text, params, callback) => {
+        return pool.query(text, params, callback);
+    }
+};

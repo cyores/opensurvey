@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "../../.env" });
 
-const { pool } = require("../db");
+const { pool } = require("../dbconnect");
 const fs = require("fs");
 
 fs.readFile("./dbinit.sql", (err, data) => {
