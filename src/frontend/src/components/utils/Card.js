@@ -10,6 +10,8 @@ const StyledCard = styled.div`
     height: 250px;
     max-width: 250px;
     margin: var(--space-sm);
+    background: #fff;
+    color: #000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     border-radius: 1rem;
     padding: var(--space-md);
@@ -22,7 +24,7 @@ export default function Card(props) {
                 dir="col"
                 style={{ height: "100%", justifyContent: "flex-end" }}
             >
-                <div style={{flex: "1 0"}}>
+                <div style={{ flex: "1 0" }}>
                     <h5>Image here</h5>
                 </div>
                 <div>

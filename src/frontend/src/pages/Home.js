@@ -8,6 +8,7 @@ import Card from "../components/utils/Card";
 
 // actions
 import { fetchSurveys } from "../actions/index";
+import Error from "../components/utils/Error";
 
 const mapStateToProps = state => {
     return {
@@ -44,21 +45,20 @@ class Home extends Component {
 
                 <h4>Open Surveys:</h4>
                 <Flex dir="rowleft">
-                    {isLoading ? (
-                        <p>Loading . . . </p>
-                    ) : surveys.length > 0 ? (
-                        surveys.map((survey, i) => (
-                            <Card
-                                key={i}
-                                title={survey.name}
-                                desc={survey.desc}
-                                buttonText="View"
-                            ></Card>
-                        ))
-                    ) : (
-                        <p>There are no open surveys at this time.</p>
-                    )}
-                    {error && <p>Error: {error}</p>}
+                    {isLoading && <p>Loading . . . </p>}
+
+                    {surveys.length > 0
+                        ? surveys.map((survey, i) => (
+                              <Card
+                                  key={i}
+                                  title={survey.name}
+                                  desc={survey.desc}
+                                  buttonText="View"
+                              ></Card>
+                          ))
+                        : null}
+
+                    {error && <Error error={error} />}
                 </Flex>
             </div>
         );

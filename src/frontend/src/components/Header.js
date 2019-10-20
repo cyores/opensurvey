@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // components
 import Flex from "./utils/Flex";
 import { NavLink } from "react-router-dom";
+import Toggle from "./utils/Toggle";
 
 const Wrapper = styled.div`
     display: flex;
@@ -32,7 +33,10 @@ const StyledNavLink = styled.div`
     }
 `;
 
-export default function Header(props) {
+export default function Header() {
+    const darkOnDefault = false;
+    const defaultTheme = darkOnDefault ? "dark" : "light";
+    const [theme, setTheme] = useState(defaultTheme);
     return (
         <Wrapper>
             <div style={{ flex: "1 1 auto" }}>
@@ -62,6 +66,29 @@ export default function Header(props) {
                             <StyledNavLink>About</StyledNavLink>
                         </NavLink>
                     </Item>
+                    <Item>
+                        <Toggle
+                            defaultChecked={darkOnDefault}
+                            onChange={input => {
+                                if (input.target.checked) {
+                                    setTheme("dark");
+                                } else {
+                                    setTheme("light");
+                                }
+                            }}
+                            style={{ padding: "var(--space-xs)" }}
+                        />
+                    </Item>
+                    {theme === "dark" && (
+                        <style>{`
+                                    :root {--color-bg: #000; --color-text-dark: #f6f1fd; --color-text-light: #000}
+                                `}</style>
+                    )}
+                    {theme === "light" && (
+                        <style>{`
+                                    :root {--color-bg: #fff; --color-text-dark: #000; --color-text-light: #f6f1fd}
+                                `}</style>
+                    )}
                 </Flex>
             </div>
         </Wrapper>

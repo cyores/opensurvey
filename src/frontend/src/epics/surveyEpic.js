@@ -21,5 +21,5 @@ export default function fetchSurveysEpic(action$) {
             return ajax.getJSON(url);
         })
         .map(surveys => fetchSurveysSuccess(surveys))
-        .catch(error => Observable.of(fetchSurveysFailure(error.message)));
+        .catch(error => Observable.of(fetchSurveysFailure(error)));
 }

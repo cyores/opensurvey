@@ -28,7 +28,7 @@ const Base = styled.div`
 const Primary = styled.button`
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
-    color: var(--color-text-light);
+    color: #f6f1fd;
     &:hover {
         border: 1px solid var(--color-primary-light);
         --box-shadow-color: var(--color-primary);
@@ -38,7 +38,7 @@ const Primary = styled.button`
 const Full = styled.button`
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
-    color: var(--color-text-light);
+    color: #f6f1fd;
     width: 100%;
     &:hover {
         border: 1px solid var(--color-primary-light);
@@ -52,7 +52,7 @@ const Outline = styled.button`
     color: var(--color-primary);
     &:hover {
         background: var(--color-primary);
-        color: var(--color-text-dark);
+        color: var(--color-text-light);
         --box-shadow-color: var(--color-primary);
     }
 `;
@@ -60,7 +60,7 @@ const Outline = styled.button`
 const Danger = styled.button`
     border: 1px solid #d30930;
     background: #d30930;
-    color: var(--color-text);
+    color: #f6f1fd;
     &:hover {
         --box-shadow-color: #d30930;
     }

@@ -20,7 +20,7 @@
 
     --color-complement: #148C4A;
 
-    --color-text-light: hsl(267, 75%, 97%);
+    --color-text-light: #f6f1fd;
     --color-text-dark: #000000;
 
     /* Text Sizing */
@@ -64,8 +64,9 @@ body {
     font-size: var(--text-base-size);
     line-height: calc(var(--space-unit) * 1.5);
     background: var(--color-bg);
-    color: var(--color-text);
+    color: var(--color-text-dark);
     min-height: 100vh;
+    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 
 /* Containers */
