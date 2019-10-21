@@ -10,6 +10,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    height: 7vh;
+    max-height: 7vh;
 `;
 
 const Item = styled.div`
@@ -26,7 +28,7 @@ const Logo = styled.div`
 const StyledNavLink = styled.div`
     font-size: var(--text-md);
     padding: var(--space-sm);
-    color: var(--color-text-dark);
+    color: #f6f1fd;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
     &:hover {
@@ -56,7 +58,7 @@ export default function Header() {
             </div>
             <div style={{ flex: "1 1 auto" }}>
                 <Flex dir="rowright">
-                    <Item>
+                    {/* <Item>
                         <NavLink
                             exact
                             to="/"
@@ -73,7 +75,7 @@ export default function Header() {
                         >
                             <StyledNavLink>About</StyledNavLink>
                         </NavLink>
-                    </Item>
+                    </Item> */}
                     <Item>
                         <Toggle
                             defaultChecked={darkOnDefault}
@@ -84,6 +86,7 @@ export default function Header() {
                                     setTheme("light");
                                 }
                             }}
+                            label="Theme"
                             style={{ padding: "var(--space-xs)" }}
                         />
                     </Item>

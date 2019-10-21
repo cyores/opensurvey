@@ -35,6 +35,16 @@ const Primary = styled.button`
     }
 `;
 
+const Complement = styled.button`
+    border: 1px solid var(--color-complement);
+    background: var(--color-complement);
+    color: #f6f1fd;
+    &:hover {
+        border: 1px solid var(--color-complement);
+        --box-shadow-color: var(--color-complement);
+    }
+`;
+
 const Full = styled.button`
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
@@ -84,9 +94,10 @@ export default function Button(props) {
                 {props.theme === "primary" ? (
                     <Primary>{props.children}</Primary>
                 ) : null}
-                {props.theme === "full" ? (
-                    <Full>{props.children}</Full>
+                {props.theme === "complement" ? (
+                    <Complement>{props.children}</Complement>
                 ) : null}
+                {props.theme === "full" ? <Full>{props.children}</Full> : null}
                 {props.theme === "outline" ? (
                     <Outline>{props.children}</Outline>
                 ) : null}

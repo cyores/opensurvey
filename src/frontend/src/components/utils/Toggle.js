@@ -42,6 +42,7 @@ const Checkbox = styled.input`
     outline: none;
     &:checked + span {
         background-color: var(--color-primary);
+        background-color: var(--color-complement);
     }
     &:checked + span:before {
         transform: translateX(
@@ -53,6 +54,7 @@ const Checkbox = styled.input`
 export default function Toggle(props) {
     return (
         <div style={props.style}>
+            {props.label && <small style={{ margin: "var(--space-md)" }}>Theme</small>}
             <Switch>
                 <Checkbox
                     type="checkbox"

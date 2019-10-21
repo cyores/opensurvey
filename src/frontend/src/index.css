@@ -6,19 +6,17 @@
  * Complement:      #148C4A // actually Triadic Right
  */
 
- :root {
+:root {
     /* Colors */
     --color-bg: rgb(255, 255, 255);
 
+    --color-primary: #4a148c;
+    --color-primary-light: #7c43bd;
+    --color-primary-dark: #12005e;
 
-    --color-primary: #4A148C;
-    --color-primary-light: #7C43BD;
-    --color-primary-dark: #12005E;
+    --color-analogous: #141a8c;
 
-
-    --color-analogous: #141A8C;
-
-    --color-complement: #148C4A;
+    --color-complement: #148c4a;
 
     --color-text-light: #f6f1fd;
     --color-text-dark: #000000;
@@ -74,7 +72,7 @@ body {
     position: relative;
     width: 66vw;
     min-height: 75vh;
-    margin: var(--space-lg) auto;
+    margin: 0 auto;
     box-sizing: border-box;
 }
 .container-full {

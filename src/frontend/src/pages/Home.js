@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Wave from "../images/wave.svg";
 
 // components
-import { NavLink } from "react-router-dom";
 import Flex from "../components/utils/Flex";
-import Button from "../components/utils/Button";
 import Card from "../components/utils/Card";
 
 // actions
 import { fetchSurveys } from "../actions/index";
 import Error from "../components/utils/Error";
+import Hero from "../components/Hero";
 
 const mapStateToProps = state => {
     return {
@@ -32,41 +32,29 @@ class Home extends Component {
     render() {
         const { surveys, isLoading, error } = this.props;
         return (
-            <div className="container">
-                <h1>Open Survey</h1>
-                <h6 style={{ margin: 0 }}>
-                    An open source tool to create public surveys to share with
-                    anyone.
-                </h6>
-                <NavLink to="/create-survey">
-                    <Button
-                        theme="primary"
-                        style={{ margin: "var(--space-sm) 0" }}
-                    >
-                        Create Survey
-                    </Button>
-                </NavLink>
+            <>
+                <Hero />
+                <div className="container">
+                    <h4>Open Surveys:</h4>
+                    <Flex dir="rowleft">
+                        {isLoading && <p>Loading . . . </p>}
 
-                <br></br>
+                        {surveys.length > 0
+                            ? surveys.map((survey, i) => (
+                                  <Card
+                                      key={i}
+                                      title={survey.name}
+                                      desc={survey.desc}
+                                      buttonText="View"
+                                  ></Card>
+                              ))
+                            : null}
 
-                <h4>Open Surveys:</h4>
-                <Flex dir="rowleft">
-                    {isLoading && <p>Loading . . . </p>}
-
-                    {surveys.length > 0
-                        ? surveys.map((survey, i) => (
-                              <Card
-                                  key={i}
-                                  title={survey.name}
-                                  desc={survey.desc}
-                                  buttonText="View"
-                              ></Card>
-                          ))
-                        : null}
-
-                    {error && <Error error={error} />}
-                </Flex>
-            </div>
+                        {error && <Error error={error} />}
+                    </Flex>
+                </div>
+            </>
+            // </div>
         );
     }
 }

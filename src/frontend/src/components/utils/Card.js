@@ -10,7 +10,7 @@ const StyledCard = styled.div`
     height: 250px;
     max-width: 250px;
     margin: var(--space-sm);
-    background: #fff;
+    background: #f6f1fd;
     color: #000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     border-radius: 1rem;
