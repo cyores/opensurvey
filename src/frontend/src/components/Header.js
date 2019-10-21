@@ -19,6 +19,8 @@ const Item = styled.div`
 const Logo = styled.div`
     font-size: var(--text-xl);
     padding-top: var(--space-xs);
+    color: var(--color-text-dark);
+    transition: all 0.25s ease-in-out;
 `;
 
 const StyledNavLink = styled.div`
@@ -34,7 +36,7 @@ const StyledNavLink = styled.div`
 `;
 
 export default function Header() {
-    const darkOnDefault = false;
+    const darkOnDefault = true;
     const defaultTheme = darkOnDefault ? "dark" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (
@@ -42,7 +44,13 @@ export default function Header() {
             <div style={{ flex: "1 1 auto" }}>
                 <Flex dir="rowleft">
                     <Item>
-                        <Logo>Open Survey</Logo>
+                        <NavLink
+                            exact
+                            to="/"
+                            style={{ textDecoration: "none" }}
+                        >
+                            <Logo>Open Survey</Logo>
+                        </NavLink>
                     </Item>
                 </Flex>
             </div>

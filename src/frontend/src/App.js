@@ -7,12 +7,14 @@ import Header from "./components/Header";
 
 // pages
 import Home from "./pages/Home";
+import CreateSurvey from "./pages/CreateSurvey";
 
 function App() {
     return (
         <Router>
             <Header />
             <Route exact path="/" component={Home} />
+            <Route path="/create-survey" component={CreateSurvey} />
         </Router>
     );
 }

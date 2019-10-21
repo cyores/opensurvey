@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 // components
+import { NavLink } from "react-router-dom";
 import Flex from "../components/utils/Flex";
 import Button from "../components/utils/Button";
 import Card from "../components/utils/Card";
@@ -37,9 +38,14 @@ class Home extends Component {
                     An open source tool to create public surveys to share with
                     anyone.
                 </h6>
-                <Button theme="primary" style={{ margin: "var(--space-sm) 0" }}>
-                    Create Survey
-                </Button>
+                <NavLink to="/create-survey">
+                    <Button
+                        theme="primary"
+                        style={{ margin: "var(--space-sm) 0" }}
+                    >
+                        Create Survey
+                    </Button>
+                </NavLink>
 
                 <br></br>
 

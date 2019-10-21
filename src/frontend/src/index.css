@@ -132,3 +132,10 @@ p {
 a {
     color: var(--color-primary);
 }
+
+/* HR */
+hr {
+    border-width: 0;
+    border-top: var(--space-xxxxs) solid var(--color-primary);
+    margin: var(--space-lg) 0;
+}
