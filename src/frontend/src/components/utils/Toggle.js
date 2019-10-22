@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Flex from "./Flex";
 
 const Switch = styled.label`
     position: relative;
@@ -54,15 +55,17 @@ const Checkbox = styled.input`
 export default function Toggle(props) {
     return (
         <div style={props.style}>
-            {props.label && <small style={{ margin: "var(--space-md)" }}>Theme</small>}
-            <Switch>
-                <Checkbox
-                    type="checkbox"
-                    defaultChecked={props.defaultChecked}
-                    onChange={props.onChange}
-                ></Checkbox>
-                <Slider></Slider>
-            </Switch>
+            <Flex dir="colcenter">
+                {props.label && <small style={{...props.labelStyle, lineHeight: 1}}>Theme</small>}
+                <Switch>
+                    <Checkbox
+                        type="checkbox"
+                        defaultChecked={props.defaultChecked}
+                        onChange={props.onChange}
+                    ></Checkbox>
+                    <Slider></Slider>
+                </Switch>
+            </Flex>
         </div>
     );
 }

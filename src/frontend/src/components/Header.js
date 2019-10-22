@@ -28,12 +28,12 @@ const Logo = styled.div`
 const StyledNavLink = styled.div`
     font-size: var(--text-md);
     padding: var(--space-sm);
-    color: #f6f1fd;
+    color: var(--color-complement);
     cursor: pointer;
     transition: all 0.25s ease-in-out;
     &:hover {
-        box-shadow: inset 0 -0.5vh 0 0 var(--color-primary);
-        color: var(--color-primary);
+        box-shadow: inset 0 -0.5vh 0 0 var(--color-complement);
+        color: var(--color-complement);
     }
 `;
 
@@ -66,8 +66,8 @@ export default function Header() {
                         >
                             <StyledNavLink>Home</StyledNavLink>
                         </NavLink>
-                    </Item>
-                    <Item>
+                    </Item> */}
+                    {/* <Item>
                         <NavLink
                             exact
                             to="/about"
@@ -87,7 +87,6 @@ export default function Header() {
                                 }
                             }}
                             label="Theme"
-                            style={{ padding: "var(--space-xs)" }}
                         />
                     </Item>
                     {theme === "dark" && (

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Wave from "../images/wave.svg";
 
 // components
 import Flex from "../components/utils/Flex";

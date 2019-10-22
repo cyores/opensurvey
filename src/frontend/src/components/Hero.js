@@ -20,7 +20,7 @@ export default function Hero() {
             }}
         >
             <div className="container" style={{minHeight: "unset"}}>
-                <h1 style={{ marginTop: 0 }}>Open Survey</h1>
+                <h1 style={{ marginTop: "var(--space-sm)" }}>Open Survey</h1>
                 <h6 style={{ margin: 0 }}>
                     An open source tool to create public surveys to share with
                     anyone.
