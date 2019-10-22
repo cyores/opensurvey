@@ -12,7 +12,7 @@ fs.readFile("./dbinit.sql", (err, data) => {
             process.exit();
         })
         .catch(error => {
-            console.log("error", error);
+            console.log(error);
             process.exit();
         });
 });

@@ -12,7 +12,7 @@ export default function Hero() {
                 background: `url(${Wave})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                marginBottom: "-16vh",
+                marginBottom: "-7%",
                 height: "34vh",
                 padding: "var(--space-md) 0",
                 marginTop: "-7vh",

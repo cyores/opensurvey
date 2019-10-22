@@ -38,7 +38,7 @@ const StyledNavLink = styled.div`
 `;
 
 export default function Header() {
-    const darkOnDefault = true;
+    const darkOnDefault = false;
     const defaultTheme = darkOnDefault ? "dark" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (

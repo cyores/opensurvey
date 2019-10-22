@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import EmptyImg from "../images/undraw_empty.svg";
 
 // components
 import Flex from "../components/utils/Flex";
@@ -35,25 +36,32 @@ class Home extends Component {
                 <Hero />
                 <div className="container">
                     <h4>Open Surveys:</h4>
-                    <Flex dir="rowleft">
-                        {isLoading && <p>Loading . . . </p>}
 
-                        {surveys.length > 0
-                            ? surveys.map((survey, i) => (
-                                  <Card
-                                      key={i}
-                                      title={survey.name}
-                                      desc={survey.desc}
-                                      buttonText="View"
-                                  ></Card>
-                              ))
-                            : null}
+                    {isLoading && <p>Loading . . . </p>}
 
-                        {error && <Error error={error} />}
-                    </Flex>
+                    {error ? (
+                        <Flex>
+                            <Error error={error} />
+                        </Flex>
+                    ) : surveys.length > 0 ? (
+                        <Flex dir="rowleft">
+                            {surveys.map((survey, i) => (
+                                <Card
+                                    key={i}
+                                    title={survey.name}
+                                    desc={survey.desc}
+                                    buttonText="View"
+                                ></Card>
+                            ))}
+                        </Flex>
+                    ) : (
+                        <Flex dir="colcenter">
+                            <img src={EmptyImg} width="50%" alt="Empty" />
+                            <p>There are no surveys at this time</p>
+                        </Flex>
+                    )}
                 </div>
             </>
-            // </div>
         );
     }
 }
