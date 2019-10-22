@@ -2,9 +2,9 @@ const { surveyService } = require("../services");
 const { createSurvey, getAllSurveys } = surveyService;
 
 const postSurvey = async (req, res, next) => {
-    const { name } = req.body;
+    const { name, startDate, endDate, imageURL, author } = req.body;
     try {
-        await createSurvey(name);
+        await createSurvey(name, startDate, endDate, imageURL, author);
         res.sendStatus(201);
         next();
     } catch (err) {

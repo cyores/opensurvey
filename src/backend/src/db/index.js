@@ -1,5 +1,6 @@
-const surveyDB = require("./survey.db");
-
+const surveysDB = require("./surveys.db");
+const questionsDB = require("./questions.db");
 module.exports = {
-    surveyDB
+    surveysDB,
+    questionsDB
 };

@@ -1,8 +1,14 @@
-const { surveyDB } = require("../db");
+const { surveysDB } = require("../db");
 
-const createSurvey = async name => {
+const createSurvey = async (name, startDate, endDate, imageURL, author) => {
     try {
-        return await surveyDB.createSurvey(name);
+        return await surveysDB.createSurvey(
+            name,
+            startDate,
+            endDate,
+            imageURL,
+            author
+        );
     } catch (err) {
         console.log("err", err);
         throw new Error(err.message);
@@ -11,7 +17,7 @@ const createSurvey = async name => {
 
 const getAllSurveys = async () => {
     try {
-        return await surveyDB.getAllSurveys();
+        return await surveysDB.getAllSurveys();
     } catch (err) {
         console.log("err", err.message);
         throw new Error(err.message);
