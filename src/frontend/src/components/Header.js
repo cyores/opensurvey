@@ -38,7 +38,7 @@ const Logo = styled.div`
 // `;
 
 export default function Header() {
-    const darkOnDefault = false;
+    const darkOnDefault = true;
     const defaultTheme = darkOnDefault ? "dark" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (

@@ -7,6 +7,7 @@ import Input from "../components/utils/Input";
 import Textarea from "../components/utils/Textarea";
 import Button from "../components/utils/Button";
 import Error from "../components/utils/Error";
+import ReactModal from "react-modal";
 
 // actions
 import { postSurvey } from "../actions/index";
@@ -25,6 +26,27 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+const modelStyle = {
+    content: {
+        width: "66vw",
+        left: "17vw",
+        right: "17vw",
+        top: "7vh",
+        bottom: "14vh",
+        padding: "var(--space-sm)",
+        borderRadius: "1rem",
+        borderColor: "var(--color-primary)",
+        backgroundColor: "var(--color-bg)",
+        boxShadow: "0 2px 32px var(--color-primary)"
+    },
+    overlay: {
+        backgroundColor: "transparent",
+        backdropFilter: "blur(4px)"
+    }
+};
+
+ReactModal.setAppElement("#root");
+
 class CreateSurvey extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +57,8 @@ class CreateSurvey extends Component {
                 author: "",
                 openDate: "",
                 endDate: ""
-            }
+            },
+            modalIsOpen: false
         };
     }
 
@@ -134,8 +157,30 @@ class CreateSurvey extends Component {
                         }}
                     >
                         <Flex>
-                            <Button theme="primary">Add Question</Button>
+                            <Button
+                                theme="primary"
+                                onClick={() =>
+                                    this.setState({ modalIsOpen: true })
+                                }
+                            >
+                                Add Question
+                            </Button>
                         </Flex>
+                        <ReactModal
+                            isOpen={this.state.modalIsOpen}
+                            style={modelStyle}
+                            closeTimeoutMS={250}
+                        >
+                            <h1>Hello, World!</h1>
+                            <Button
+                                theme="danger"
+                                onClick={() =>
+                                    this.setState({ modalIsOpen: false })
+                                }
+                            >
+                                Close
+                            </Button>
+                        </ReactModal>
                     </div>
                 </Flex>
 

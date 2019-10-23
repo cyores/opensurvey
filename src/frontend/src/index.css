@@ -137,3 +137,24 @@ hr {
     border-top: var(--space-xxxxs) solid var(--color-primary);
     margin: var(--space-lg) 0;
 }
+
+/* Modal */
+.ReactModal__Overlay {
+    opacity: 0;
+    height: 0 !important;
+    top: -100% !important;
+    transition: all 250ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+    height: 100% !important;
+    top: 0 !important;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+    height: 0 !important;
+    top: -100% !important;
+}
+
