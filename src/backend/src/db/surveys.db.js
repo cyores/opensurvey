@@ -1,10 +1,12 @@
 const db = require("./db");
 
-const createSurvey = async (name, startDate, endDate, imageURL, author) => {
+const createSurvey = async (name, desc, openDate, endDate, imageURL, author) => {
+    if (openDate === "") openDate = null;
+    if (endDate === "") endDate = null;
     try {
         let qresult = await db.query(
-            "INSERT INTO surveys (name, startDate, endDate, imageURL, author) VALUES ($1, $2, $3, $4, $5)",
-            [name, startDate, endDate, imageURL, author]
+            "INSERT INTO surveys (name, descrip, open_date, end_date, image_url, author) VALUES ($1, $2, $3, $4, $5, $6)",
+            [name, desc, openDate, endDate, imageURL, author]
         );
         return qresult;
     } catch (err) {

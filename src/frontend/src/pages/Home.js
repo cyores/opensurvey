@@ -5,17 +5,17 @@ import EmptyImg from "../images/undraw_empty.svg";
 // components
 import Flex from "../components/utils/Flex";
 import Card from "../components/utils/Card";
+import Error from "../components/utils/Error";
+import Hero from "../components/Hero";
 
 // actions
 import { fetchSurveys } from "../actions/index";
-import Error from "../components/utils/Error";
-import Hero from "../components/Hero";
 
 const mapStateToProps = state => {
     return {
         surveys: state.surveyReducer.surveys,
         isLoading: state.surveyReducer.isLoading,
-        error: state.surveyReducer.error
+        fetchError: state.surveyReducer.error
     };
 };
 
@@ -30,7 +30,7 @@ class Home extends Component {
         this.props.fetchSurveys();
     }
     render() {
-        const { surveys, isLoading, error } = this.props;
+        const { surveys, isLoading, fetchError } = this.props;
         return (
             <>
                 <Hero />
@@ -39,9 +39,9 @@ class Home extends Component {
 
                     {isLoading && <p>Loading . . . </p>}
 
-                    {error ? (
+                    {fetchError ? (
                         <Flex>
-                            <Error error={error} />
+                            <Error error={fetchError} />
                         </Flex>
                     ) : surveys.length > 0 ? (
                         <Flex dir="rowleft">

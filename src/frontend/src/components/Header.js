@@ -25,17 +25,17 @@ const Logo = styled.div`
     transition: all 0.25s ease-in-out;
 `;
 
-const StyledNavLink = styled.div`
-    font-size: var(--text-md);
-    padding: var(--space-sm);
-    color: var(--color-complement);
-    cursor: pointer;
-    transition: all 0.25s ease-in-out;
-    &:hover {
-        box-shadow: inset 0 -0.5vh 0 0 var(--color-complement);
-        color: var(--color-complement);
-    }
-`;
+// const StyledNavLink = styled.div`
+//     font-size: var(--text-md);
+//     padding: var(--space-sm);
+//     color: var(--color-complement);
+//     cursor: pointer;
+//     transition: all 0.25s ease-in-out;
+//     &:hover {
+//         box-shadow: inset 0 -0.5vh 0 0 var(--color-complement);
+//         color: var(--color-complement);
+//     }
+// `;
 
 export default function Header() {
     const darkOnDefault = false;

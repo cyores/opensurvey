@@ -9,7 +9,7 @@ import {
     FETCH_SURVEYS, // type we're watching for
     fetchSurveysSuccess, // actions we will dispatch at the right time
     fetchSurveysFailure // actions we will dispatch at the right time
-} from "../actions/index";
+} from "../../actions/index";
 
 const url = process.env.REACT_APP_API_URL + "/surveys";
 

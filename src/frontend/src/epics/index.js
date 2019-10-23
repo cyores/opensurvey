@@ -1,5 +1,6 @@
 import { combineEpics } from "redux-observable";
 
-import surveyEpic from "./surveyEpic";
+import surveyFetch from "./survey/surveyFetch.epic";
+import surveyPost from "./survey/surveyPost.epic";
 
-export const rootEpic = combineEpics(surveyEpic);
+export const rootEpic = combineEpics(surveyFetch, surveyPost);

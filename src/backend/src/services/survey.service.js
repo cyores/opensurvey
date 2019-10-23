@@ -1,16 +1,16 @@
 const { surveysDB } = require("../db");
 
-const createSurvey = async (name, startDate, endDate, imageURL, author) => {
+const createSurvey = async (name, desc, openDate, endDate, imageURL, author) => {
     try {
         return await surveysDB.createSurvey(
             name,
-            startDate,
+            desc,
+            openDate,
             endDate,
             imageURL,
             author
         );
     } catch (err) {
-        console.log("err", err);
         throw new Error(err.message);
     }
 };

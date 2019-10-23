@@ -2,13 +2,12 @@ const { surveyService } = require("../services");
 const { createSurvey, getAllSurveys } = surveyService;
 
 const postSurvey = async (req, res, next) => {
-    const { name, startDate, endDate, imageURL, author } = req.body;
+    const { name, desc, openDate, endDate, imageURL, author } = req.body;
     try {
-        await createSurvey(name, startDate, endDate, imageURL, author);
+        await createSurvey(name, desc, openDate, endDate, imageURL, author);
         res.sendStatus(201);
         next();
     } catch (err) {
-        console.log("Error", err.message);
         res.sendStatus(500) && next(err);
     }
 };

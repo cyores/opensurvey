@@ -15,26 +15,24 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-    position: relative;
     flex: 6 0 300px;
+    font-size: var(--text-base-size);
+    height: var(--text-lg);
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
     padding: var(--space-xs);
-    margin: 0 var(--space-sm);
     outline: none;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.25s ease-in-out;
     &:focus {
         border: 1px solid var(--color-primary);
     }
 `;
 
 const Label = styled.label`
-    position: relative;
     flex: 1 0 50px;
     display: inline-block;
     padding: var(--space-xs);
-    transition: opacity 0.15s ease-in-out;
 `;
 
 export default function Input(props) {
