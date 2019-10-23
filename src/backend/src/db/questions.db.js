@@ -1,18 +1,21 @@
 const db = require("./db");
+const pgformat = require("pg-format");
 
-const createQuestion = async (
-    surveyID,
-    qtitle,
-    qdesc,
-    qtype,
-    qweight,
-    isRequired
-) => {
+/**
+ * Create Questions.
+ * Inserts questions into the questions table
+ *
+ * @param {Array} questions Array of all arrays of questions (ex. [[qtitle, qdesc], [qtitle, qdesc]])
+ *
+ * @return Result of the query
+ */
+const createQuestions = async questions => {
     try {
-        let qresult = await db.query(
-            "INSERT INTO questions (surveyID, qtitle, qdesc, qtype, qweight, isRequired) VALUES ($1, $2, $3, $4, $5)",
-            [surveyID, qtitle, qdesc, qtype, qweight, isRequired]
+        let formattedQuery = pgformat(
+            "INSERT INTO questions (surveyID, qtitle, qdesc, qtype, qweight, isRequired) VALUES %L",
+            questions
         );
+        let qresult = await db.query(formattedQuery);
         return qresult;
     } catch (err) {
         throw err;
@@ -20,5 +23,5 @@ const createQuestion = async (
 };
 
 module.exports = {
-    createQuestion
+    createQuestions
 };
