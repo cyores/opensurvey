@@ -173,6 +173,7 @@ class CreateSurvey extends Component {
                             isOpen={this.state.modalIsOpen}
                             style={modelStyle}
                             closeTimeoutMS={250}
+                            onRequestClose={() => this.setState({ modalIsOpen: false })}
                         >
                             <CreateQuestion
                                 onClose={() =>
