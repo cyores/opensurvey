@@ -62,6 +62,18 @@ class CreateQuestion extends Component {
         );
     }
 
+    updatePossibleAnswer(input, index) {
+        let q = this.state.question;
+        let pas = q.possibleAnswers;
+        q.possibleAnswers = pas.map(pa => {
+            if (pa.index === index) {
+                pa.atext = input.target.value;
+            }
+            return pa;
+        });
+        this.setState({ question: q }, () => console.log(this.state));
+    }
+
     addQuestion() {
         this.props.addQuestion(this.state.question);
         this.props.onClose();
@@ -151,6 +163,12 @@ class CreateQuestion extends Component {
                                     type="text"
                                     label={`Option ${ans.index}`}
                                     placeholder={`Possible answer ${ans.index} text`}
+                                    onChange={input =>
+                                        this.updatePossibleAnswer(
+                                            input,
+                                            ans.index
+                                        )
+                                    }
                                 />
                             ))}
                         </div>
