@@ -15,9 +15,7 @@ import CreateQuestion from "../components/modals/CreateQuestion.modal";
 
 const mapStateToProps = state => {
     return {
-        isPosting: state.surveyReducer.isLoading,
-        postError: state.surveyReducer.error,
-        postSuccess: state.surveyReducer.postSuccess
+        survey: state.createSurveyReducer.survey
     };
 };
 
@@ -56,7 +54,7 @@ class CreateSurvey extends Component {
                 desc: "",
                 author: "",
                 openDate: "",
-                endDate: ""
+                closeDate: ""
             },
             modalIsOpen: false
         };
@@ -64,7 +62,7 @@ class CreateSurvey extends Component {
 
     handleChange(input, item) {
         let value = input.target.value;
-        if (item === "openDate" || item === "endDate") {
+        if (item === "openDate" || item === "closeDate") {
             console.log(value);
             value = new Date(value);
         }
@@ -81,7 +79,7 @@ class CreateSurvey extends Component {
     }
 
     render() {
-        const { postSuccess, postError } = this.props;
+        const { postSuccess, postError, survey } = this.props;
         return (
             <div className="container">
                 <h2>Create New Survey</h2>
@@ -124,16 +122,16 @@ class CreateSurvey extends Component {
                         />
                         <Input
                             type="datetime-local"
-                            label="Start Date"
+                            label="Open Date"
                             onChange={input =>
                                 this.handleChange(input, "openDate")
                             }
                         />
                         <Input
                             type="datetime-local"
-                            label="End Date"
+                            label="Close Date"
                             onChange={input =>
-                                this.handleChange(input, "endDate")
+                                this.handleChange(input, "closeDate")
                             }
                         />
                     </div>
@@ -156,6 +154,18 @@ class CreateSurvey extends Component {
                             margin: "var(--space-sm) 0"
                         }}
                     >
+                        {survey.questions.length > 0 && (
+                            <>
+                                <Flex dir="colcenter">
+                                    {survey.questions.map((question, i) => (
+                                        <p key={`question-${i}`}>
+                                            {question.qtext}
+                                        </p>
+                                    ))}
+                                </Flex>
+                                <br></br>
+                            </>
+                        )}
                         <Flex>
                             <Button
                                 theme="primary"
@@ -163,7 +173,7 @@ class CreateSurvey extends Component {
                                     this.setState({ modalIsOpen: true })
                                 }
                             >
-                                Add Question
+                                Create Question
                             </Button>
                         </Flex>
                         <ReactModal

@@ -10,7 +10,7 @@ CREATE TABLE surveys (
     descrip TEXT,
     creation_date TIMESTAMPTZ DEFAULT CURRENT_DATE,
     open_date TIMESTAMPTZ DEFAULT CURRENT_DATE,
-    end_date TIMESTAMPTZ,
+    close_date TIMESTAMPTZ,
     image_url TEXT,
     author TEXT
 );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // components
 import Flex from "../utils/Flex";
@@ -8,18 +9,33 @@ import Select from "../utils/Select";
 import Toggle from "../utils/Toggle";
 import Textarea from "../utils/Textarea";
 
+// actions
+import { addQuestion } from "../../actions/index";
+
 const questionTypes = ["Text", "Radio", "Checkbox"];
+
+const mapStateToProps = state => {
+    return {};
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addQuestion: question => dispatch(addQuestion(question))
+    };
+}
 
 class CreateQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            qtext: "",
-            qdesc: "",
-            qweight: 1,
-            qtype: "Text",
-            required: false,
-            possibleAnswers: [],
+            question: {
+                qtext: "",
+                qdesc: "",
+                qweight: 1,
+                qtype: "Text",
+                required: false,
+                possibleAnswers: []
+            },
             PAindex: 1
         };
     }
@@ -29,18 +45,30 @@ class CreateQuestion extends Component {
         if (item === "required") {
             value = input.target.checked;
         }
-        this.setState({ [item]: value }, () => console.log(this.state));
+        let q = this.state.question;
+        q[item] = value;
+        this.setState({ question: q }, () => console.log(this.state));
     }
 
     addPossibleAnswer() {
-        let pas = this.state.possibleAnswers;
+        let q = this.state.question;
         let currIndex = this.state.PAindex;
-        pas = pas.concat({ atext: "", index: currIndex });
-        this.setState({ possibleAnswers: pas, PAindex: currIndex + 1 });
+        q.possibleAnswers = q.possibleAnswers.concat({
+            atext: "",
+            index: currIndex
+        });
+        this.setState({ question: q, PAindex: currIndex + 1 }, () =>
+            console.log(this.state)
+        );
+    }
+
+    addQuestion() {
+        this.props.addQuestion(this.state.question);
+        this.props.onClose();
     }
 
     render() {
-        const { qtype, possibleAnswers } = this.state;
+        const { qtext, qtype, possibleAnswers } = this.state.question;
         return (
             <>
                 <h4 style={{ marginTop: 0 }}>New Question</h4>
@@ -101,9 +129,16 @@ class CreateQuestion extends Component {
                 </Flex>
 
                 {qtype === "Text" ? (
-                    <Flex>
-                        <Button theme="complement">Add Question</Button>
-                    </Flex>
+                    qtext.length > 0 ? (
+                        <Flex>
+                            <Button
+                                theme="complement"
+                                onClick={() => this.addQuestion()}
+                            >
+                                Add Question
+                            </Button>
+                        </Flex>
+                    ) : null
                 ) : (
                     <>
                         <Flex>
@@ -127,11 +162,14 @@ class CreateQuestion extends Component {
                                 Add Possible Answer
                             </Button>
                         </Flex>
-                        {possibleAnswers.length > 0 && (
+                        {possibleAnswers.length > 0 && qtext.length > 0 && (
                             <>
                                 <br></br>
                                 <Flex>
-                                    <Button theme="complement">
+                                    <Button
+                                        theme="complement"
+                                        onClick={() => this.addQuestion()}
+                                    >
                                         Add Question
                                     </Button>
                                 </Flex>
@@ -142,7 +180,6 @@ class CreateQuestion extends Component {
 
                 <br></br>
                 <br></br>
-
                 <Flex dir="rowright">
                     <Button theme="danger" onClick={() => this.props.onClose()}>
                         Cancel
@@ -153,4 +190,7 @@ class CreateQuestion extends Component {
     }
 }
 
-export default CreateQuestion;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CreateQuestion);

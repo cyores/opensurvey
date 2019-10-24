@@ -1,12 +1,12 @@
 const { surveysDB } = require("../db");
 
-const createSurvey = async (name, desc, openDate, endDate, imageURL, author) => {
+const createSurvey = async (name, desc, openDate, closeDate, imageURL, author) => {
     try {
         return await surveysDB.createSurvey(
             name,
             desc,
             openDate,
-            endDate,
+            closeDate,
             imageURL,
             author
         );

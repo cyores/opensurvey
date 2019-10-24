@@ -20,7 +20,7 @@ export const POST_SURVEY = "POST_SURVEYS";
 export const POST_SURVEY_SUCCESS = "POST_SURVEYS_SUCCESS";
 export const POST_SURVEY_FAILURE = "POST_SURVEYS_FAILURE";
 
-export const postSurvey = (survey) => ({ type: POST_SURVEY, survey });
+export const postSurvey = survey => ({ type: POST_SURVEY, survey });
 
 export const postSurveySuccess = survey => ({
     type: POST_SURVEY_SUCCESS,
@@ -31,3 +31,8 @@ export const postSurveyFailure = survey => ({
     type: POST_SURVEY_FAILURE,
     payload: survey
 });
+
+// SURVEY CREATE
+export const ADD_QUESTION = "ADD_QUESTION";
+
+export const addQuestion = question => ({ type: ADD_QUESTION, question });
