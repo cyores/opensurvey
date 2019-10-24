@@ -10,7 +10,7 @@ import Error from "../components/utils/Error";
 import ReactModal from "react-modal";
 
 // actions
-import { postSurvey } from "../actions/index";
+import { postSurvey, updateSurvey } from "../actions/index";
 import CreateQuestion from "../components/modals/CreateQuestion.modal";
 
 const mapStateToProps = state => {
@@ -21,7 +21,8 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        postSurvey: survey => dispatch(postSurvey(survey))
+        postSurvey: survey => dispatch(postSurvey(survey)),
+        updateSurvey: survey => dispatch(updateSurvey(survey))
     };
 }
 
@@ -49,13 +50,6 @@ class CreateSurvey extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            survey: {
-                name: "",
-                desc: "",
-                author: "",
-                openDate: "",
-                closeDate: ""
-            },
             modalIsOpen: false
         };
     }
@@ -63,14 +57,13 @@ class CreateSurvey extends Component {
     handleChange(input, item) {
         let value = input.target.value;
         if (item === "openDate" || item === "closeDate") {
-            console.log(value);
             value = new Date(value);
         }
         let survey = {
-            ...this.state.survey,
+            ...this.props.survey,
             [item]: value
         };
-        this.setState({ survey: survey }, () => console.log(this.state));
+        this.props.updateSurvey(survey);
     }
 
     publish() {
@@ -192,11 +185,16 @@ class CreateSurvey extends Component {
 
                 <br></br>
 
-                <Flex>
-                    <Button theme="complement" onClick={() => this.publish()}>
-                        Publish Servey
-                    </Button>
-                </Flex>
+                {survey.name.length > 0 && (
+                    <Flex>
+                        <Button
+                            theme="complement"
+                            onClick={() => this.publish()}
+                        >
+                            Publish Servey
+                        </Button>
+                    </Flex>
+                )}
 
                 {postSuccess && <p>Survey was created!</p>}
 

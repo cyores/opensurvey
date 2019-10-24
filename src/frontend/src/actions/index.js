@@ -34,5 +34,7 @@ export const postSurveyFailure = survey => ({
 
 // SURVEY CREATE
 export const ADD_QUESTION = "ADD_QUESTION";
+export const UPDATE_SURVEY = "UPDATE_SURVEY";
 
 export const addQuestion = question => ({ type: ADD_QUESTION, question });
+export const updateSurvey = survey => ({ type: UPDATE_SURVEY, survey });

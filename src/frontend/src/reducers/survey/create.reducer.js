@@ -1,4 +1,4 @@
-import { ADD_QUESTION } from "../../actions/";
+import { ADD_QUESTION, UPDATE_SURVEY } from "../../actions/";
 
 const initialState = {
     survey: {
@@ -20,6 +20,11 @@ export default function create(state = initialState, action) {
                     questions: state.survey.questions.concat(action.question)
                 }
             });
+        case UPDATE_SURVEY:
+            return Object.assign({}, state, {
+                survey: action.survey
+            });
+
         default:
             return state;
     }
