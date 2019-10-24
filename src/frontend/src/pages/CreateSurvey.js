@@ -11,6 +11,7 @@ import ReactModal from "react-modal";
 
 // actions
 import { postSurvey } from "../actions/index";
+import CreateQuestion from "../components/modals/CreateQuestion.modal";
 
 const mapStateToProps = state => {
     return {
@@ -28,12 +29,11 @@ function mapDispatchToProps(dispatch) {
 
 const modelStyle = {
     content: {
-        width: "66vw",
-        left: "17vw",
-        right: "17vw",
+        left: "15vw",
+        right: "15vw",
         top: "7vh",
         bottom: "14vh",
-        padding: "var(--space-sm)",
+        padding: "var(--space-xl)",
         borderRadius: "1rem",
         borderColor: "var(--color-primary)",
         backgroundColor: "var(--color-bg)",
@@ -171,15 +171,11 @@ class CreateSurvey extends Component {
                             style={modelStyle}
                             closeTimeoutMS={250}
                         >
-                            <h1>Hello, World!</h1>
-                            <Button
-                                theme="danger"
-                                onClick={() =>
+                            <CreateQuestion
+                                onClose={() =>
                                     this.setState({ modalIsOpen: false })
                                 }
-                            >
-                                Close
-                            </Button>
+                            />
                         </ReactModal>
                     </div>
                 </Flex>
@@ -187,7 +183,7 @@ class CreateSurvey extends Component {
                 <br></br>
 
                 <Flex>
-                    <Button theme="primary" onClick={() => this.publish()}>
+                    <Button theme="complement" onClick={() => this.publish()}>
                         Publish Servey
                     </Button>
                 </Flex>

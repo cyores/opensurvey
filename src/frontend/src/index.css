@@ -13,6 +13,7 @@
     --color-primary: #4a148c;
     --color-primary-light: #7c43bd;
     --color-primary-dark: #12005e;
+    --color-primary-transparent: rgba(74, 20, 140, 0.75);
 
     --color-analogous: #141a8c;
 
@@ -158,3 +159,27 @@ hr {
     top: -100% !important;
 }
 
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    /* background: var(--color-text); */
+    border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary-transparent);
+    border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+    border-radius: 1rem;
+}

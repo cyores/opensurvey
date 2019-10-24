@@ -14,16 +14,15 @@ const Wrapper = styled.div`
     }
 `;
 
-const StyledInput = styled.input`
+const StyledSelect = styled.select`
     flex: 6 0 300px;
     font-size: var(--text-base-size);
-    height: var(--text-lg);
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
     padding: var(--space-xs);
     outline: none;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.15s ease-in-out;
     &:focus {
         border: 1px solid var(--color-primary);
     }
@@ -41,17 +40,9 @@ const LabelTop = styled.label`
     padding: 0;
 `;
 
-export default function Input(props) {
-    const {
-        type,
-        placeholder,
-        defaultValue,
-        step,
-        min,
-        onChange,
-        label,
-        labelTop
-    } = props;
+export default function Select(props) {
+    const { defaultValue, label, options, multiple, labelTop } = props;
+
     return (
         <Wrapper>
             <Flex>
@@ -60,14 +51,17 @@ export default function Input(props) {
                 ) : (
                     <Label>{label}</Label>
                 )}
-                <StyledInput
-                    type={type}
-                    placeholder={placeholder}
+                <StyledSelect
                     defaultValue={defaultValue}
-                    step={step}
-                    min={min}
-                    onChange={onChange}
-                ></StyledInput>
+                    multiple={multiple}
+                    onChange={props.onChange}
+                >
+                    {options.map((option, i) => (
+                        <option key={`qtype-option-${i}`} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </StyledSelect>
             </Flex>
         </Wrapper>
     );

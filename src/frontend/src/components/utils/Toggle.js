@@ -56,7 +56,7 @@ export default function Toggle(props) {
     return (
         <div style={props.style}>
             <Flex dir="colcenter">
-                {props.label && <small style={{...props.labelStyle, lineHeight: 1}}>Theme</small>}
+                {props.label && <small style={{...props.labelStyle, lineHeight: 1}}>{props.label}</small>}
                 <Switch>
                     <Checkbox
                         type="checkbox"
