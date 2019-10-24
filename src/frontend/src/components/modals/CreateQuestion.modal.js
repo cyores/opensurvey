@@ -47,7 +47,7 @@ class CreateQuestion extends Component {
         }
         let q = this.state.question;
         q[item] = value;
-        this.setState({ question: q }, () => console.log(this.state));
+        this.setState({ question: q });
     }
 
     addPossibleAnswer() {
@@ -57,9 +57,7 @@ class CreateQuestion extends Component {
             atext: "",
             index: currIndex
         });
-        this.setState({ question: q, PAindex: currIndex + 1 }, () =>
-            console.log(this.state)
-        );
+        this.setState({ question: q, PAindex: currIndex + 1 });
     }
 
     updatePossibleAnswer(input, index) {
@@ -71,7 +69,7 @@ class CreateQuestion extends Component {
             }
             return pa;
         });
-        this.setState({ question: q }, () => console.log(this.state));
+        this.setState({ question: q });
     }
 
     addQuestion() {

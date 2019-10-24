@@ -24,7 +24,7 @@ const Slider = styled.span`
     bottom: 0;
     border-radius: var(--text-xl);
     background-color: #ccc;
-    transition: 0.4s;
+    transition: 0.1s linear;
     outline: none;
     &:before {
         position: absolute;
@@ -35,7 +35,7 @@ const Slider = styled.span`
         bottom: 4px;
         border-radius: 50%;
         background-color: white;
-        transition: 0.4s;
+        transition: 0.1s linear;
     }
 `;
 

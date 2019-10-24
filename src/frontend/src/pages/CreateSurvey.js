@@ -12,6 +12,7 @@ import ReactModal from "react-modal";
 // actions
 import { postSurvey, updateSurvey } from "../actions/index";
 import CreateQuestion from "../components/modals/CreateQuestion.modal";
+import QuestionCS from "../components/QuestionCS";
 
 const mapStateToProps = state => {
     return {
@@ -62,6 +63,21 @@ class CreateSurvey extends Component {
         let survey = {
             ...this.props.survey,
             [item]: value
+        };
+        this.props.updateSurvey(survey);
+    }
+
+    deleteQuestion(q) {
+        let questions = this.props.survey.questions;
+        questions = questions.filter(question => {
+            if (question === q) {
+                return false;
+            }
+            return true;
+        });
+        let survey = {
+            ...this.props.survey,
+            questions: questions
         };
         this.props.updateSurvey(survey);
     }
@@ -149,13 +165,17 @@ class CreateSurvey extends Component {
                     >
                         {survey.questions.length > 0 && (
                             <>
-                                <Flex dir="colcenter">
-                                    {survey.questions.map((question, i) => (
-                                        <p key={`question-${i}`}>
-                                            {question.qtext}
-                                        </p>
-                                    ))}
-                                </Flex>
+                                {survey.questions.map((question, i) => (
+                                    <QuestionCS
+                                        key={`question-${i}`}
+                                        qtext={question.qtext}
+                                        qtype={question.qtype}
+                                        qindex={i + 1}
+                                        onDelete={() =>
+                                            this.deleteQuestion(question)
+                                        }
+                                    />
+                                ))}
                                 <br></br>
                             </>
                         )}
@@ -173,7 +193,9 @@ class CreateSurvey extends Component {
                             isOpen={this.state.modalIsOpen}
                             style={modelStyle}
                             closeTimeoutMS={250}
-                            onRequestClose={() => this.setState({ modalIsOpen: false })}
+                            onRequestClose={() =>
+                                this.setState({ modalIsOpen: false })
+                            }
                         >
                             <CreateQuestion
                                 onClose={() =>
@@ -200,6 +222,8 @@ class CreateSurvey extends Component {
                 {postSuccess && <p>Survey was created!</p>}
 
                 {postError && <Error error={postError}></Error>}
+
+                <br></br>
             </div>
         );
     }
