@@ -1,6 +1,7 @@
 import {
     ADD_QUESTION,
     UPDATE_SURVEY,
+    REFRESH_SURVEY,
     POST_SURVEY,
     POST_SURVEY_SUCCESS,
     POST_SURVEY_FAILURE
@@ -14,7 +15,10 @@ const initialState = {
         openDate: "",
         closeDate: "",
         questions: []
-    }
+    },
+    isPosting: false,
+    postSuccess: null,
+    postError: null
 };
 
 export default function create(state = initialState, action) {
@@ -30,15 +34,26 @@ export default function create(state = initialState, action) {
             return Object.assign({}, state, {
                 survey: action.survey
             });
+        case REFRESH_SURVEY:
+            return Object.assign({}, state, initialState);
         case POST_SURVEY:
-            console.log("reducer post survey");
-            return state;
+            return Object.assign({}, state, {
+                ...state,
+                isPosting: true
+            });
         case POST_SURVEY_SUCCESS:
-            console.log("reducer post survey succ");
-            return state;
+            return Object.assign({}, state, {
+                ...state,
+                survey: initialState.survey,
+                postSuccess: true,
+                isPosting: false
+            });
         case POST_SURVEY_FAILURE:
-            console.log("reducer post survey fail");
-            return state;
+            return Object.assign({}, state, {
+                ...state,
+                postSuccess: false,
+                postError: action.payload
+            });
         default:
             return state;
     }

@@ -42,9 +42,12 @@ const createSurvey = async survey => {
                 });
             }
         });
-        console.log("fpa", formattedPAArray);
 
-        return await possibleAnswersDB.createPossibleAnswers(formattedPAArray);
+        if (formattedPAArray.length > 0) {
+            await possibleAnswersDB.createPossibleAnswers(formattedPAArray);
+        }
+
+        return 1;
     } catch (err) {
         throw new Error(err.message);
     }

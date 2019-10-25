@@ -18,7 +18,6 @@ export default function postSurveyEpic(action$) {
     return action$
         .ofType(POST_SURVEY)
         .switchMap(action => {
-            console.log("from epic", action.survey);
             return ajax.post(url, action.survey, {
                 "Content-Type": "application/json"
             });

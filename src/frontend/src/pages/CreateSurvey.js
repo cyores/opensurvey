@@ -10,20 +10,24 @@ import Error from "../components/utils/Error";
 import ReactModal from "react-modal";
 
 // actions
-import { postSurvey, updateSurvey } from "../actions/index";
+import { postSurvey, updateSurvey, refreshSurvey } from "../actions/index";
 import CreateQuestion from "../components/modals/CreateQuestion.modal";
 import QuestionCS from "../components/QuestionCS";
 
 const mapStateToProps = state => {
     return {
-        survey: state.createSurveyReducer.survey
+        survey: state.createSurveyReducer.survey,
+        isPosting: state.createSurveyReducer.isPosting,
+        postSuccess: state.createSurveyReducer.postSuccess,
+        postError: state.createSurveyReducer.postError
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
         postSurvey: survey => dispatch(postSurvey(survey)),
-        updateSurvey: survey => dispatch(updateSurvey(survey))
+        updateSurvey: survey => dispatch(updateSurvey(survey)),
+        refreshSurvey: () => dispatch(refreshSurvey())
     };
 }
 
@@ -53,6 +57,7 @@ class CreateSurvey extends Component {
         this.state = {
             modalIsOpen: false
         };
+        this.props.refreshSurvey();
     }
 
     handleChange(input, item) {
@@ -83,12 +88,22 @@ class CreateSurvey extends Component {
     }
 
     publish() {
-        console.log("publishing", this.props.survey);
         this.props.postSurvey(this.props.survey);
     }
 
     render() {
-        const { postSuccess, postError, survey } = this.props;
+        const { postSuccess, postError, isPosting, survey } = this.props;
+        if (postSuccess) {
+            return (
+                <div className="container">
+                    <h2>Create New Survey</h2>
+                    <hr></hr>
+                    <Flex>
+                        <h4>Survey created!</h4>
+                    </Flex>
+                </div>
+            );
+        }
         return (
             <div className="container">
                 <h2>Create New Survey</h2>
@@ -219,7 +234,7 @@ class CreateSurvey extends Component {
                     </Flex>
                 )}
 
-                {postSuccess && <p>Survey was created!</p>}
+                {isPosting && <p>Creating survey . . . </p>}
 
                 {postError && <Error error={postError}></Error>}
 
