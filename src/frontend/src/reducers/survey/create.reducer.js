@@ -1,4 +1,10 @@
-import { ADD_QUESTION, UPDATE_SURVEY } from "../../actions/";
+import {
+    ADD_QUESTION,
+    UPDATE_SURVEY,
+    POST_SURVEY,
+    POST_SURVEY_SUCCESS,
+    POST_SURVEY_FAILURE
+} from "../../actions/";
 
 const initialState = {
     survey: {
@@ -24,7 +30,15 @@ export default function create(state = initialState, action) {
             return Object.assign({}, state, {
                 survey: action.survey
             });
-
+        case POST_SURVEY:
+            console.log("reducer post survey");
+            return state;
+        case POST_SURVEY_SUCCESS:
+            console.log("reducer post survey succ");
+            return state;
+        case POST_SURVEY_FAILURE:
+            console.log("reducer post survey fail");
+            return state;
         default:
             return state;
     }

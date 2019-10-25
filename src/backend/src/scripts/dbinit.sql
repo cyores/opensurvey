@@ -34,7 +34,8 @@ CREATE TABLE possible_answers (
     FOREIGN KEY (survey_id) REFERENCES surveys(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
     atext TEXT NOT NULL,
-    avalue TEXT
+    avalue TEXT,
+    index INT
 );
 
 CREATE TABLE responses (

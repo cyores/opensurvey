@@ -55,6 +55,7 @@ class CreateQuestion extends Component {
         let currIndex = this.state.PAindex;
         q.possibleAnswers = q.possibleAnswers.concat({
             atext: "",
+            avalue: null,
             index: currIndex
         });
         this.setState({ question: q, PAindex: currIndex + 1 });

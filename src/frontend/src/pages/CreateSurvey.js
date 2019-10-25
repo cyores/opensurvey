@@ -83,8 +83,8 @@ class CreateSurvey extends Component {
     }
 
     publish() {
-        console.log("publishing");
-        this.props.postSurvey(this.state.survey);
+        console.log("publishing", this.props.survey);
+        this.props.postSurvey(this.props.survey);
     }
 
     render() {
@@ -208,7 +208,7 @@ class CreateSurvey extends Component {
 
                 <br></br>
 
-                {survey.name.length > 0 && (
+                {survey.name.length > 0 && survey.questions.length > 0 && (
                     <Flex>
                         <Button
                             theme="complement"

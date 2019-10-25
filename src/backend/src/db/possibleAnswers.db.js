@@ -1,17 +1,27 @@
 const db = require("./db");
+const pgformat = require("pg-format");
 
-const createPossibleAnswer = async (surveyID, questionID, atext, avalue) => {
+/**
+ * Create Possible Answers.
+ * Inserts possible answers into the possible answers table
+ *
+ * @param {Array} possibleAnswers Array of all arrays of possible answers (ex. [[surveyid, questionid, atext, avalue, index]])
+ *
+ * @return Result of the query
+ */
+const createPossibleAnswers = async possibleAnswers => {
     try {
-        let qresult = await db.query(
-            "INSERT INTO questions (surveyID, questionID, atext, avalue) VALUES ($1, $2, $3, $4)",
-            [surveyID, questionID, atext, avalue]
+        let formattedQuery = pgformat(
+            "INSERT INTO possible_answers (survey_id, question_id, atext, avalue, index) VALUES %L RETURNING id",
+            possibleAnswers
         );
-        return qresult;
+        let qresult = await db.query(formattedQuery);
+        return qresult.rows;
     } catch (err) {
         throw err;
     }
 };
 
 module.exports = {
-    createPossibleAnswer
+    createPossibleAnswers
 };
