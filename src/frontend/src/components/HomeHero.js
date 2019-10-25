@@ -12,7 +12,6 @@ export default function HomeHero() {
                 background: `url(${Wave})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                marginBottom: "-7%",
                 height: "34vh",
                 padding: "var(--space-md) 0",
                 margin: 0,
@@ -21,7 +20,7 @@ export default function HomeHero() {
             }}
         >
             <div className="container" style={{minHeight: "unset"}}>
-                <h1 style={{ marginTop: "var(--space-sm)" }}>Open Survey</h1>
+                <h1 style={{ marginTop: "var(--space-lg)" }}>Open Survey</h1>
                 <h6 style={{ margin: 0 }}>
                     An open source tool to create public surveys to share with
                     anyone.
