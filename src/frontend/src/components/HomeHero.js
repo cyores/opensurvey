@@ -3,9 +3,9 @@ import Wave from "../images/wave4.svg";
 
 // components
 import { NavLink } from "react-router-dom";
-import Button from "../components/utils/Button";
+import Button from "./utils/Button";
 
-export default function Hero() {
+export default function HomeHero() {
     return (
         <div
             style={{
@@ -15,8 +15,9 @@ export default function Hero() {
                 marginBottom: "-7%",
                 height: "34vh",
                 padding: "var(--space-md) 0",
-                marginTop: "-7vh",
-                paddingTop: "calc(7vh + var(--space-xl))",
+                margin: 0,
+                marginTop: "-2vh",
+                paddingTop: "calc(2vh + var(--space-xl))",
             }}
         >
             <div className="container" style={{minHeight: "unset"}}>

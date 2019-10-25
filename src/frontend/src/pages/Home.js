@@ -6,7 +6,7 @@ import EmptyImg from "../images/undraw_empty.svg";
 import Flex from "../components/utils/Flex";
 import Card from "../components/utils/Card";
 import Error from "../components/utils/Error";
-import Hero from "../components/Hero";
+import HomeHero from "../components/HomeHero";
 
 // actions
 import { fetchSurveys } from "../actions/index";
@@ -33,7 +33,7 @@ class Home extends Component {
         const { surveys, isLoading, fetchError } = this.props;
         return (
             <>
-                <Hero />
+                <HomeHero />
                 <div className="container">
                     <h4>Open Surveys:</h4>
 

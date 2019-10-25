@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 // components
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 // pages
 import Home from "./pages/Home";
@@ -15,6 +16,7 @@ function App() {
             <Header />
             <Route exact path="/" component={Home} />
             <Route path="/create-survey" component={CreateSurvey} />
+            <Footer />
         </Router>
     );
 }

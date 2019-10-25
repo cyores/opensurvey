@@ -12,16 +12,18 @@ const Wrapper = styled.div`
     justify-content: space-around;
     height: 7vh;
     max-height: 7vh;
+    background: var(--color-primary);
 `;
 
 const Item = styled.div`
     margin: var(--space-sm);
+    color: #fff;
 `;
 
 const Logo = styled.div`
     font-size: var(--text-xl);
     padding-top: var(--space-xs);
-    color: var(--color-text-dark);
+    color: #fff;
     transition: all 0.25s ease-in-out;
 `;
 
@@ -38,7 +40,7 @@ const Logo = styled.div`
 // `;
 
 export default function Header() {
-    const darkOnDefault = true;
+    const darkOnDefault = false;
     const defaultTheme = darkOnDefault ? "dark" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (
