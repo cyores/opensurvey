@@ -56,6 +56,18 @@ const Full = styled.button`
     }
 `;
 
+const FullOutline = styled.button`
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    width: 100%;
+    &:hover {
+        background: var(--color-primary);
+        color: var(--color-text-light);
+        --box-shadow-color: var(--color-primary);
+    }
+`;
+
 const Outline = styled.button`
     background: transparent;
     border: 1px solid var(--color-primary);
@@ -100,6 +112,9 @@ export default function Button(props) {
                 {props.theme === "full" ? <Full>{props.children}</Full> : null}
                 {props.theme === "outline" ? (
                     <Outline>{props.children}</Outline>
+                ) : null}
+                {props.theme === "full-outline" ? (
+                    <FullOutline>{props.children}</FullOutline>
                 ) : null}
                 {props.theme === "danger" ? (
                     <Danger>{props.children}</Danger>

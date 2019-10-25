@@ -35,8 +35,8 @@ const modelStyle = {
     content: {
         left: "15vw",
         right: "15vw",
-        top: "7vh",
-        bottom: "14vh",
+        top: "10vh",
+        bottom: "12vh",
         padding: "var(--space-xl)",
         borderRadius: "1rem",
         borderColor: "var(--color-primary)",

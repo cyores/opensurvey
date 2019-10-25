@@ -35,8 +35,6 @@ class Home extends Component {
             <>
                 <HomeHero />
                 <div className="container">
-                    <h4>Open Surveys:</h4>
-
                     {isLoading && <p>Loading . . . </p>}
 
                     {fetchError ? (
@@ -49,7 +47,9 @@ class Home extends Component {
                                 <Card
                                     key={i}
                                     title={survey.name}
-                                    desc={survey.desc}
+                                    desc={survey.descrip}
+                                    open={survey.open_date}
+                                    close={survey.close_date}
                                     buttonText="View"
                                 ></Card>
                             ))}

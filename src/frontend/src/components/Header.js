@@ -13,6 +13,10 @@ const Wrapper = styled.div`
     height: 7vh;
     max-height: 7vh;
     background: var(--color-primary);
+    @media only screen and (max-width: 450px) {
+        height: 9vh;
+        max-height: 9vh;
+    }
 `;
 
 const Item = styled.div`
@@ -40,7 +44,7 @@ const Logo = styled.div`
 // `;
 
 export default function Header() {
-    const darkOnDefault = false;
+    const darkOnDefault = true;
     const defaultTheme = darkOnDefault ? "dark" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (

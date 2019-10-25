@@ -13,7 +13,8 @@
     --color-primary: #4a148c;
     --color-primary-light: #7c43bd;
     --color-primary-dark: #12005e;
-    --color-primary-transparent: rgba(74, 20, 140, 0.75);
+    --color-primary-transparent: rgba(74, 20, 140, 0.5);
+    --color-primary-shadow: rgba(74, 20, 140, 0.25);
 
     --color-analogous: #141a8c;
 

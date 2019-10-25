@@ -6,34 +6,33 @@ import Button from "./Button";
 import Flex from "./Flex";
 
 const StyledCard = styled.div`
-    flex: 1 0 250px;
-    height: 250px;
-    max-width: 250px;
-    margin: var(--space-sm);
-    background: #f6f1fd;
-    color: #000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    flex: 1 0 300px;
+    height: 300px;
+    margin: var(--space-md);
+    // box-shadow: 0 16px 32px 0 rgba(55, 58, 75, 0.08);
+    box-shadow: 0 16px 32px 0 var(--color-primary-shadow);
+    border: 1px solid var(--color-primary-transparent);
     border-radius: 1rem;
-    padding: var(--space-md);
 `;
 
 export default function Card(props) {
+    const { title, desc, buttonText, open, close } = props;
     return (
         <StyledCard>
             <Flex
                 dir="col"
                 style={{ height: "100%", justifyContent: "flex-end" }}
             >
-                <div style={{ flex: "1 0" }}>
-                    <h5>Image here</h5>
-                </div>
-                <div>
-                    <h5 style={{ margin: 0 }}>{props.title}</h5>
+                <div style={{ padding: "var(--space-sm)" }}>
+                    <h5 style={{ margin: 0 }}>{title}</h5>
 
-                    <p>{props.desc}</p>
+                    {desc ? <p>{desc}</p> : <p>No description.</p>}
+
+                    {/* {open && <p>Open: {new Date(open).toString()}</p>} */}
+                    {/* {close && <p>Close: {new Date(close).toString()}</p>} */}
 
                     <Button theme="full" style={{ margin: 0 }}>
-                        {props.buttonText}
+                        {buttonText}
                     </Button>
                 </div>
             </Flex>

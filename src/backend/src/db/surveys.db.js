@@ -20,7 +20,7 @@ const createSurvey = async survey => {
 
 const getAllSurveys = async () => {
     try {
-        let qresult = await db.query("SELECT * FROM surveys");
+        let qresult = await db.query("SELECT * FROM surveys ORDER BY creation_date DESC");
         return qresult.rows;
     } catch (err) {
         throw err;
