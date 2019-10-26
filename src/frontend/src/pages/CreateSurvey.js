@@ -117,7 +117,7 @@ class CreateSurvey extends Component {
                             margin: "var(--space-sm) 0"
                         }}
                     >
-                        <h4 style={{ margin: 0 }}>Survey Details</h4>
+                        <h5 style={{ margin: 0 }}>Survey Details</h5>
                     </div>
                     <div
                         style={{
@@ -170,7 +170,7 @@ class CreateSurvey extends Component {
                             margin: "var(--space-sm) 0"
                         }}
                     >
-                        <h4 style={{ margin: 0 }}>Survey Questions</h4>
+                        <h5 style={{ margin: 0 }}>Survey Questions</h5>
                     </div>
                     <div
                         style={{

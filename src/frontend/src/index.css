@@ -8,11 +8,10 @@
 
 :root {
     /* Colors */
-    --color-bg: rgb(255, 255, 255);
+    --color-bg: var(--color-light-bg);
+    --color-text: var(--color-light-text);
 
     --color-primary: #4a148c;
-    --color-primary-light: #7c43bd;
-    --color-primary-dark: #12005e;
     --color-primary-transparent: rgba(74, 20, 140, 0.5);
     --color-primary-shadow: rgba(74, 20, 140, 0.25);
 
@@ -20,8 +19,11 @@
 
     --color-complement: #148c4a;
 
-    --color-text-light: #f6f1fd;
-    --color-text-dark: #000000;
+    /* Holder Color Vars */
+    --color-night-bg: rgba(22, 22, 22, 1);
+    --color-light-bg: rgba(232, 232, 232, 1);
+    --color-night-text: rgba(255, 255, 255, 0.91);
+    --color-light-text: rgba(0, 0, 0, 0.91);
 
     /* Text Sizing */
     --text-base-size: 1em;
@@ -64,7 +66,7 @@ body {
     font-size: var(--text-base-size);
     line-height: calc(var(--space-unit) * 1.5);
     background: var(--color-bg);
-    color: var(--color-text-dark);
+    color: var(--color-text);
     min-height: 100vh;
     transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 }
@@ -128,9 +130,6 @@ h6 {
 }
 p {
     font-size: var(--text-base-size);
-}
-a {
-    color: var(--color-primary);
 }
 
 /* HR */

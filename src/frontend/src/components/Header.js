@@ -21,13 +21,13 @@ const Wrapper = styled.div`
 
 const Item = styled.div`
     margin: var(--space-sm);
-    color: #fff;
+    color: var(--color-night-text);
 `;
 
 const Logo = styled.div`
     font-size: var(--text-xl);
     padding-top: var(--space-xs);
-    color: #fff;
+    color: var(--color-night-text);
     transition: all 0.25s ease-in-out;
 `;
 
@@ -43,10 +43,7 @@ const Logo = styled.div`
 //     }
 // `;
 
-export default function Header() {
-    const darkOnDefault = true;
-    const defaultTheme = darkOnDefault ? "dark" : "light";
-    const [theme, setTheme] = useState(defaultTheme);
+export default function Header(props) {
     return (
         <Wrapper>
             <div style={{ flex: "1 1 auto" }}>
@@ -84,27 +81,11 @@ export default function Header() {
                     </Item> */}
                     <Item>
                         <Toggle
-                            defaultChecked={darkOnDefault}
-                            onChange={input => {
-                                if (input.target.checked) {
-                                    setTheme("dark");
-                                } else {
-                                    setTheme("light");
-                                }
-                            }}
+                            defaultChecked={props.darkOnDefault}
+                            onChange={input => props.onToggleChange(input)}
                             label="Theme"
                         />
                     </Item>
-                    {theme === "dark" && (
-                        <style>{`
-                                    :root {--color-bg: #000; --color-text-dark: #f6f1fd; --color-text-light: #000}
-                                `}</style>
-                    )}
-                    {theme === "light" && (
-                        <style>{`
-                                    :root {--color-bg: #fff; --color-text-dark: #000; --color-text-light: #f6f1fd}
-                                `}</style>
-                    )}
                 </Flex>
             </div>
         </Wrapper>
