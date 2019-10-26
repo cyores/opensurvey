@@ -113,7 +113,7 @@ class CreateSurvey extends Component {
                 <Flex dir="rowleft">
                     <div
                         style={{
-                            flex: "1 0 100px",
+                            flex: "33 0 150px",
                             margin: "var(--space-sm) 0"
                         }}
                     >
@@ -121,7 +121,7 @@ class CreateSurvey extends Component {
                     </div>
                     <div
                         style={{
-                            flex: "3 0 300px",
+                            flex: "66 0 300px",
                             margin: "var(--space-sm) 0"
                         }}
                     >
@@ -166,7 +166,7 @@ class CreateSurvey extends Component {
                 <Flex dir="rowleft">
                     <div
                         style={{
-                            flex: "1 0 100px",
+                            flex: "33 0 150px",
                             margin: "var(--space-sm) 0"
                         }}
                     >
@@ -174,7 +174,7 @@ class CreateSurvey extends Component {
                     </div>
                     <div
                         style={{
-                            flex: "3 0 300px",
+                            flex: "66 0 300px",
                             margin: "var(--space-sm) 0"
                         }}
                     >

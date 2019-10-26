@@ -28,9 +28,8 @@ const Base = styled.div`
 const Primary = styled.button`
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
-    color: #f6f1fd;
+    color: var(--color-night-text);
     &:hover {
-        border: 1px solid var(--color-primary-light);
         --box-shadow-color: var(--color-primary);
     }
 `;
@@ -38,7 +37,7 @@ const Primary = styled.button`
 const Complement = styled.button`
     border: 1px solid var(--color-complement);
     background: var(--color-complement);
-    color: #f6f1fd;
+    color: var(--color-night-text);
     &:hover {
         border: 1px solid var(--color-complement);
         --box-shadow-color: var(--color-complement);
@@ -48,10 +47,9 @@ const Complement = styled.button`
 const Full = styled.button`
     border: 1px solid var(--color-primary);
     background: var(--color-primary);
-    color: #f6f1fd;
+    color: var(--color-night-text);
     width: 100%;
     &:hover {
-        border: 1px solid var(--color-primary-light);
         --box-shadow-color: var(--color-primary);
     }
 `;
@@ -82,7 +80,7 @@ const Outline = styled.button`
 const Danger = styled.button`
     border: 1px solid #d30930;
     background: #d30930;
-    color: #f6f1fd;
+    color: var(--color-night-text);
     &:hover {
         --box-shadow-color: #d30930;
     }

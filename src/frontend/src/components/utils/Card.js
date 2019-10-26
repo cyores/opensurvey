@@ -13,6 +13,12 @@ const StyledCard = styled.div`
     box-shadow: 0 16px 32px 0 var(--color-primary-shadow);
     border: 1px solid var(--color-primary-transparent);
     border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    transition: 0.25s ease-in-out;
+    backface-visibility: hidden;
+    &:hover {
+        transform: translate3d(0, -1px, 0) scale(1.02);
+    }
 `;
 
 export default function Card(props) {
