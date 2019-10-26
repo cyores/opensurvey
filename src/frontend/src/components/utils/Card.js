@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { checkDates } from "../../utils/index";
+import GreenClock from "../../images/clock-green.svg";
+import RedClock from "../../images/clock-red.svg";
 
 // components
 import Button from "./Button";
@@ -23,24 +26,82 @@ const StyledCard = styled.div`
 
 export default function Card(props) {
     const { title, desc, buttonText, open, close } = props;
+    const { isOpen, dateText, dateColor } = checkDates(open, close);
+
     return (
         <StyledCard>
-            <Flex
-                dir="col"
-                style={{ height: "100%", justifyContent: "flex-end" }}
-            >
-                <div style={{ padding: "var(--space-sm)" }}>
-                    <h5 style={{ margin: 0 }}>{title}</h5>
+            <Flex dir="colcenter" style={{ height: "100%" }}>
+                <Flex
+                    dir="col"
+                    style={{
+                        flex: "66 0 66px",
+                        width: "100%",
+                        maxHeight: "66%",
+                        justifyContent: "flex-start",
+                        overflow: "hidden"
+                    }}
+                >
+                    <div
+                        style={{
+                            padding: "var(--space-sm)"
+                        }}
+                    >
+                        <Flex dir="rowleft">
+                            <div style={{ flex: "1 0 auto" }}>
+                                <p style={{ fontWeight: 700 }}>{title}</p>
+                            </div>
+                            <div style={{ flex: "1 0 auto" }}>
+                                <p
+                                    style={{
+                                        fontWeight: 700,
+                                        float: "right",
+                                        color: dateColor
+                                    }}
+                                >
+                                    <img
+                                        src={
+                                            dateColor === "green"
+                                                ? GreenClock
+                                                : RedClock
+                                        }
+                                        alt="Clock"
+                                        style={{
+                                            color: dateColor,
+                                            width:
+                                                "calc(0.8 * var(--text-base-size))",
+                                            padding: "0 2px"
+                                        }}
+                                    />
+                                    <small>{dateText}</small>
+                                </p>
+                            </div>
+                        </Flex>
 
-                    {desc ? <p>{desc}</p> : <p>No description.</p>}
+                        {desc ? <p>{desc}</p> : <p>No description.</p>}
+                    </div>
+                </Flex>
 
-                    {/* {open && <p>Open: {new Date(open).toString()}</p>} */}
-                    {/* {close && <p>Close: {new Date(close).toString()}</p>} */}
-
-                    <Button theme="full" style={{ margin: 0 }}>
-                        {buttonText}
-                    </Button>
-                </div>
+                <Flex
+                    dir="col"
+                    style={{
+                        flex: "33 0 33px",
+                        width: "100%",
+                        justifyContent: "flex-end"
+                    }}
+                >
+                    <div
+                        style={{
+                            padding: "var(--space-sm)"
+                        }}
+                    >
+                        <Button
+                            theme={isOpen ? "full" : "full-disabled"}
+                            style={{ margin: 0 }}
+                        >
+                            {isOpen ? buttonText : "Closed"}
+                        </Button>
+                    </div>
+                </Flex>
             </Flex>
         </StyledCard>
     );

@@ -94,6 +94,15 @@ const Disabled = styled.button`
     }
 `;
 
+const FullDisabled = styled.button`
+    border: 1px solid #bcbcbc;
+    background: #bcbcbc;
+    width: 100%;
+    &:hover {
+        cursor: not-allowed;
+    }
+`;
+
 export default function Button(props) {
     return (
         <>
@@ -121,6 +130,11 @@ export default function Button(props) {
                     <Disabled disabled={props.disabled}>
                         {props.children}
                     </Disabled>
+                ) : null}
+                {props.theme === "full-disabled" ? (
+                    <FullDisabled disabled={props.disabled}>
+                        {props.children}
+                    </FullDisabled>
                 ) : null}
                 {!props.theme ? <Primary>{props.children}</Primary> : null}
             </Base>
