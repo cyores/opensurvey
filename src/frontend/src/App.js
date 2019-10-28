@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import CreateSurvey from "./pages/CreateSurvey";
 
 export default function App() {
-    const darkOnDefault = true;
+    const darkOnDefault = false;
     const defaultTheme = darkOnDefault ? "night" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (

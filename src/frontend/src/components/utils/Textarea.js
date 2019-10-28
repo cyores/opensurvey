@@ -25,6 +25,7 @@ const StyledTextarea = styled.textarea`
     transition: all 0.15s ease-in-out;
     &:focus {
         border: 1px solid var(--color-primary);
+        box-shadow: 0 2px 6px var(--color-primary-shadow);
     }
 `;
 

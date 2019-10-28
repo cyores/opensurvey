@@ -72,7 +72,6 @@ const Outline = styled.button`
     color: var(--color-primary);
     &:hover {
         background: var(--color-primary);
-        color: var(--color-text-light);
         --box-shadow-color: var(--color-primary);
     }
 `;
@@ -101,6 +100,12 @@ const FullDisabled = styled.button`
     &:hover {
         cursor: not-allowed;
     }
+`;
+
+const Transparent = styled.button`
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-primary);
 `;
 
 export default function Button(props) {
@@ -135,6 +140,9 @@ export default function Button(props) {
                     <FullDisabled disabled={props.disabled}>
                         {props.children}
                     </FullDisabled>
+                ) : null}
+                {props.theme === "transparent" ? (
+                    <Transparent>{props.children}</Transparent>
                 ) : null}
                 {!props.theme ? <Primary>{props.children}</Primary> : null}
             </Base>
