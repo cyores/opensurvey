@@ -33,10 +33,10 @@ function mapDispatchToProps(dispatch) {
 
 const modelStyle = {
     content: {
-        left: "15vw",
-        right: "15vw",
+        left: "12vw",
+        right: "12vw",
         top: "10vh",
-        bottom: "12vh",
+        bottom: "10vh",
         padding: "var(--space-xl)",
         borderRadius: "1rem",
         borderColor: "var(--color-primary)",
@@ -144,20 +144,39 @@ class CreateSurvey extends Component {
                                 this.handleChange(input, "author")
                             }
                         />
-                        <Input
-                            type="datetime-local"
-                            label="Open Date"
-                            onChange={input =>
-                                this.handleChange(input, "openDate")
-                            }
-                        />
-                        <Input
-                            type="datetime-local"
-                            label="Close Date"
-                            onChange={input =>
-                                this.handleChange(input, "closeDate")
-                            }
-                        />
+                        <Flex dir="rowleft">
+                            <div
+                                style={{
+                                    flex: "1 0 300px",
+                                    paddingLeft: "var(--space-xs)",
+                                    paddingRight: "var(--space-xs)"
+                                }}
+                            >
+                                <Input
+                                    type="datetime-local"
+                                    label="Open Date"
+                                    labelTop={true}
+                                    onChange={input =>
+                                        this.handleChange(input, "openDate")
+                                    }
+                                />
+                            </div>
+                            <div
+                                style={{
+                                    flex: "1 0 300px",
+                                    paddingLeft: "var(--space-xs)"
+                                }}
+                            >
+                                <Input
+                                    type="datetime-local"
+                                    label="Close Date"
+                                    labelTop={true}
+                                    onChange={input =>
+                                        this.handleChange(input, "closeDate")
+                                    }
+                                />
+                            </div>
+                        </Flex>
                     </div>
                 </Flex>
 

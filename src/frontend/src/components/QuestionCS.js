@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 // components
-import Flex from "./utils/Flex";
 import Button from "./utils/Button";
 
 const Grid = styled.div`
