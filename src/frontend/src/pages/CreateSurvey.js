@@ -223,16 +223,48 @@ class CreateSurvey extends Component {
 
                 <br></br>
 
-                {survey.name.length > 0 && survey.questions.length > 0 && (
-                    <Flex>
-                        <Button
-                            theme="complement"
-                            onClick={() => this.publish()}
-                        >
-                            Publish Servey
-                        </Button>
-                    </Flex>
-                )}
+                <Flex dir="rowleft">
+                    <div
+                        style={{
+                            flex: "33 0 150px",
+                            margin: "var(--space-sm) 0"
+                        }}
+                    >
+                        <h5 style={{ margin: 0 }}>Publish Survey</h5>
+                    </div>
+                    <div
+                        style={{
+                            flex: "66 0 300px",
+                            margin: "var(--space-sm) 0"
+                        }}
+                    >
+                        {survey.name.length > 0 &&
+                        survey.questions.length > 0 ? (
+                            <Flex>
+                                <Button
+                                    theme="complement"
+                                    onClick={() => this.publish()}
+                                >
+                                    Publish Servey
+                                </Button>
+                            </Flex>
+                        ) : (
+                            <>
+                                <Flex>
+                                    <Button theme="disabled">
+                                        Publish Servey
+                                    </Button>
+                                </Flex>
+                                <Flex>
+                                    <p>
+                                        Your survey needs a name and at least
+                                        one question.
+                                    </p>
+                                </Flex>
+                            </>
+                        )}
+                    </div>
+                </Flex>
 
                 {isPosting && <p>Creating survey . . . </p>}
 
