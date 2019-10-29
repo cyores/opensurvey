@@ -1,17 +1,34 @@
-// SURVEYS FETCH
+// SURVEYS FETCH ALL
 export const FETCH_SURVEYS = "FETCH_SURVEYS";
 export const FETCH_SURVEYS_SUCCESS = "FETCH_SURVEYS_SUCCESS";
 export const FETCH_SURVEYS_FAILURE = "FETCH_SURVEYS_FAILURE";
 
 export const fetchSurveys = () => ({ type: FETCH_SURVEYS });
 
-export const fetchSurveysSuccess = error => ({
+export const fetchSurveysSuccess = payload => ({
     type: FETCH_SURVEYS_SUCCESS,
-    payload: error
+    payload: payload
 });
 
 export const fetchSurveysFailure = error => ({
     type: FETCH_SURVEYS_FAILURE,
+    payload: error
+});
+
+// SURVEYS FETCH ONE
+export const FETCH_SURVEY = "FETCH_SURVEYS";
+export const FETCH_SURVEY_SUCCESS = "FETCH_SURVEY_SUCCESS";
+export const FETCH_SURVEY_FAILURE = "FETCH_SURVEY_FAILURE";
+
+export const fetchSurvey = id => ({ type: FETCH_SURVEY, id });
+
+export const fetchSurveySuccess = payload => ({
+    type: FETCH_SURVEY_SUCCESS,
+    payload: payload
+});
+
+export const fetchSurveyFailure = error => ({
+    type: FETCH_SURVEY_FAILURE,
     payload: error
 });
 

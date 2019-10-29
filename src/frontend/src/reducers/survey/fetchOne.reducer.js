@@ -1,29 +1,29 @@
 import {
-    FETCH_SURVEYS,
-    FETCH_SURVEYS_SUCCESS,
-    FETCH_SURVEYS_FAILURE,
+    FETCH_SURVEY,
+    FETCH_SURVEY_SUCCESS,
+    FETCH_SURVEY_FAILURE,
 } from "../../actions/index";
 
 const initialState = {
-    surveys: [],
+    survey: null,
     isLoading: false,
     fetchError: null
 };
 
-export default function surveyReducer(state = initialState, action) {
+export default function fetchAll(state = initialState, action) {
     switch (action.type) {
-        case FETCH_SURVEYS:
+        case FETCH_SURVEY:
             return {
                 ...state,
                 isLoading: true
             };
-        case FETCH_SURVEYS_SUCCESS:
+        case FETCH_SURVEY_SUCCESS:
             return Object.assign({}, state, {
                 ...state,
-                surveys: action.payload,
+                survey: action.payload,
                 isLoading: false
             });
-        case FETCH_SURVEYS_FAILURE:
+        case FETCH_SURVEY_FAILURE:
             return Object.assign({}, state, {
                 ...state,
                 fetchError: action.payload,

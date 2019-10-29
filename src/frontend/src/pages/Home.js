@@ -13,9 +13,9 @@ import { fetchSurveys } from "../actions/index";
 
 const mapStateToProps = state => {
     return {
-        surveys: state.fetchSurveyReducer.surveys,
-        isLoading: state.fetchSurveyReducer.isLoading,
-        fetchError: state.fetchSurveyReducer.error
+        surveys: state.fetchAllSurveyReducer.surveys,
+        isLoading: state.fetchAllSurveyReducer.isLoading,
+        fetchError: state.fetchAllSurveyReducer.error
     };
 };
 

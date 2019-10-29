@@ -13,8 +13,7 @@ import {
 
 const url = process.env.REACT_APP_API_URL + "/surveys";
 
-export default function fetchSurveysEpic(action$) {
-    // action$ is a stream of actions
+export default function fetchAll(action$) {
     return action$
         .ofType(FETCH_SURVEYS)
         .switchMap(() => {

@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
 
-import fetchSurveyReducer from "./survey/fetch.reducer";
+import fetchAllSurveyReducer from "./survey/fetchAll.reducer";
+import fetchOneSurveyReducer from "./survey/fetchOne.reducer";
 import createSurveyReducer from "./survey/create.reducer";
 
-export default combineReducers({ fetchSurveyReducer, createSurveyReducer });
+export default combineReducers({
+    fetchAllSurveyReducer,
+    createSurveyReducer,
+    fetchOneSurveyReducer
+});

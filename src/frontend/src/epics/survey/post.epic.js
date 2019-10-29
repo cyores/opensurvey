@@ -13,8 +13,7 @@ import {
 
 const url = process.env.REACT_APP_API_URL + "/survey";
 
-export default function postSurveyEpic(action$) {
-    // action$ is a stream of actions
+export default function post(action$) {
     return action$
         .ofType(POST_SURVEY)
         .switchMap(action => {
