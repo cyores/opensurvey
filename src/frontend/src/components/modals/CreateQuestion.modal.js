@@ -79,7 +79,13 @@ class CreateQuestion extends Component {
     }
 
     render() {
-        const { qtext, qtype, qdesc, possibleAnswers } = this.state.question;
+        const {
+            qtext,
+            qtype,
+            qdesc,
+            possibleAnswers,
+            required
+        } = this.state.question;
         return (
             <Flex dir="rowleft" style={{ height: "100%" }}>
                 <div
@@ -207,17 +213,6 @@ class CreateQuestion extends Component {
                             )}
                         </>
                     )}
-
-                    <br></br>
-                    <br></br>
-                    <Flex dir="rowright">
-                        <Button
-                            theme="danger"
-                            onClick={() => this.props.onClose()}
-                        >
-                            Cancel
-                        </Button>
-                    </Flex>
                 </div>
                 <div
                     style={{
@@ -227,45 +222,76 @@ class CreateQuestion extends Component {
                         height: "100%"
                     }}
                 >
-                    <h5 style={{ margin: 0 }}>Question Preview</h5>
-                    <p>
-                        <b>{qtext}</b>
-                        <br></br>
-                        {qdesc}
-                    </p>
+                    <Flex dir="colcenter" style={{ height: "100%" }}>
+                        <Flex
+                            dir="col"
+                            style={{
+                                flex: "66 0 66px",
+                                width: "100%",
+                                // maxHeight: "66%",
+                                justifyContent: "flex-start"
+                            }}
+                        >
+                            <h5 style={{ margin: 0 }}>Question Preview</h5>
+                            <p>
+                                <b>
+                                    {qtext}
+                                    {required && (
+                                        <span style={{ color: "#d30930" }}>
+                                            {" "}
+                                            *
+                                        </span>
+                                    )}
+                                </b>
+                                <br></br>
+                                {qdesc}
+                            </p>
 
-                    {qtype === "Text" && (
-                        <Input
-                            type="text"
-                            label="Answer"
-                            labelTop={true}
-                            placeholder="Type your response here"
-                        />
-                    )}
-
-                    {qtype === "Radio" &&
-                        possibleAnswers.map((pa, i) => (
-                            <>
+                            {qtype === "Text" && (
                                 <Input
-                                    key={`pa-${i}`}
-                                    type="radio"
-                                    label={pa.atext}
+                                    type="text"
+                                    label="Answer"
+                                    labelTop={true}
+                                    placeholder="Type your response here"
                                 />
-                                {/* <span>{pa.atext}</span> */}
-                            </>
-                        ))}
+                            )}
 
-                    {qtype === "Checkbox" &&
-                        possibleAnswers.map((pa, i) => (
-                            <>
-                                <Input
-                                    key={`pa-${i}`}
-                                    type="checkbox"
-                                    label={pa.atext}
-                                />
-                                {/* <span>{pa.atext}</span> */}
-                            </>
-                        ))}
+                            {qtype === "Radio" &&
+                                possibleAnswers.map((pa, i) => (
+                                    <Input
+                                        key={`pa-${i}`}
+                                        type="radio"
+                                        label={pa.atext}
+                                    />
+                                ))}
+
+                            {qtype === "Checkbox" &&
+                                possibleAnswers.map((pa, i) => (
+                                    <Input
+                                        key={`pa-${i}`}
+                                        type="checkbox"
+                                        label={pa.atext}
+                                    />
+                                ))}
+                        </Flex>
+                        <Flex
+                            dir="colright"
+                            style={{
+                                flex: "33 0 33px",
+                                width: "100%",
+                                justifyContent: "flex-end"
+                            }}
+                        >
+                            <div>
+                                <Button
+                                    theme="danger"
+                                    onClick={() => this.props.onClose()}
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </Flex>
+                    </Flex>
                 </div>
             </Flex>
         );

@@ -7,11 +7,6 @@ import Flex from "./Flex";
 const Wrapper = styled.div`
     width: 100%;
     margin-bottom: var(--space-md);
-    &:hover {
-        * {
-            opacity: 1;
-        }
-    }
 `;
 
 const StyledInput = styled.input`
@@ -42,6 +37,16 @@ const LabelTop = styled.label`
     padding: 0;
 `;
 
+const RadioCheckbox = styled.input`
+    outline: none;
+    transition: all 0.25s ease-in-out;
+    padding: var(--space-xs);
+`;
+
+const RCLabel = styled.span`
+    padding: 0 var(--space-xs);
+`;
+
 export default function Input(props) {
     const {
         type,
@@ -56,19 +61,35 @@ export default function Input(props) {
     return (
         <Wrapper>
             <Flex>
-                {labelTop ? (
-                    <LabelTop>{label}</LabelTop>
+                {type === "radio" || type === "checkbox" ? (
+                    <div style={{ flex: "1 0 auto" }}>
+                        <RadioCheckbox
+                            type={type}
+                            placeholder={placeholder}
+                            defaultValue={defaultValue}
+                            step={step}
+                            min={min}
+                            onChange={onChange}
+                        ></RadioCheckbox>
+                        <RCLabel>{label}</RCLabel>
+                    </div>
                 ) : (
-                    <Label>{label}</Label>
+                    <>
+                        {labelTop ? (
+                            <LabelTop>{label}</LabelTop>
+                        ) : (
+                            <Label>{label}</Label>
+                        )}
+                        <StyledInput
+                            type={type}
+                            placeholder={placeholder}
+                            defaultValue={defaultValue}
+                            step={step}
+                            min={min}
+                            onChange={onChange}
+                        />
+                    </>
                 )}
-                <StyledInput
-                    type={type}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                    step={step}
-                    min={min}
-                    onChange={onChange}
-                ></StyledInput>
             </Flex>
         </Wrapper>
     );

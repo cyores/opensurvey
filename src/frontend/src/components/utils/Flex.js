@@ -32,6 +32,13 @@ const FlexColCenter = styled.div`
     align-items: center;
 `;
 
+const FlexColRight = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+`;
+
 export default function Flex(props) {
     if (props.dir === "col") {
         return <FlexCol style={props.style}>{props.children}</FlexCol>;
@@ -44,6 +51,10 @@ export default function Flex(props) {
     } else if (props.dir === "rowright") {
         return (
             <FlexRowRight style={props.style}>{props.children}</FlexRowRight>
+        );
+    } else if (props.dir === "colright") {
+        return (
+            <FlexColRight style={props.style}>{props.children}</FlexColRight>
         );
     }
     return <FlexRow style={props.style}>{props.children}</FlexRow>;
