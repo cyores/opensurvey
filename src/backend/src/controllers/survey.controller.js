@@ -1,5 +1,5 @@
 const { surveyService } = require("../services");
-const { createSurvey, getAllSurveys } = surveyService;
+const { createSurvey, getAllSurveys, getSurvey } = surveyService;
 
 const postSurvey = async (req, res, next) => {
     const survey = req.body;
@@ -23,7 +23,20 @@ const getAll = async (req, res, next) => {
     }
 };
 
+const getOneSurvey = async (req, res, next) => {
+    try {
+        let id = req.params.id;
+        let survey = await getSurvey(id);
+        res.status(200).json(survey);
+        next();
+    } catch (err) {
+        console.log("Error", err.message);
+        res.sendStatus(500) && next(err);
+    }
+};
+
 module.exports = {
     postSurvey,
-    getAll
+    getAll,
+    getOneSurvey
 };

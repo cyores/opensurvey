@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { checkDates } from "../../utils/index";
 import GreenClock from "../../images/clock-green.svg";
 import RedClock from "../../images/clock-red.svg";
+import { Link } from "react-router-dom";
 
 // components
 import Button from "./Button";
@@ -25,7 +26,7 @@ const StyledCard = styled.div`
 `;
 
 export default function Card(props) {
-    const { title, desc, buttonText, open, close } = props;
+    const { title, desc, buttonText, open, close, surveyID } = props;
     const { isOpen, dateText, dateColor } = checkDates(open, close);
 
     return (
@@ -94,12 +95,14 @@ export default function Card(props) {
                             padding: "var(--space-sm)"
                         }}
                     >
-                        <Button
-                            theme={isOpen ? "full" : "full-disabled"}
-                            style={{ margin: 0 }}
-                        >
-                            {isOpen ? buttonText : "Closed"}
-                        </Button>
+                        <Link to={`/survey/${surveyID}`}>
+                            <Button
+                                theme={isOpen ? "full" : "full-disabled"}
+                                style={{ margin: 0 }}
+                            >
+                                {isOpen ? buttonText : "Closed"}
+                            </Button>
+                        </Link>
                     </div>
                 </Flex>
             </Flex>

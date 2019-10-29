@@ -20,7 +20,18 @@ const createSurvey = async survey => {
 
 const getAllSurveys = async () => {
     try {
-        let qresult = await db.query("SELECT * FROM surveys ORDER BY creation_date DESC");
+        let qresult = await db.query(
+            "SELECT * FROM surveys ORDER BY creation_date DESC"
+        );
+        return qresult.rows;
+    } catch (err) {
+        throw err;
+    }
+};
+
+const getSurvey = async id => {
+    try {
+        let qresult = await db.query("SELECT * FROM surveys WHERE id=$1", [id]);
         return qresult.rows;
     } catch (err) {
         throw err;
@@ -29,5 +40,6 @@ const getAllSurveys = async () => {
 
 module.exports = {
     createSurvey,
-    getAllSurveys
+    getAllSurveys,
+    getSurvey
 };

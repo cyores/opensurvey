@@ -51,6 +51,7 @@ class Home extends Component {
                                     open={survey.open_date}
                                     close={survey.close_date}
                                     buttonText="View"
+                                    surveyID={survey.id}
                                 ></Card>
                             ))}
                         </Flex>

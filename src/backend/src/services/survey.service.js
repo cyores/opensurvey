@@ -57,12 +57,20 @@ const getAllSurveys = async () => {
     try {
         return await surveysDB.getAllSurveys();
     } catch (err) {
-        console.log("err", err.message);
+        throw new Error(err.message);
+    }
+};
+
+const getSurvey = async id => {
+    try {
+        return await surveysDB.getSurvey(id);
+    } catch (err) {
         throw new Error(err.message);
     }
 };
 
 module.exports = {
     createSurvey,
-    getAllSurveys
+    getAllSurveys,
+    getSurvey
 };
