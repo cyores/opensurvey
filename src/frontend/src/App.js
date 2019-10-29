@@ -11,7 +11,7 @@ import CreateSurvey from "./pages/CreateSurvey";
 import Survey from "./pages/Survey";
 
 export default function App() {
-    const darkOnDefault = false;
+    const darkOnDefault = true;
     const defaultTheme = darkOnDefault ? "night" : "light";
     const [theme, setTheme] = useState(defaultTheme);
     return (

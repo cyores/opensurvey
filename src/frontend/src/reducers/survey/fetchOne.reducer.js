@@ -1,11 +1,18 @@
 import {
     FETCH_SURVEY,
     FETCH_SURVEY_SUCCESS,
-    FETCH_SURVEY_FAILURE,
+    FETCH_SURVEY_FAILURE
 } from "../../actions/index";
 
 const initialState = {
-    survey: null,
+    survey: {
+        name: "",
+        descrip: "",
+        creation_date: "",
+        open_date: "",
+        close_date: "",
+        author: ""
+    },
     isLoading: false,
     fetchError: null
 };

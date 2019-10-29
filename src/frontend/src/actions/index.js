@@ -16,7 +16,7 @@ export const fetchSurveysFailure = error => ({
 });
 
 // SURVEYS FETCH ONE
-export const FETCH_SURVEY = "FETCH_SURVEYS";
+export const FETCH_SURVEY = "FETCH_SURVEY";
 export const FETCH_SURVEY_SUCCESS = "FETCH_SURVEY_SUCCESS";
 export const FETCH_SURVEY_FAILURE = "FETCH_SURVEY_FAILURE";
 

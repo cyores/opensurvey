@@ -32,7 +32,7 @@ const getAllSurveys = async () => {
 const getSurvey = async id => {
     try {
         let qresult = await db.query("SELECT * FROM surveys WHERE id=$1", [id]);
-        return qresult.rows;
+        return qresult.rows[0];
     } catch (err) {
         throw err;
     }

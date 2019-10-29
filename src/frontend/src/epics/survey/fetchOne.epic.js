@@ -16,9 +16,9 @@ const url = process.env.REACT_APP_API_URL + "/survey/";
 export default function fetchOne(action$) {
     return action$
         .ofType(FETCH_SURVEY)
-        .switchMap(() => {
-            return ajax.getJSON(url + action$.id);
+        .switchMap(action => {
+            return ajax.getJSON(url + action.id);
         })
-        .map(surveys => fetchSurveySuccess(surveys))
+        .map(survey => fetchSurveySuccess(survey))
         .catch(error => Observable.of(fetchSurveyFailure(error)));
 }
