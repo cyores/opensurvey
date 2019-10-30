@@ -14,7 +14,7 @@ const mapStateToProps = state => {
     return {
         survey: state.fetchOneSurveyReducer.survey,
         isLoading: state.fetchOneSurveyReducer.isLoading,
-        fetchError: state.fetchOneSurveyReducer.error
+        fetchError: state.fetchOneSurveyReducer.fetchError
     };
 };
 
