@@ -87,6 +87,7 @@ const getSurvey = async id => {
                     qtext: row.qtext,
                     qtype: row.qtype,
                     qdesc: row.qdesc,
+                    required: row.is_required,
                     possibleAnswers: []
                 };
             }

@@ -68,6 +68,7 @@ const getSurvey = async id => {
             "questions.qtext, " +
             "questions.qdesc, " +
             "questions.qtype, " +
+            "questions.is_required, " +
             "possible_answers.atext, " +
             "possible_answers.avalue " +
             "FROM surveys " +
