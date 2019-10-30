@@ -31,7 +31,6 @@ class Home extends Component {
     }
     render() {
         const { surveys, isLoading, fetchError } = this.props;
-        console.log(surveys);
         return (
             <>
                 <HomeHero />
