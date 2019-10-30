@@ -20,9 +20,21 @@ const createSurvey = async survey => {
 
 const getAllSurveys = async () => {
     try {
-        let qresult = await db.query(
-            "SELECT * FROM surveys ORDER BY creation_date DESC"
-        );
+        let q =
+            "SELECT " +
+            "surveys.id AS id, " +
+            "name AS name, " +
+            "descrip AS desc, " +
+            "author AS author, " +
+            "creation_date AS creationDate, " +
+            "open_date AS openDate, " +
+            "close_date AS closeDate, " +
+            "COUNT(questions.survey_id) AS numquestions " +
+            "FROM surveys " +
+            "LEFT JOIN questions ON (surveys.id = questions.survey_id) " +
+            "GROUP BY surveys.id " +
+            "ORDER BY creation_date DESC";
+        let qresult = await db.query(q);
         return qresult.rows;
     } catch (err) {
         throw err;

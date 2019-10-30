@@ -31,6 +31,7 @@ class Home extends Component {
     }
     render() {
         const { surveys, isLoading, fetchError } = this.props;
+        console.log(surveys);
         return (
             <>
                 <HomeHero />
@@ -47,11 +48,12 @@ class Home extends Component {
                                 <Card
                                     key={i}
                                     title={survey.name}
-                                    desc={survey.descrip}
-                                    open={survey.open_date}
-                                    close={survey.close_date}
+                                    desc={survey.desc}
+                                    open={survey.openDate}
+                                    close={survey.closeDate}
                                     buttonText="View"
                                     surveyID={survey.id}
+                                    numQuestions={survey.numquestions}
                                 ></Card>
                             ))}
                         </Flex>

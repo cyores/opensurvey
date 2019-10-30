@@ -25,8 +25,21 @@ const StyledCard = styled.div`
     }
 `;
 
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: auto auto;
+`;
+
 export default function Card(props) {
-    const { title, desc, buttonText, open, close, surveyID } = props;
+    const {
+        title,
+        desc,
+        buttonText,
+        open,
+        close,
+        surveyID,
+        numQuestions
+    } = props;
     const { isOpen, dateText, dateColor } = checkDates(open, close);
 
     return (
@@ -47,9 +60,15 @@ export default function Card(props) {
                             padding: "var(--space-sm)"
                         }}
                     >
-                        <Flex dir="rowleft">
+                        <Grid>
                             <div style={{ flex: "1 0 auto" }}>
-                                <p style={{ fontWeight: 700 }}>{title}</p>
+                                <p>
+                                    <span style={{ fontWeight: 700 }}>
+                                        {title}
+                                    </span>
+                                    <br></br>
+                                    <small>{numQuestions} questions</small>
+                                </p>
                             </div>
                             <div style={{ flex: "1 0 auto" }}>
                                 <p
@@ -76,7 +95,7 @@ export default function Card(props) {
                                     <small>{dateText}</small>
                                 </p>
                             </div>
-                        </Flex>
+                        </Grid>
 
                         {desc ? <p>{desc}</p> : <p>No description.</p>}
                     </div>
