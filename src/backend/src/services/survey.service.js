@@ -63,9 +63,47 @@ const getAllSurveys = async () => {
 
 const getSurvey = async id => {
     try {
-        return await surveysDB.getSurvey(id);
+        // return await surveysDB.getSurvey(id);
+        let rows = await surveysDB.getSurvey(id);
+        let survey = {
+            name: rows[0].name,
+            descrip: rows[0].descrip,
+            creation_date: rows[0].creation_date,
+            open_date: rows[0].open_date,
+            close_date: rows[0].close_date,
+            author: rows[0].author,
+            questions: []
+        };
+        let currQid = -1;
+        let currQ = null;
+        rows.forEach(row => {
+            if (row.question_id !== currQid) {
+                if (currQ) {
+                    survey.questions.push(currQ);
+                }
+                currQid = row.question_id;
+                currQ = {
+                    id: row.question_id,
+                    qtext: row.qtext,
+                    qtype: row.qtype,
+                    qdesc: row.qdesc,
+                    possibleAnswers: []
+                };
+            }
+
+            if (currQ.qtype !== "text") {
+                let pa = {
+                    atext: row.atext,
+                    avalue: row.avalue
+                };
+                currQ.possibleAnswers.push(pa);
+            }
+        });
+        // push the last question
+        survey.questions.push(currQ);
+        return survey;
     } catch (err) {
-        throw new Error(err.message);
+        throw err;
     }
 };
 
