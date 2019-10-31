@@ -44,5 +44,6 @@ CREATE TABLE responses (
     question_id INT,
     FOREIGN KEY (survey_id) REFERENCES surveys(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
+    creation_date TIMESTAMPTZ DEFAULT CURRENT_DATE,
     response TEXT
 );

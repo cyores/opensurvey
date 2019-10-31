@@ -46,7 +46,7 @@ class Survey extends Component {
                 // a checkbox option has been checked
                 response = {
                     surveyID: this.props.survey.id,
-                    qid: qid,
+                    questionID: qid,
                     text: value
                 };
                 responses[qid.toString() + value.toString()] = response;
@@ -57,7 +57,7 @@ class Survey extends Component {
         } else {
             response = {
                 surveyID: this.props.survey.id,
-                qid: qid,
+                questionID: qid,
                 text: value
             };
             responses[qid] = response;
