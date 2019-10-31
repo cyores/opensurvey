@@ -66,6 +66,7 @@ const getSurvey = async id => {
         // return await surveysDB.getSurvey(id);
         let rows = await surveysDB.getSurvey(id);
         let survey = {
+            id: rows[0].survey_id,
             name: rows[0].name,
             descrip: rows[0].descrip,
             creation_date: rows[0].creation_date,

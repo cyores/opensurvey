@@ -25,9 +25,32 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Survey extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            responses: {}
+        };
+    }
+
     componentDidMount() {
         this.props.fetchSurvey(this.props.match.params.id);
     }
+
+    handleChange(input, qid) {
+        let responses = this.state.responses;
+        let value = input.target.value;
+        let response = {
+            surveyID: this.props.survey.id,
+            qid: qid,
+            text: value
+        };
+        if (!input.target.checked) {
+            console.log("it should have unchecked");
+        }
+        responses[qid] = response;
+        this.setState({ responses: responses }, () => console.log(this.state));
+    }
+
     render() {
         const { survey, isLoading, fetchError } = this.props;
         const { dateText, dateColor } = checkDates(
@@ -52,7 +75,9 @@ class Survey extends Component {
             <div className="container">
                 <Flex>
                     <div style={{ flex: "66 0 300px" }}>
-                        <h2>{survey.name}</h2>
+                        <h2>
+                            {survey.name} ({survey.id})
+                        </h2>
                     </div>
                     <div style={{ flex: "33 0 150px" }}>
                         <p
@@ -110,11 +135,17 @@ class Survey extends Component {
                         </p>
 
                         {question.qtype === "text" && (
-                            <div key={`pa-${qindex}`} style={{ maxWidth: "800px" }}>
+                            <div
+                                key={`pa-${qindex}`}
+                                style={{ maxWidth: "800px" }}
+                            >
                                 <Input
                                     type={question.qtype}
                                     labelTop={true}
                                     placeholder="Type your response here"
+                                    onChange={input =>
+                                        this.handleChange(input, question.id)
+                                    }
                                 />
                             </div>
                         )}
@@ -126,8 +157,12 @@ class Survey extends Component {
                             >
                                 <Input
                                     type={question.qtype}
+                                    value={pa.avalue}
                                     label={pa.atext}
-                                    name={"question.id"}
+                                    name={question.id}
+                                    onChange={input =>
+                                        this.handleChange(input, question.id)
+                                    }
                                 />
                             </div>
                         ))}

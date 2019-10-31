@@ -57,7 +57,8 @@ export default function Input(props) {
         onChange,
         label,
         labelTop,
-        name
+        name,
+        value
     } = props;
     return (
         <Wrapper>
@@ -70,6 +71,7 @@ export default function Input(props) {
                             defaultValue={defaultValue}
                             step={step}
                             name={name}
+                            value={value}
                             onChange={onChange}
                         ></RadioCheckbox>
                         <RCLabel>{label}</RCLabel>
