@@ -8,6 +8,7 @@ import Button from "./utils/Button";
 
 const Wrapper = styled.div`
     height: 34vh;
+    margin-bottom: var(--space-lg);
     @media only screen and (max-width: 1024px) {
         margin-bottom: var(--space-xxl);
         text-align: center;
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.div`
     margin: 0 auto;
-    width: 75%;
+    width: 66%;
     @media only screen and (max-width: 1024px) {
         width: 98%;
     }

@@ -9,6 +9,7 @@ import { fetchSurvey } from "../actions/index";
 import Flex from "../components/utils/Flex";
 import Error from "../components/utils/Error";
 import Input from "../components/utils/Input";
+import Button from "../components/utils/Button";
 
 const mapStateToProps = state => {
     return {
@@ -36,20 +37,36 @@ class Survey extends Component {
         this.props.fetchSurvey(this.props.match.params.id);
     }
 
-    handleChange(input, qid) {
+    handleChange(input, qid, type) {
         let responses = this.state.responses;
         let value = input.target.value;
-        let response = {
-            surveyID: this.props.survey.id,
-            qid: qid,
-            text: value
-        };
-        if (!input.target.checked) {
-            console.log("it should have unchecked");
+        let response = {};
+        if (type === "checkbox") {
+            if (input.target.checked) {
+                // a checkbox option has been checked
+                response = {
+                    surveyID: this.props.survey.id,
+                    qid: qid,
+                    text: value
+                };
+                responses[qid.toString() + value.toString()] = response;
+            } else {
+                // a checkbox option has been unchecked
+                delete responses[qid.toString() + value.toString()];
+            }
+        } else {
+            response = {
+                surveyID: this.props.survey.id,
+                qid: qid,
+                text: value
+            };
+            responses[qid] = response;
         }
-        responses[qid] = response;
+
         this.setState({ responses: responses }, () => console.log(this.state));
     }
+
+    submit() {}
 
     render() {
         const { survey, isLoading, fetchError } = this.props;
@@ -144,7 +161,11 @@ class Survey extends Component {
                                     labelTop={true}
                                     placeholder="Type your response here"
                                     onChange={input =>
-                                        this.handleChange(input, question.id)
+                                        this.handleChange(
+                                            input,
+                                            question.id,
+                                            question.qtype
+                                        )
                                     }
                                 />
                             </div>
@@ -161,13 +182,18 @@ class Survey extends Component {
                                     label={pa.atext}
                                     name={question.id}
                                     onChange={input =>
-                                        this.handleChange(input, question.id)
+                                        this.handleChange(
+                                            input,
+                                            question.id,
+                                            question.qtype
+                                        )
                                     }
                                 />
                             </div>
                         ))}
                     </div>
                 ))}
+                <Button theme="complement">Submit</Button>
             </div>
         );
     }
