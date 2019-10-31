@@ -52,7 +52,8 @@ export default function create(state = initialState, action) {
             return Object.assign({}, state, {
                 ...state,
                 postSuccess: false,
-                postError: action.payload
+                postError: action.payload,
+                isPosting: false
             });
         default:
             return state;

@@ -5,7 +5,7 @@ import GreenClock from "../images/clock-green.svg";
 import RedClock from "../images/clock-red.svg";
 
 // actions
-import { fetchSurvey } from "../actions/index";
+import { fetchSurvey, postResponse } from "../actions/index";
 import Flex from "../components/utils/Flex";
 import Error from "../components/utils/Error";
 import Input from "../components/utils/Input";
@@ -15,13 +15,17 @@ const mapStateToProps = state => {
     return {
         survey: state.fetchOneSurveyReducer.survey,
         isLoading: state.fetchOneSurveyReducer.isLoading,
-        fetchError: state.fetchOneSurveyReducer.fetchError
+        fetchError: state.fetchOneSurveyReducer.fetchError,
+        isPosting: state.postResponseReducer.isPosting,
+        postSuccess: state.postResponseReducer.postSuccess,
+        postError: state.postResponseReducer.postError
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSurvey: id => dispatch(fetchSurvey(id))
+        fetchSurvey: id => dispatch(fetchSurvey(id)),
+        postResponse: response => dispatch(postResponse(response))
     };
 }
 
@@ -63,13 +67,22 @@ class Survey extends Component {
             responses[qid] = response;
         }
 
-        this.setState({ responses: responses }, () => console.log(this.state));
+        this.setState({ responses: responses });
     }
 
-    submit() {}
+    submit() {
+        this.props.postResponse(Object.values(this.state.responses));
+    }
 
     render() {
-        const { survey, isLoading, fetchError } = this.props;
+        const {
+            survey,
+            isLoading,
+            fetchError,
+            isPosting,
+            postSuccess,
+            postError
+        } = this.props;
         const { dateText, dateColor } = checkDates(
             survey.open_date,
             survey.close_date
@@ -88,12 +101,60 @@ class Survey extends Component {
             );
         }
 
+        if (postError) {
+            return (
+                <Flex>
+                    <Error error={postError} />
+                </Flex>
+            );
+        }
+
+        if (postSuccess) {
+            return (
+                <div className="container">
+                    <Flex>
+                        <div style={{ flex: "66 0 300px" }}>
+                            <h2>
+                                {survey.name}
+                            </h2>
+                        </div>
+                        <div style={{ flex: "33 0 150px" }}>
+                            <p
+                                style={{
+                                    fontWeight: 700,
+                                    float: "right",
+                                    color: dateColor
+                                }}
+                            >
+                                <img
+                                    src={
+                                        dateColor === "green"
+                                            ? GreenClock
+                                            : RedClock
+                                    }
+                                    alt="Clock"
+                                    style={{
+                                        color: dateColor,
+                                        width:
+                                            "calc(0.8 * var(--text-base-size))",
+                                        padding: "0 2px"
+                                    }}
+                                />
+                                <small>{dateText}</small>
+                            </p>
+                        </div>
+                    </Flex>
+                    <h6>Survey submitted!</h6>
+                </div>
+            );
+        }
+
         return (
             <div className="container">
                 <Flex>
                     <div style={{ flex: "66 0 300px" }}>
                         <h2>
-                            {survey.name} ({survey.id})
+                            {survey.name}
                         </h2>
                     </div>
                     <div style={{ flex: "33 0 150px" }}>
@@ -193,7 +254,15 @@ class Survey extends Component {
                         ))}
                     </div>
                 ))}
-                <Button theme="complement">Submit</Button>
+                <Button theme="complement" onClick={() => this.submit()}>
+                    Submit
+                </Button>
+                {isPosting && (
+                    <>
+                        <br></br>
+                        <p>Submitting . . . </p>
+                    </>
+                )}
             </div>
         );
     }

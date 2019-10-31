@@ -57,3 +57,20 @@ export const REFRESH_SURVEY = "REFRESH_SURVEY";
 export const addQuestion = question => ({ type: ADD_QUESTION, question });
 export const updateSurvey = survey => ({ type: UPDATE_SURVEY, survey });
 export const refreshSurvey = () => ({ type: REFRESH_SURVEY });
+
+// RESPONSE POST
+export const POST_RESPONSE = "POST_RESPONSES";
+export const POST_RESPONSE_SUCCESS = "POST_RESPONSES_SUCCESS";
+export const POST_RESPONSE_FAILURE = "POST_RESPONSES_FAILURE";
+
+export const postResponse = response => ({ type: POST_RESPONSE, response });
+
+export const postResponseSuccess = error => ({
+    type: POST_RESPONSE_SUCCESS,
+    payload: error
+});
+
+export const postResponseFailure = error => ({
+    type: POST_RESPONSE_FAILURE,
+    payload: error
+});
