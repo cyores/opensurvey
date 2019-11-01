@@ -10,6 +10,7 @@ import HomeHero from "../components/HomeHero";
 
 // actions
 import { fetchSurveys } from "../actions/index";
+import PageTransition from "../components/utils/PageTransition";
 
 const mapStateToProps = state => {
     return {
@@ -34,35 +35,37 @@ class Home extends Component {
         return (
             <>
                 <HomeHero />
-                <div className="container">
-                    {isLoading && <p>Loading . . . </p>}
+                <PageTransition>
+                    <div className="container">
+                        {isLoading && <p>Loading . . . </p>}
 
-                    {fetchError ? (
-                        <Flex>
-                            <Error error={fetchError} />
-                        </Flex>
-                    ) : surveys.length > 0 ? (
-                        <Flex dir="rowleft">
-                            {surveys.map((survey, i) => (
-                                <Card
-                                    key={i}
-                                    title={survey.name}
-                                    desc={survey.desc}
-                                    open={survey.openDate}
-                                    close={survey.closeDate}
-                                    buttonText="View"
-                                    surveyID={survey.id}
-                                    numQuestions={survey.numquestions}
-                                ></Card>
-                            ))}
-                        </Flex>
-                    ) : (
-                        <Flex dir="colcenter">
-                            <img src={EmptyImg} width="50%" alt="Empty" />
-                            <p>There are no surveys at this time</p>
-                        </Flex>
-                    )}
-                </div>
+                        {fetchError ? (
+                            <Flex>
+                                <Error error={fetchError} />
+                            </Flex>
+                        ) : surveys.length > 0 ? (
+                            <Flex dir="rowleft">
+                                {surveys.map((survey, i) => (
+                                    <Card
+                                        key={i}
+                                        title={survey.name}
+                                        desc={survey.desc}
+                                        open={survey.openDate}
+                                        close={survey.closeDate}
+                                        buttonText="View"
+                                        surveyID={survey.id}
+                                        numQuestions={survey.numquestions}
+                                    ></Card>
+                                ))}
+                            </Flex>
+                        ) : (
+                            <Flex dir="colcenter">
+                                <img src={EmptyImg} width="50%" alt="Empty" />
+                                <p>There are no surveys at this time</p>
+                            </Flex>
+                        )}
+                    </div>
+                </PageTransition>
             </>
         );
     }
