@@ -13,6 +13,7 @@ const initialState = {
         close_date: "",
         author: ""
     },
+    requiredQuestions: [],
     isLoading: false,
     fetchError: null
 };
@@ -25,9 +26,19 @@ export default function fetchAll(state = initialState, action) {
                 isLoading: true
             };
         case FETCH_SURVEY_SUCCESS:
+            let requiredQuestions = action.payload.questions.reduce(
+                (filtered, q) => {
+                    if (q.required) {
+                        filtered.push(q.id);
+                    }
+                    return filtered;
+                },
+                []
+            );
             return Object.assign({}, state, {
                 ...state,
                 survey: action.payload,
+                requiredQuestions: requiredQuestions,
                 isLoading: false
             });
         case FETCH_SURVEY_FAILURE:

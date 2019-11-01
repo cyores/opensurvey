@@ -17,6 +17,7 @@ import PageTransition from "../components/utils/PageTransition";
 const mapStateToProps = state => {
     return {
         survey: state.fetchOneSurveyReducer.survey,
+        requiredQuestions: state.fetchOneSurveyReducer.requiredQuestions,
         isLoading: state.fetchOneSurveyReducer.isLoading,
         fetchError: state.fetchOneSurveyReducer.fetchError,
         isPosting: state.postResponseReducer.isPosting,
@@ -37,7 +38,8 @@ class Survey extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            responses: {}
+            responses: {},
+            answeredIDs: []
         };
         this.props.refreshResponse();
     }
@@ -48,8 +50,13 @@ class Survey extends Component {
 
     handleChange(input, qid, type) {
         let responses = this.state.responses;
+        let answeredIDs = this.state.answeredIDs;
         let value = input.target.value;
         let response = {};
+        let index = answeredIDs.findIndex(ele => {
+            return qid === ele;
+        });
+
         if (type === "checkbox") {
             if (input.target.checked) {
                 // a checkbox option has been checked
@@ -59,24 +66,54 @@ class Survey extends Component {
                     text: value
                 };
                 responses[qid.toString() + value.toString()] = response;
+                answeredIDs.push(qid);
             } else {
                 // a checkbox option has been unchecked
                 delete responses[qid.toString() + value.toString()];
+                if (index > -1) {
+                    answeredIDs.splice(index, 1);
+                }
             }
         } else {
-            response = {
-                surveyID: this.props.survey.id,
-                questionID: qid,
-                text: value
-            };
-            responses[qid] = response;
+            if (value === "") {
+                // if a textbox is left empty
+                delete responses[qid];
+                if (index > -1) {
+                    answeredIDs.splice(index, 1);
+                }
+            } else {
+                response = {
+                    surveyID: this.props.survey.id,
+                    questionID: qid,
+                    text: value
+                };
+                responses[qid] = response;
+                if (index === -1) {
+                    // not answered yet, else already asnwered this question
+                    answeredIDs.push(qid);
+                }
+            }
         }
 
-        this.setState({ responses: responses });
+        this.setState({ responses: responses, answeredIDs: answeredIDs });
     }
 
     submit() {
-        this.props.postResponse(Object.values(this.state.responses));
+        let allAnswered = this.checkIfAllAnswered();
+        if (allAnswered) {
+            this.props.postResponse(Object.values(this.state.responses));
+        }
+    }
+
+    checkIfAllAnswered() {
+        let rqs = this.props.requiredQuestions;
+        let aqs = this.state.answeredIDs;
+        let unanswered = rqs.filter(id => {
+            if (aqs.includes(id)) return false;
+            return true;
+        });
+        if (unanswered.length === 0) return true;
+        return false;
     }
 
     render() {
@@ -88,7 +125,6 @@ class Survey extends Component {
             postSuccess,
             postError
         } = this.props;
-        console.log(survey);
         const { dateText, dateColor } = checkDates(
             survey.open_date,
             survey.close_date
@@ -266,9 +302,26 @@ class Survey extends Component {
                             ))}
                         </div>
                     ))}
-                    <Button theme="complement" onClick={() => this.submit()}>
-                        Submit
-                    </Button>
+                    {this.checkIfAllAnswered() ? (
+                        <>
+                            <Button
+                                theme="complement"
+                                onClick={() => this.submit()}
+                            >
+                                Submit
+                            </Button>
+                            <small style={{ marginLeft: "var(--space-xs)" }}>
+                                <em></em>
+                            </small>
+                        </>
+                    ) : (
+                        <>
+                            <Button theme="disabled">Submit</Button>
+                            <small style={{ marginLeft: "var(--space-xs)" }}>
+                                <em>Please answer all required questions</em>
+                            </small>
+                        </>
+                    )}
                     {isPosting && (
                         <>
                             <br></br>
