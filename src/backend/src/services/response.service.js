@@ -11,9 +11,8 @@ const createResponses = async responses => {
         // format responses for db
         let formattedResArray = [];
         responses.forEach(response => {
-            const { surveyID, questionID, text } = response;
-            if (text) {
-                formattedResArray.push([surveyID, questionID, text]);
+            if (response.text) {
+                formattedResArray.push(Object.values(response));
             }
         });
         if (formattedResArray.length > 0) {

@@ -5,7 +5,7 @@ import GreenClock from "../images/clock-green.svg";
 import RedClock from "../images/clock-red.svg";
 
 // actions
-import { fetchSurvey, postResponse } from "../actions/index";
+import { fetchSurvey, postResponse, refreshResponse } from "../actions/index";
 import Flex from "../components/utils/Flex";
 import Error from "../components/utils/Error";
 import Input from "../components/utils/Input";
@@ -25,7 +25,8 @@ const mapStateToProps = state => {
 function mapDispatchToProps(dispatch) {
     return {
         fetchSurvey: id => dispatch(fetchSurvey(id)),
-        postResponse: response => dispatch(postResponse(response))
+        postResponse: response => dispatch(postResponse(response)),
+        refreshResponse: () => dispatch(refreshResponse())
     };
 }
 
@@ -35,6 +36,7 @@ class Survey extends Component {
         this.state = {
             responses: {}
         };
+        this.props.refreshResponse();
     }
 
     componentDidMount() {

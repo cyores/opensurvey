@@ -1,7 +1,8 @@
 import {
     POST_RESPONSE,
     POST_RESPONSE_SUCCESS,
-    POST_RESPONSE_FAILURE
+    POST_RESPONSE_FAILURE,
+    REFRESH_RESPONSE
 } from "../../actions/";
 
 const initialState = {
@@ -29,6 +30,8 @@ export default function post(state = initialState, action) {
                 postSuccess: false,
                 postError: action.payload
             });
+        case REFRESH_RESPONSE:
+            return Object.assign({}, state, initialState);
         default:
             return state;
     }

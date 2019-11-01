@@ -62,6 +62,7 @@ export const refreshSurvey = () => ({ type: REFRESH_SURVEY });
 export const POST_RESPONSE = "POST_RESPONSES";
 export const POST_RESPONSE_SUCCESS = "POST_RESPONSES_SUCCESS";
 export const POST_RESPONSE_FAILURE = "POST_RESPONSES_FAILURE";
+export const REFRESH_RESPONSE = "REFRESH_RESPONSE";
 
 export const postResponse = response => ({ type: POST_RESPONSE, response });
 
@@ -74,3 +75,5 @@ export const postResponseFailure = error => ({
     type: POST_RESPONSE_FAILURE,
     payload: error
 });
+
+export const refreshResponse = () => ({ type: REFRESH_RESPONSE });
