@@ -5,6 +5,7 @@ import Wave from "../images/wave4.svg";
 // components
 import { Link } from "react-router-dom";
 import Button from "./utils/Button";
+import PageTransition from "./utils/PageTransition";
 
 const Wrapper = styled.div`
     height: 34vh;
@@ -51,31 +52,33 @@ export default function HomeHero() {
                     paddingTop: "calc(2vh + var(--space-xl))"
                 }}
             >
-                <ContentWrapper>
-                    <h1
-                        style={{
-                            margin: 0,
-                            marginTop: "var(--space-sm)",
-                            fontSize: "calc(1.5 * var(--text-xxxxl))"
-                        }}
-                    >
-                        Open Survey
-                    </h1>
-                    <h5 style={{ margin: 0 }}>
-                        An open source tool to create public surveys to share
-                        with everyone.
-                    </h5>
-                    <ButtonWrapper>
-                        <Link to="/create-survey">
-                            <Button
-                                theme="primary"
-                                style={{ margin: "var(--space-sm) 0" }}
-                            >
-                                Create Survey
-                            </Button>
-                        </Link>
-                    </ButtonWrapper>
-                </ContentWrapper>
+                <PageTransition>
+                    <ContentWrapper>
+                        <h1
+                            style={{
+                                margin: 0,
+                                marginTop: "var(--space-sm)",
+                                fontSize: "calc(1.5 * var(--text-xxxxl))"
+                            }}
+                        >
+                            Open Survey
+                        </h1>
+                        <h5 style={{ margin: 0 }}>
+                            An open source tool to create public surveys to
+                            share with everyone.
+                        </h5>
+                        <ButtonWrapper>
+                            <Link to="/create-survey">
+                                <Button
+                                    theme="primary"
+                                    style={{ margin: "var(--space-sm) 0" }}
+                                >
+                                    Create Survey
+                                </Button>
+                            </Link>
+                        </ButtonWrapper>
+                    </ContentWrapper>
+                </PageTransition>
             </div>
         </Wrapper>
     );

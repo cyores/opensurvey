@@ -8,6 +8,7 @@ import Textarea from "../components/utils/Textarea";
 import Button from "../components/utils/Button";
 import Error from "../components/utils/Error";
 import ReactModal from "react-modal";
+import PageTransition from "../components/utils/PageTransition";
 
 // actions
 import { postSurvey, updateSurvey, refreshSurvey } from "../actions/index";
@@ -105,192 +106,201 @@ class CreateSurvey extends Component {
             );
         }
         return (
-            <div className="container">
-                <h2>Create New Survey</h2>
+            <PageTransition>
+                <div className="container">
+                    <h2>Create New Survey</h2>
 
-                <hr></hr>
+                    <hr></hr>
 
-                <Flex dir="rowleft">
-                    <div
-                        style={{
-                            flex: "33 0 150px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        <h5 style={{ margin: 0 }}>Survey Details</h5>
-                    </div>
-                    <div
-                        style={{
-                            flex: "66 0 300px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        <Input
-                            type="text"
-                            placeholder="Survey Name"
-                            label="Survey Name"
-                            onChange={input => this.handleChange(input, "name")}
-                        />
-                        <Textarea
-                            placeholder="Write your survey description here"
-                            label="Description"
-                            onChange={input => this.handleChange(input, "desc")}
-                        />
-                        <Input
-                            type="text"
-                            placeholder="Survey Author (optional)"
-                            label="Survey Author (optional)"
-                            onChange={input =>
-                                this.handleChange(input, "author")
-                            }
-                        />
-                        <Flex dir="rowleft">
-                            <div
-                                style={{
-                                    flex: "1 0 300px",
-                                    paddingLeft: "var(--space-xs)",
-                                    paddingRight: "var(--space-xs)"
-                                }}
-                            >
-                                <Input
-                                    type="datetime-local"
-                                    label="Open Date"
-                                    labelTop={true}
-                                    onChange={input =>
-                                        this.handleChange(input, "openDate")
-                                    }
-                                />
-                            </div>
-                            <div
-                                style={{
-                                    flex: "1 0 300px",
-                                    paddingLeft: "var(--space-xs)"
-                                }}
-                            >
-                                <Input
-                                    type="datetime-local"
-                                    label="Close Date"
-                                    labelTop={true}
-                                    onChange={input =>
-                                        this.handleChange(input, "closeDate")
-                                    }
-                                />
-                            </div>
-                        </Flex>
-                    </div>
-                </Flex>
-
-                <br></br>
-
-                <Flex dir="rowleft">
-                    <div
-                        style={{
-                            flex: "33 0 150px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        <h5 style={{ margin: 0 }}>Survey Questions</h5>
-                    </div>
-                    <div
-                        style={{
-                            flex: "66 0 300px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        {survey.questions.length > 0 && (
-                            <>
-                                {survey.questions.map((question, i) => (
-                                    <QuestionCS
-                                        key={`question-${i}`}
-                                        qtext={question.qtext}
-                                        qtype={question.qtype}
-                                        qindex={i + 1}
-                                        onDelete={() =>
-                                            this.deleteQuestion(question)
-                                        }
-                                    />
-                                ))}
-                                <br></br>
-                            </>
-                        )}
-                        <Flex>
-                            <Button
-                                theme="primary"
-                                onClick={() =>
-                                    this.setState({ modalIsOpen: true })
-                                }
-                            >
-                                Create Question
-                            </Button>
-                        </Flex>
-                        <ReactModal
-                            isOpen={this.state.modalIsOpen}
-                            style={modelStyle}
-                            closeTimeoutMS={250}
-                            onRequestClose={() =>
-                                this.setState({ modalIsOpen: false })
-                            }
+                    <Flex dir="rowleft">
+                        <div
+                            style={{
+                                flex: "33 0 150px",
+                                margin: "var(--space-sm) 0"
+                            }}
                         >
-                            <CreateQuestion
-                                onClose={() =>
-                                    this.setState({ modalIsOpen: false })
+                            <h5 style={{ margin: 0 }}>Survey Details</h5>
+                        </div>
+                        <div
+                            style={{
+                                flex: "66 0 300px",
+                                margin: "var(--space-sm) 0"
+                            }}
+                        >
+                            <Input
+                                type="text"
+                                placeholder="Survey Name"
+                                label="Survey Name"
+                                onChange={input =>
+                                    this.handleChange(input, "name")
                                 }
                             />
-                        </ReactModal>
-                    </div>
-                </Flex>
+                            <Textarea
+                                placeholder="Write your survey description here"
+                                label="Description"
+                                onChange={input =>
+                                    this.handleChange(input, "desc")
+                                }
+                            />
+                            <Input
+                                type="text"
+                                placeholder="Survey Author (optional)"
+                                label="Survey Author (optional)"
+                                onChange={input =>
+                                    this.handleChange(input, "author")
+                                }
+                            />
+                            <Flex dir="rowleft">
+                                <div
+                                    style={{
+                                        flex: "1 0 300px",
+                                        paddingLeft: "var(--space-xs)",
+                                        paddingRight: "var(--space-xs)"
+                                    }}
+                                >
+                                    <Input
+                                        type="datetime-local"
+                                        label="Open Date"
+                                        labelTop={true}
+                                        onChange={input =>
+                                            this.handleChange(input, "openDate")
+                                        }
+                                    />
+                                </div>
+                                <div
+                                    style={{
+                                        flex: "1 0 300px",
+                                        paddingLeft: "var(--space-xs)"
+                                    }}
+                                >
+                                    <Input
+                                        type="datetime-local"
+                                        label="Close Date"
+                                        labelTop={true}
+                                        onChange={input =>
+                                            this.handleChange(
+                                                input,
+                                                "closeDate"
+                                            )
+                                        }
+                                    />
+                                </div>
+                            </Flex>
+                        </div>
+                    </Flex>
 
-                <br></br>
+                    <br></br>
 
-                <Flex dir="rowleft">
-                    <div
-                        style={{
-                            flex: "33 0 150px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        <h5 style={{ margin: 0 }}>Publish Survey</h5>
-                    </div>
-                    <div
-                        style={{
-                            flex: "66 0 300px",
-                            margin: "var(--space-sm) 0"
-                        }}
-                    >
-                        {survey.name.length > 0 &&
-                        survey.questions.length > 0 ? (
+                    <Flex dir="rowleft">
+                        <div
+                            style={{
+                                flex: "33 0 150px",
+                                margin: "var(--space-sm) 0"
+                            }}
+                        >
+                            <h5 style={{ margin: 0 }}>Survey Questions</h5>
+                        </div>
+                        <div
+                            style={{
+                                flex: "66 0 300px",
+                                margin: "var(--space-sm) 0"
+                            }}
+                        >
+                            {survey.questions.length > 0 && (
+                                <>
+                                    {survey.questions.map((question, i) => (
+                                        <QuestionCS
+                                            key={`question-${i}`}
+                                            qtext={question.qtext}
+                                            qtype={question.qtype}
+                                            qindex={i + 1}
+                                            onDelete={() =>
+                                                this.deleteQuestion(question)
+                                            }
+                                        />
+                                    ))}
+                                    <br></br>
+                                </>
+                            )}
                             <Flex>
                                 <Button
-                                    theme="complement"
-                                    onClick={() => this.publish()}
+                                    theme="primary"
+                                    onClick={() =>
+                                        this.setState({ modalIsOpen: true })
+                                    }
                                 >
-                                    Publish Servey
+                                    Create Question
                                 </Button>
                             </Flex>
-                        ) : (
-                            <>
+                            <ReactModal
+                                isOpen={this.state.modalIsOpen}
+                                style={modelStyle}
+                                closeTimeoutMS={250}
+                                onRequestClose={() =>
+                                    this.setState({ modalIsOpen: false })
+                                }
+                            >
+                                <CreateQuestion
+                                    onClose={() =>
+                                        this.setState({ modalIsOpen: false })
+                                    }
+                                />
+                            </ReactModal>
+                        </div>
+                    </Flex>
+
+                    <br></br>
+
+                    <Flex dir="rowleft">
+                        <div
+                            style={{
+                                flex: "33 0 150px",
+                                margin: "var(--space-sm) 0"
+                            }}
+                        >
+                            <h5 style={{ margin: 0 }}>Publish Survey</h5>
+                        </div>
+                        <div
+                            style={{
+                                flex: "66 0 300px",
+                                margin: "var(--space-sm) 0"
+                            }}
+                        >
+                            {survey.name.length > 0 &&
+                            survey.questions.length > 0 ? (
                                 <Flex>
-                                    <Button theme="disabled">
+                                    <Button
+                                        theme="complement"
+                                        onClick={() => this.publish()}
+                                    >
                                         Publish Servey
                                     </Button>
                                 </Flex>
-                                <Flex>
-                                    <p>
-                                        Your survey needs a name and at least
-                                        one question.
-                                    </p>
-                                </Flex>
-                            </>
-                        )}
-                    </div>
-                </Flex>
+                            ) : (
+                                <>
+                                    <Flex>
+                                        <Button theme="disabled">
+                                            Publish Servey
+                                        </Button>
+                                    </Flex>
+                                    <Flex>
+                                        <p>
+                                            Your survey needs a name and at
+                                            least one question.
+                                        </p>
+                                    </Flex>
+                                </>
+                            )}
+                        </div>
+                    </Flex>
 
-                {isPosting && <p>Creating survey . . . </p>}
+                    {isPosting && <p>Creating survey . . . </p>}
 
-                {postError && <Error error={postError}></Error>}
+                    {postError && <Error error={postError}></Error>}
 
-                <br></br>
-            </div>
+                    <br></br>
+                </div>
+            </PageTransition>
         );
     }
 }

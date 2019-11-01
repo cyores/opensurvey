@@ -6,10 +6,13 @@ import RedClock from "../images/clock-red.svg";
 
 // actions
 import { fetchSurvey, postResponse, refreshResponse } from "../actions/index";
+
+// components
 import Flex from "../components/utils/Flex";
 import Error from "../components/utils/Error";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
+import PageTransition from "../components/utils/PageTransition";
 
 const mapStateToProps = state => {
     return {
@@ -92,22 +95,30 @@ class Survey extends Component {
         const questions = survey.questions || [];
 
         if (isLoading) {
-            return <p>Loading . . . </p>;
+            return (
+                <div className="container">
+                    <p>Loading . . . </p>
+                </div>
+            );
         }
 
         if (fetchError) {
             return (
-                <Flex>
-                    <Error error={fetchError} />
-                </Flex>
+                <div className="container">
+                    <Flex>
+                        <Error error={fetchError} />
+                    </Flex>
+                </div>
             );
         }
 
         if (postError) {
             return (
-                <Flex>
-                    <Error error={postError} />
-                </Flex>
+                <div className="container">
+                    <Flex>
+                        <Error error={postError} />
+                    </Flex>
+                </div>
             );
         }
 
@@ -116,9 +127,7 @@ class Survey extends Component {
                 <div className="container">
                     <Flex>
                         <div style={{ flex: "66 0 300px" }}>
-                            <h2>
-                                {survey.name}
-                            </h2>
+                            <h2>{survey.name}</h2>
                         </div>
                         <div style={{ flex: "33 0 150px" }}>
                             <p
@@ -152,120 +161,121 @@ class Survey extends Component {
         }
 
         return (
-            <div className="container">
-                <Flex>
-                    <div style={{ flex: "66 0 300px" }}>
-                        <h2>
-                            {survey.name}
-                        </h2>
-                    </div>
-                    <div style={{ flex: "33 0 150px" }}>
-                        <p
-                            style={{
-                                fontWeight: 700,
-                                float: "right",
-                                color: dateColor
-                            }}
-                        >
-                            <img
-                                src={
-                                    dateColor === "green"
-                                        ? GreenClock
-                                        : RedClock
-                                }
-                                alt="Clock"
+            <PageTransition>
+                <div className="container">
+                    <Flex>
+                        <div style={{ flex: "66 0 300px" }}>
+                            <h2>{survey.name}</h2>
+                        </div>
+                        <div style={{ flex: "33 0 150px" }}>
+                            <p
                                 style={{
-                                    color: dateColor,
-                                    width: "calc(0.8 * var(--text-base-size))",
-                                    padding: "0 2px"
+                                    fontWeight: 700,
+                                    float: "right",
+                                    color: dateColor
                                 }}
-                            />
-                            <small>{dateText}</small>
-                        </p>
-                    </div>
-                </Flex>
+                            >
+                                <img
+                                    src={
+                                        dateColor === "green"
+                                            ? GreenClock
+                                            : RedClock
+                                    }
+                                    alt="Clock"
+                                    style={{
+                                        color: dateColor,
+                                        width:
+                                            "calc(0.8 * var(--text-base-size))",
+                                        padding: "0 2px"
+                                    }}
+                                />
+                                <small>{dateText}</small>
+                            </p>
+                        </div>
+                    </Flex>
 
-                {survey.descrip.length > 0 && <p>{survey.descrip}</p>}
-                {survey.author.length > 0 && (
-                    <p>
-                        Survey Author: <b>{survey.author}</b>
-                    </p>
-                )}
-                <hr></hr>
-
-                {questions.map((question, qindex) => (
-                    <div
-                        key={`question-${qindex}`}
-                        style={{ margin: "var(--space-xxl) 0" }}
-                    >
-                        <h6 style={{ margin: 0 }}>
-                            Question {qindex + 1}{" "}
-                            {question.required && (
-                                <span style={{ color: "#d30930" }}> *</span>
-                            )}
-                        </h6>
+                    {survey.descrip.length > 0 && <p>{survey.descrip}</p>}
+                    {survey.author.length > 0 && (
                         <p>
-                            <b>{question.qtext}</b>
-                            {question.qdesc && (
-                                <>
-                                    <br></br>
-                                    {question.qdesc}
-                                </>
-                            )}
+                            Survey Author: <b>{survey.author}</b>
                         </p>
+                    )}
+                    <hr></hr>
 
-                        {question.qtype === "text" && (
-                            <div
-                                key={`pa-${qindex}`}
-                                style={{ maxWidth: "800px" }}
-                            >
-                                <Input
-                                    type={question.qtype}
-                                    labelTop={true}
-                                    placeholder="Type your response here"
-                                    onChange={input =>
-                                        this.handleChange(
-                                            input,
-                                            question.id,
-                                            question.qtype
-                                        )
-                                    }
-                                />
-                            </div>
-                        )}
+                    {questions.map((question, qindex) => (
+                        <div
+                            key={`question-${qindex}`}
+                            style={{ margin: "var(--space-xxl) 0" }}
+                        >
+                            <h6 style={{ margin: 0 }}>
+                                Question {qindex + 1}{" "}
+                                {question.required && (
+                                    <span style={{ color: "#d30930" }}> *</span>
+                                )}
+                            </h6>
+                            <p>
+                                <b>{question.qtext}</b>
+                                {question.qdesc && (
+                                    <>
+                                        <br></br>
+                                        {question.qdesc}
+                                    </>
+                                )}
+                            </p>
 
-                        {question.possibleAnswers.map((pa, paindex) => (
-                            <div
-                                key={`pa-${qindex}-${paindex}`}
-                                style={{ padding: "0 var(--space-md)" }}
-                            >
-                                <Input
-                                    type={question.qtype}
-                                    value={pa.avalue}
-                                    label={pa.atext}
-                                    name={question.id}
-                                    onChange={input =>
-                                        this.handleChange(
-                                            input,
-                                            question.id,
-                                            question.qtype
-                                        )
-                                    }
-                                />
-                            </div>
-                        ))}
-                    </div>
-                ))}
-                <Button theme="complement" onClick={() => this.submit()}>
-                    Submit
-                </Button>
-                {isPosting && (
-                    <>
-                        <br></br>
-                        <p>Submitting . . . </p>
-                    </>
-                )}
-            </div>
+                            {question.qtype === "text" && (
+                                <div
+                                    key={`pa-${qindex}`}
+                                    style={{ maxWidth: "800px" }}
+                                >
+                                    <Input
+                                        type={question.qtype}
+                                        labelTop={true}
+                                        placeholder="Type your response here"
+                                        onChange={input =>
+                                            this.handleChange(
+                                                input,
+                                                question.id,
+                                                question.qtype
+                                            )
+                                        }
+                                    />
+                                </div>
+                            )}
+
+                            {question.possibleAnswers.map((pa, paindex) => (
+                                <div
+                                    key={`pa-${qindex}-${paindex}`}
+                                    style={{ padding: "0 var(--space-md)" }}
+                                >
+                                    <Input
+                                        type={question.qtype}
+                                        value={pa.avalue}
+                                        label={pa.atext}
+                                        name={question.id}
+                                        onChange={input =>
+                                            this.handleChange(
+                                                input,
+                                                question.id,
+                                                question.qtype
+                                            )
+                                        }
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                    <Button theme="complement" onClick={() => this.submit()}>
+                        Submit
+                    </Button>
+                    {isPosting && (
+                        <>
+                            <br></br>
+                            <p>Submitting . . . </p>
+                        </>
+                    )}
+                </div>
+            </PageTransition>
         );
     }
 }
