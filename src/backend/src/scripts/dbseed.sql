@@ -29,7 +29,7 @@ INSERT INTO possible_answers (survey_id, question_id, atext, avalue)
 INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
     VALUES (2, 'Who is your favourite musician?', '', 'text', '1', true);
 
-    INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
     VALUES (2, 'Which genres of music do you like (check all that apply)?', '', 'checkbox', '1', true);
 
 INSERT INTO possible_answers (survey_id, question_id, atext, avalue) 
@@ -44,3 +44,51 @@ INSERT INTO surveys (name, descrip, open_date, close_date, author)
 
 INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
     VALUES (3, 'What, in your opinion, is the greatest movie?', '', 'text', '1', true);
+
+-- Programming Languages
+INSERT INTO surveys (name, descrip, open_date, close_date, author) 
+    VALUES ('Programming Languages', '', 'Fri Nov 07 2019 00:00:00', 'Fri Nov 29 2019 00:00:00', '');
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (4, 'What is your main programming language?', '', 'text', '1', true);
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (4, 'What is your favourite programming language?', '', 'text', '1', false);
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (4, 'What is your least favourite programming language?', '', 'text', '1', true);
+
+-- Operating Systems
+INSERT INTO surveys (name, descrip, open_date, close_date, author) 
+    VALUES ('Operating Systems', '', null, null, '');
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (5, 'Which OS do you like best?', '', 'checkbox', '1', false);
+
+INSERT INTO possible_answers (survey_id, question_id, atext, avalue) 
+    VALUES  (5, 9, 'Windows', 'windows'),
+            (5, 9, 'MacOS', 'macos'),
+            (5, 9, 'Linux', 'linux');
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (5, 'What OS do you use?', '', 'text', '1', true);
+
+-- Desktop Env
+INSERT INTO surveys (name, descrip, open_date, close_date, author) 
+    VALUES ('Desktop Environments', 'This survey tries to figure out which DE people like vs which DE they use.', null, null, '');
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (6, 'Which DE have you heard of?', '', 'checkbox', '1', true);
+
+INSERT INTO possible_answers (survey_id, question_id, atext, avalue) 
+    VALUES  (6, 11, 'Gnome', 'gnome'),
+            (6, 11, 'KDE Plasma', 'kde'),
+            (6, 11, 'Unity', 'unity');
+
+INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
+    VALUES (6, 'Which DE do you use?', '', 'checkbox', '1', false);
+
+INSERT INTO possible_answers (survey_id, question_id, atext, avalue) 
+    VALUES  (6, 12, 'Gnome', 'gnome'),
+            (6, 12, 'KDE Plasma', 'kde'),
+            (6, 12, 'Unity', 'unity');
