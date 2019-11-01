@@ -50,8 +50,8 @@ class Home extends Component {
                                         key={i}
                                         title={survey.name}
                                         desc={survey.desc}
-                                        open={survey.openDate}
-                                        close={survey.closeDate}
+                                        open={survey.opendate}
+                                        close={survey.closedate}
                                         buttonText="View"
                                         surveyID={survey.id}
                                         numQuestions={survey.numquestions}

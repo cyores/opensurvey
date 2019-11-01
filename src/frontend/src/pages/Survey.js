@@ -88,6 +88,7 @@ class Survey extends Component {
             postSuccess,
             postError
         } = this.props;
+        console.log(survey);
         const { dateText, dateColor } = checkDates(
             survey.open_date,
             survey.close_date

@@ -33,8 +33,8 @@ export default function checkDates(openDate, closeDate) {
         };
     }
 
-    // currently open and close in more than 7 days
-    if (open <= now && close >= now)
+    // currently open and close in more than 7 days or null
+    if (open <= now && (close >= now || !closeDate))
         return { isOpen: true, dateText: "Open", dateColor: "green" };
 
     return { isOpen: false, dateText: "", dateColor: "#d30930" };
