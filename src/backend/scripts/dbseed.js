@@ -1,9 +1,9 @@
-require("dotenv").config({ path: "../../.env" });
+require("dotenv").config({ path: "./.env" });
 
-const db = require("../db/db");
+const db = require("../src/db/db");
 const fs = require("fs");
 
-fs.readFile("./dbinit.sql", (err, data) => {
+fs.readFile("./scripts/dbinit.sql", (err, data) => {
     if (err) throw err;
 
     db.query(data.toString())
@@ -11,7 +11,7 @@ fs.readFile("./dbinit.sql", (err, data) => {
             console.log("initialized");
             console.log("seeding . . . ");
 
-            fs.readFile("./dbseed.sql", (err, data) => {
+            fs.readFile("./scripts/dbseed.sql", (err, data) => {
                 if (err) throw err;
 
                 db.query(data.toString())
