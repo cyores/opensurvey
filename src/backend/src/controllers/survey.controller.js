@@ -1,6 +1,13 @@
 const { surveyService } = require("../services");
 const { createSurvey, getAllSurveys, getSurvey } = surveyService;
 
+/**
+ * Extracts the survey from the request body, sends it to the survey service, sends HTTP status code.
+ * 
+ * @param {Object} req Express request object.
+ * @param {Object} res Express response object.
+ * @param {Function} next Express next function.
+ */
 const postSurvey = async (req, res, next) => {
     const survey = req.body;
     try {
@@ -12,6 +19,13 @@ const postSurvey = async (req, res, next) => {
     }
 };
 
+/**
+ * Asks the survey service for all the surveys, sends HTTP status code.
+ * 
+ * @param {Object} req Express request object.
+ * @param {Object} res Express response object.
+ * @param {Function} next Express next function.
+ */
 const getAll = async (req, res, next) => {
     try {
         let surveys = await getAllSurveys();
@@ -23,6 +37,13 @@ const getAll = async (req, res, next) => {
     }
 };
 
+/**
+ * Extracts the desired survey ID, asks the survey service for it, sends HTTP status code.
+ * 
+ * @param {Object} req Express request object.
+ * @param {Object} res Express response object.
+ * @param {Function} next Express next function.
+ */
 const getOneSurvey = async (req, res, next) => {
     try {
         let id = req.params.id;

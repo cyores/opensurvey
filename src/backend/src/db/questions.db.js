@@ -2,12 +2,11 @@ const db = require("./db");
 const pgformat = require("pg-format");
 
 /**
- * Create Questions.
- * Inserts questions into the questions table
+ * Inserts questions into the questions table.
  *
  * @param {Array} questions Array of all arrays of questions (ex. [[surveyID, qtext, qdesc, qtype, qweight, required]])
  *
- * @return Result of the query
+ * @return {Array} Array containing the ID of all questions just created.
  */
 const createQuestions = async questions => {
     try {

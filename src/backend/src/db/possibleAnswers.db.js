@@ -2,12 +2,11 @@ const db = require("./db");
 const pgformat = require("pg-format");
 
 /**
- * Create Possible Answers.
- * Inserts possible answers into the possible answers table
+ * Inserts possible answers into the possible answers table.
  *
  * @param {Array} possibleAnswers Array of all arrays of possible answers (ex. [[surveyid, questionid, atext, avalue, index]])
  *
- * @return Result of the query
+ * @return {Array} Array containing the ID of all possible answers just created.
  */
 const createPossibleAnswers = async possibleAnswers => {
     try {

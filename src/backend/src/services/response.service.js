@@ -1,10 +1,10 @@
 const { responsesDB } = require("../db/index");
 
 /**
- * Create Responses
- * Takes in an array of objects and stores them in the database. Objects are of the form: {surveyID, questionID, text}
+ * Formats the responses into a way the db file is expecting.
  *
- * @param {Array} responses
+ * @param {Array} responses Array of objects of the form {surveyID, questionID, text}.
+ * @returns {Array} The result of the responses.db call (array of created responses IDs).
  */
 const createResponses = async responses => {
     try {
