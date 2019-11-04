@@ -47,7 +47,7 @@ INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required)
 
 -- Programming Languages
 INSERT INTO surveys (name, descrip, open_date, close_date, author) 
-    VALUES ('Programming Languages', '', 'Fri Nov 07 2019 00:00:00', 'Fri Nov 29 2019 00:00:00', '');
+    VALUES ('Programming Languages', '', 'Fri Nov 22 2019 00:00:00', 'Fri Nov 29 2019 00:00:00', '');
 
 INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required) 
     VALUES (4, 'What is your main programming language?', '', 'text', '1', true);

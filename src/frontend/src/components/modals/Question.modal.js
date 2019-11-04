@@ -10,7 +10,7 @@ import Toggle from "../utils/Toggle";
 import Textarea from "../utils/Textarea";
 
 // actions
-import { addQuestion } from "../../actions/index";
+import { addQuestion, editQuestion } from "../../actions/index";
 
 const questionTypes = ["Text", "Radio", "Checkbox"];
 
@@ -20,24 +20,32 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addQuestion: question => dispatch(addQuestion(question))
+        addQuestion: question => dispatch(addQuestion(question)),
+        editQuestion: question => dispatch(editQuestion(question))
     };
 }
 
-class CreateQuestion extends Component {
+class Question extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            question: {
-                qtext: "",
-                qdesc: "",
-                qweight: 1,
-                qtype: "Text",
-                required: false,
-                possibleAnswers: []
-            },
-            PAindex: 1
-        };
+        if (props.mode === "edit") {
+            this.state = {
+                question: props.question,
+                PAindex: 1
+            };
+        } else {
+            this.state = {
+                question: {
+                    qtext: "",
+                    qdesc: "",
+                    qweight: 1,
+                    qtype: "Text",
+                    required: false,
+                    possibleAnswers: []
+                },
+                PAindex: 1
+            };
+        }
     }
 
     handleChange(input, item) {
@@ -70,11 +78,15 @@ class CreateQuestion extends Component {
             }
             return pa;
         });
-        this.setState({ question: q }, console.log(this.state));
+        this.setState({ question: q });
     }
 
-    addQuestion() {
-        this.props.addQuestion(this.state.question);
+    submit() {
+        if (this.props.mode === "create") {
+            this.props.addQuestion(this.state.question);
+        } else if (this.props.mode === "edit") {
+            this.props.editQuestion(this.state.question);
+        }
         this.props.onClose();
     }
 
@@ -83,8 +95,10 @@ class CreateQuestion extends Component {
             qtext,
             qtype,
             qdesc,
+            qweight,
             possibleAnswers,
-            required
+            required,
+            index
         } = this.state.question;
         return (
             <Flex dir="rowleft" style={{ height: "100%" }}>
@@ -94,16 +108,24 @@ class CreateQuestion extends Component {
                         paddingRight: "var(--space-md)"
                     }}
                 >
-                    <h5 style={{ marginTop: 0 }}>New Question</h5>
+                    {this.props.mode === "edit" && (
+                        <h5 style={{ marginTop: 0 }}>Edit Question {index}</h5>
+                    )}
+                    {this.props.mode === "create" && (
+                        <h5 style={{ marginTop: 0 }}>Create Question</h5>
+                    )}
+
                     <Input
                         type="text"
                         placeholder="Question text"
+                        defaultValue={qtext}
                         label="Question"
                         onChange={input => this.handleChange(input, "qtext")}
                     />
                     <Textarea
                         placeholder="Write your question description here (optional)"
                         label="Description"
+                        defaultValue={qdesc}
                         onChange={input => this.handleChange(input, "qdesc")}
                     />
                     <Flex>
@@ -117,7 +139,7 @@ class CreateQuestion extends Component {
                             <Select
                                 label="Type"
                                 options={questionTypes}
-                                defaultValue="Text"
+                                defaultValue={qtype}
                                 onChange={input =>
                                     this.handleChange(input, "qtype")
                                 }
@@ -135,7 +157,7 @@ class CreateQuestion extends Component {
                                 min={1}
                                 step={1}
                                 placeholder="Weight"
-                                defaultValue="1"
+                                defaultValue={qweight}
                                 label="Weight"
                                 labelTop={true}
                                 onChange={input =>
@@ -145,7 +167,7 @@ class CreateQuestion extends Component {
                         </div>
                         <div style={{ flex: "10" }}>
                             <Toggle
-                                defaultChecked={false}
+                                defaultChecked={required}
                                 label="Required"
                                 labelStyle={{
                                     marginBottom: "8px",
@@ -163,9 +185,14 @@ class CreateQuestion extends Component {
                             <Flex>
                                 <Button
                                     theme="complement"
-                                    onClick={() => this.addQuestion()}
+                                    onClick={() => this.submit()}
                                 >
-                                    Add Question
+                                    {this.props.mode === "edit" && (
+                                        <span>Save Edits</span>
+                                    )}
+                                    {this.props.mode === "create" && (
+                                        <span>Add Question</span>
+                                    )}
                                 </Button>
                             </Flex>
                         ) : null
@@ -180,6 +207,7 @@ class CreateQuestion extends Component {
                                         key={`pa-${ans.index}`}
                                         type="text"
                                         label={`Option ${ans.index}`}
+                                        defaultValue={ans.atext}
                                         placeholder={`Possible answer ${ans.index} text`}
                                         onChange={input =>
                                             this.updatePossibleAnswer(
@@ -204,9 +232,14 @@ class CreateQuestion extends Component {
                                     <Flex>
                                         <Button
                                             theme="complement"
-                                            onClick={() => this.addQuestion()}
+                                            onClick={() => this.submit()}
                                         >
-                                            Add Question
+                                            {this.props.mode === "edit" && (
+                                                <span>Save Edits</span>
+                                            )}
+                                            {this.props.mode === "create" && (
+                                                <span>Add Question</span>
+                                            )}
                                         </Button>
                                     </Flex>
                                 </>
@@ -214,6 +247,7 @@ class CreateQuestion extends Component {
                         </>
                     )}
                 </div>
+                {/* Question Preview */}
                 <div
                     style={{
                         flex: "33 0 150px",
@@ -301,4 +335,4 @@ class CreateQuestion extends Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CreateQuestion);
+)(Question);

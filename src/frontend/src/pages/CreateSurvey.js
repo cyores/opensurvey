@@ -9,11 +9,16 @@ import Button from "../components/utils/Button";
 import Error from "../components/utils/Error";
 import ReactModal from "react-modal";
 import PageTransition from "../components/utils/PageTransition";
+import QuestionCS from "../components/QuestionCS";
+import Question from "../components/modals/Question.modal";
 
 // actions
-import { postSurvey, updateSurvey, refreshSurvey } from "../actions/index";
-import CreateQuestion from "../components/modals/CreateQuestion.modal";
-import QuestionCS from "../components/QuestionCS";
+import {
+    postSurvey,
+    updateSurvey,
+    refreshSurvey,
+    delQuestion
+} from "../actions/index";
 
 const mapStateToProps = state => {
     return {
@@ -28,6 +33,7 @@ function mapDispatchToProps(dispatch) {
     return {
         postSurvey: survey => dispatch(postSurvey(survey)),
         updateSurvey: survey => dispatch(updateSurvey(survey)),
+        delQuestion: index => dispatch(delQuestion(index)),
         refreshSurvey: () => dispatch(refreshSurvey())
     };
 }
@@ -56,7 +62,10 @@ class CreateSurvey extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            addModal: false,
+            editModal: false,
+            editQuestion: {}
         };
         this.props.refreshSurvey();
     }
@@ -69,21 +78,6 @@ class CreateSurvey extends Component {
         let survey = {
             ...this.props.survey,
             [item]: value
-        };
-        this.props.updateSurvey(survey);
-    }
-
-    deleteQuestion(q) {
-        let questions = this.props.survey.questions;
-        questions = questions.filter(question => {
-            if (question === q) {
-                return false;
-            }
-            return true;
-        });
-        let survey = {
-            ...this.props.survey,
-            questions: questions
         };
         this.props.updateSurvey(survey);
     }
@@ -213,9 +207,19 @@ class CreateSurvey extends Component {
                                             key={`question-${i}`}
                                             qtext={question.qtext}
                                             qtype={question.qtype}
-                                            qindex={i + 1}
+                                            index={question.index}
                                             onDelete={() =>
-                                                this.deleteQuestion(question)
+                                                this.props.delQuestion(
+                                                    question.index
+                                                )
+                                            }
+                                            onEdit={() =>
+                                                this.setState({
+                                                    modalIsOpen: true,
+                                                    editModal: true,
+                                                    addModal: false,
+                                                    editQuestion: question
+                                                })
                                             }
                                         />
                                     ))}
@@ -226,7 +230,11 @@ class CreateSurvey extends Component {
                                 <Button
                                     theme="primary"
                                     onClick={() =>
-                                        this.setState({ modalIsOpen: true })
+                                        this.setState({
+                                            modalIsOpen: true,
+                                            addModal: true,
+                                            editModal: false
+                                        })
                                     }
                                 >
                                     Create Question
@@ -240,11 +248,27 @@ class CreateSurvey extends Component {
                                     this.setState({ modalIsOpen: false })
                                 }
                             >
-                                <CreateQuestion
-                                    onClose={() =>
-                                        this.setState({ modalIsOpen: false })
-                                    }
-                                />
+                                {this.state.addModal && (
+                                    <Question
+                                        mode="create"
+                                        onClose={() =>
+                                            this.setState({
+                                                modalIsOpen: false
+                                            })
+                                        }
+                                    />
+                                )}
+                                {this.state.editModal && (
+                                    <Question
+                                        mode="edit"
+                                        question={this.state.editQuestion}
+                                        onClose={() =>
+                                            this.setState({
+                                                modalIsOpen: false
+                                            })
+                                        }
+                                    ></Question>
+                                )}
                             </ReactModal>
                         </div>
                     </Flex>

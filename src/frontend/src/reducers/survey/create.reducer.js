@@ -1,5 +1,7 @@
 import {
     ADD_QUESTION,
+    EDIT_QUESTION,
+    DEL_QUESTION,
     UPDATE_SURVEY,
     REFRESH_SURVEY,
     POST_SURVEY,
@@ -24,10 +26,49 @@ const initialState = {
 export default function create(state = initialState, action) {
     switch (action.type) {
         case ADD_QUESTION:
+            let question = action.question;
+            question.index = state.survey.questions.length + 1;
             return Object.assign({}, state, {
+                ...state,
                 survey: {
                     ...state.survey,
-                    questions: state.survey.questions.concat(action.question)
+                    questions: state.survey.questions.concat(question)
+                }
+            });
+        case EDIT_QUESTION:
+            return Object.assign({}, state, {
+                ...state,
+                survey: {
+                    ...state.survey,
+                    questions: state.survey.questions.map(question => {
+                        if (question.index === action.question.index) {
+                            return action.question;
+                        }
+                        return question;
+                    })
+                }
+            });
+        case DEL_QUESTION:
+            return Object.assign({}, state, {
+                ...state,
+                survey: {
+                    ...state.survey,
+                    questions: state.survey.questions.reduce(
+                        (acc, question) => {
+                            if (question.index !== action.index) {
+                                if (question.index < action.index) {
+                                    acc.push(question);
+                                } else {
+                                    acc.push({
+                                        ...question,
+                                        index: question.index - 1
+                                    });
+                                }
+                            }
+                            return acc;
+                        },
+                        []
+                    )
                 }
             });
         case UPDATE_SURVEY:

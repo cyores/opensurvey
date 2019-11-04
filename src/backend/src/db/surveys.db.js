@@ -43,7 +43,7 @@ const getAllSurveys = async () => {
             "FROM surveys " +
             "LEFT JOIN questions ON (surveys.id = questions.survey_id) " +
             "GROUP BY surveys.id " +
-            "ORDER BY creation_date DESC";
+            "ORDER BY surveys.creation_date DESC";
         let qresult = await db.query(q);
         return qresult.rows;
     } catch (err) {

@@ -51,10 +51,14 @@ export const postSurveyFailure = error => ({
 
 // SURVEY CREATE
 export const ADD_QUESTION = "ADD_QUESTION";
+export const EDIT_QUESTION = "EDIT_QUESTION";
+export const DEL_QUESTION = "DEL_QUESTION";
 export const UPDATE_SURVEY = "UPDATE_SURVEY";
 export const REFRESH_SURVEY = "REFRESH_SURVEY";
 
 export const addQuestion = question => ({ type: ADD_QUESTION, question });
+export const editQuestion = question => ({ type: EDIT_QUESTION, question });
+export const delQuestion = index => ({ type: DEL_QUESTION, index });
 export const updateSurvey = survey => ({ type: UPDATE_SURVEY, survey });
 export const refreshSurvey = () => ({ type: REFRESH_SURVEY });
 
