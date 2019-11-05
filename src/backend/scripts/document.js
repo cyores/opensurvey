@@ -9,7 +9,6 @@ let locations = [
 
 for (let j = 0; j < locations.length; j++) {
     let location = locations[j];
-    // console.log(location);
     fs.readdir(location.path, async (err, files) => {
         if (err) {
             console.log("Error reading file", err);
