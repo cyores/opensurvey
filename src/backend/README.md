@@ -11,7 +11,7 @@ The server is split into four main layers, each with their own purpose and conte
 -   servcies
 -   db (database)
 
-## Routes
+## [Routes](https://github.com/cyores/opensurvey/tree/master/src/backend/src/routes)
 
 -   Function: routing
 -   Context: HTTP
