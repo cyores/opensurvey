@@ -2,6 +2,8 @@
 
 A open source platform where anyone can create surveys or polls to be answered (anonymously) by others.
 
+![Screenshot](/screenshot.png)
+
 ## Tech Stack
 
 -   PostgreSQL
