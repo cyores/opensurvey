@@ -36,13 +36,30 @@ export default function create(state = initialState, action) {
                 }
             });
         case EDIT_QUESTION:
+            let adjustIndices = action.question.index !== action.index;
+            let adjustAbove = action.question.index < action.index;
+            let adjustBelow = action.question.index > action.index;
             return Object.assign({}, state, {
                 ...state,
                 survey: {
                     ...state.survey,
                     questions: state.survey.questions.map(question => {
-                        if (question.index === action.question.index) {
+                        if (question.index === action.index) {
                             return action.question;
+                        } else if (
+                            adjustIndices &&
+                            adjustAbove &&
+                            question.index === action.question.index
+                        ) {
+                            // the question whose index the newly edited question is taking over
+                            return { ...question, index: question.index + 1 };
+                        } else if (
+                            adjustIndices &&
+                            adjustBelow &&
+                            question.index === action.question.index
+                        ) {
+                            // the question whose index the newly edited question is taking over
+                            return { ...question, index: question.index - 1 };
                         }
                         return question;
                     })

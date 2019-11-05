@@ -57,7 +57,11 @@ export const UPDATE_SURVEY = "UPDATE_SURVEY";
 export const REFRESH_SURVEY = "REFRESH_SURVEY";
 
 export const addQuestion = question => ({ type: ADD_QUESTION, question });
-export const editQuestion = question => ({ type: EDIT_QUESTION, question });
+export const editQuestion = (question, index) => ({
+    type: EDIT_QUESTION,
+    question,
+    index
+});
 export const delQuestion = index => ({ type: DEL_QUESTION, index });
 export const updateSurvey = survey => ({ type: UPDATE_SURVEY, survey });
 export const refreshSurvey = () => ({ type: REFRESH_SURVEY });

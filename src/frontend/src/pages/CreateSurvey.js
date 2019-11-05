@@ -88,6 +88,10 @@ class CreateSurvey extends Component {
 
     render() {
         const { postSuccess, postError, isPosting, survey } = this.props;
+        const sortedQuestions = survey.questions.sort((a, b) =>
+            a.index > b.index ? 1 : -1
+        );
+
         if (postSuccess) {
             return (
                 <div className="container">
@@ -202,12 +206,13 @@ class CreateSurvey extends Component {
                         >
                             {survey.questions.length > 0 && (
                                 <>
-                                    {survey.questions.map((question, i) => (
+                                    {sortedQuestions.map((question, i) => (
                                         <QuestionCS
                                             key={`question-${i}`}
-                                            qtext={question.qtext}
-                                            qtype={question.qtype}
-                                            index={question.index}
+                                            question={question}
+                                            numQuestions={
+                                                survey.questions.length
+                                            }
                                             onDelete={() =>
                                                 this.props.delQuestion(
                                                     question.index

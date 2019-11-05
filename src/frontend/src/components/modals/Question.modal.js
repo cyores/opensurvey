@@ -21,7 +21,8 @@ const mapStateToProps = state => {
 function mapDispatchToProps(dispatch) {
     return {
         addQuestion: question => dispatch(addQuestion(question)),
-        editQuestion: question => dispatch(editQuestion(question))
+        editQuestion: (question, index) =>
+            dispatch(editQuestion(question, index))
     };
 }
 
@@ -85,7 +86,10 @@ class Question extends Component {
         if (this.props.mode === "create") {
             this.props.addQuestion(this.state.question);
         } else if (this.props.mode === "edit") {
-            this.props.editQuestion(this.state.question);
+            this.props.editQuestion(
+                this.state.question,
+                this.state.question.index
+            );
         }
         this.props.onClose();
     }

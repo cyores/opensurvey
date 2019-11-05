@@ -14,7 +14,7 @@ const PageTransitionSC = styled.div`
     }
     transform: translateY(0%);
     animation-name: fadeIn;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
     animation-timing-function: ease;
 `;
 
