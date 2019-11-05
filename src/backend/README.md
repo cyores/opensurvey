@@ -16,11 +16,11 @@ The server is split into four main layers, each with their own purpose and conte
 -   Function: routing
 -   Context: HTTP
 
-When an HTTP request hits the servers, the routes file will direct the request to the appropriate controllers function.
+When an HTTP request hits the server, the routes file will direct the request to the appropriate controller's function.
 
 #### Example
 
-If the server receives a `POST` request to `/survey`, the routes file will direct the request to the surveys controller's function `postSurvey`.
+If the server receives a `POST` request to `/survey`, the routes file will direct the request to the survey's controller function `postSurvey`.
 
 ## [Controllers](https://github.com/cyores/opensurvey/tree/master/src/backend/src/controllers)
 
@@ -35,21 +35,21 @@ Let's say the `postSurvey` function has been called. The controller (in this cas
 
 ## [Services](https://github.com/cyores/opensurvey/tree/master/src/backend/src/services)
 
--   Function: format data (if necessary), make database calls
+-   Function: format data (if necessary), make external API calls, make calls to the db files
 -   Context: application
 
 Services make the calls to the db files or any external API's. Services take the data given to it from the controller and format it for insertion into the database (if necessary). They are also responsible for taking the rows returned from a database file and formatting them into the expected JSON format. Since services are in the application context, they are independant of the framework used. This means Express can be swapped out for some other framework and no changes need to be made to any of the service files. It would also be possible to change databases without changing service files.
 
 #### Example
 
-Let's say the `createSurvey` function has been called. The service file will format the data into a way that can been inserted into the database, then call the relevant database file to perform the insertion. A service can call any database file.
+Let's say the `createSurvey` function has been called. The service file will format the data in a way that can been inserted into the database, then call the relevant database file to perform the insertion. A service can call any database file.
 
 ## [Database](https://github.com/cyores/opensurvey/tree/master/src/backend/src/db)
 
 -   Function: make database calls
 -   Context: database
 
-The database files simple perform queries on the Postgres database. The recieve formatted data from the service, create the query, then return the result of the query.
+The database files simply perform queries on the Postgres database. The receive formatted data from the service, create the query, then return the result of the query.
 
 <br>
 
@@ -57,14 +57,14 @@ The database files simple perform queries on the Postgres database. The recieve 
 
 ## Surveys
 
-| Method  | Route             | Description                             |
-| ------- | ----------------- | --------------------------------------- |
-| `GET`:  | `/api/surveys`    | returns an array of all surveys         |
-| `GET`:  | `/api/survey/:id` | returns the survey with the matching id |
-| `POST`: | `/api/survey`     | creates the survey                      |
+| Method | Route             | Description                             | Example                                                    |
+| ------ | ----------------- | --------------------------------------- | ---------------------------------------------------------- |
+| `GET`  | `/api/surveys`    | returns an array of all surveys         |
+| `GET`  | `/api/survey/:id` | returns the survey with the matching id |
+| `POST` | `/api/survey`     | creates the survey                      | { name, desc, author, openDate, closeDate, questions: [] } |
 
 ## Responses
 
-| Method  | Route           | Description        |
-| ------- | --------------- | ------------------ |
-| `POST`: | `/api/response` | creates a response |
+| Method | Route           | Description        | Example                        |
+| ------ | --------------- | ------------------ | ------------------------------ |
+| `POST` | `/api/response` | creates a response | { surveyID, questionID, text } |
