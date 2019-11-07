@@ -37,14 +37,80 @@ const LabelTop = styled.label`
     padding: 0;
 `;
 
-const RadioCheckbox = styled.input`
-    outline: none;
+const RCWrapper = styled.label`
+    flex: 1 0 auto;
+    display: block;
+    position: relative;
+    padding-left: var(--text-xxl);
+    cursor: pointer;
+    user-select: none;
     transition: all 0.25s ease-in-out;
-    padding: var(--space-sm);
+    &:hover input ~ span {
+        box-shadow: 0 2px 6px var(--color-shadow);
+        opacity: 1;
+    }
+    & input:checked ~ span:after {
+        display: block;
+        opacity: 1;
+    }
+    & input:checked ~ span {
+        opacity: 1;
+    }
 `;
 
-const RCLabel = styled.span`
-    padding: 0 var(--space-sm);
+const RadioCheckbox = styled.input`
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    outline: none;
+`;
+
+const Checkmark = styled.span`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--text-lg);
+    width: var(--text-lg);
+    background: rgba(255, 255, 255, 0.75);
+    opacity: 0.85;
+    transition: all 0.25s ease-in-out;
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 8px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--color-primary);
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+`;
+
+const Radio = styled.span`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--text-lg);
+    width: var(--text-lg);
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: all 0.25s ease-in-out;
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: calc((var(--text-lg) / 2) - (var(--text-sm) / 2));
+        left: calc((var(--text-lg) / 2) - (var(--text-sm) / 2));
+        border-radius: 50%;
+        width: var(--text-sm);
+        height: var(--text-sm);
+        background-color: var(--color-primary);
+    }
 `;
 
 export default function Input(props) {
@@ -64,18 +130,18 @@ export default function Input(props) {
         <Wrapper>
             <Flex>
                 {type === "radio" || type === "checkbox" ? (
-                    <div style={{ flex: "1 0 auto" }}>
+                    <RCWrapper>
+                        {label}
                         <RadioCheckbox
                             type={type}
                             placeholder={placeholder}
                             defaultValue={defaultValue}
-                            step={step}
                             name={name}
                             value={value}
                             onChange={onChange}
                         ></RadioCheckbox>
-                        <RCLabel>{label}</RCLabel>
-                    </div>
+                        {type === "radio" ? <Radio /> : <Checkmark />}
+                    </RCWrapper>
                 ) : (
                     <>
                         {labelTop ? (
