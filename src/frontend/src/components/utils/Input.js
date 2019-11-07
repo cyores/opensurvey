@@ -14,21 +14,21 @@ const StyledInput = styled.input`
     font-size: var(--text-base-size);
     height: var(--text-lg);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    padding: var(--space-xs);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--color-shadow);
+    padding: var(--space-sm);
     outline: none;
     transition: all 0.25s ease-in-out;
     &:focus {
-        border: 1px solid var(--color-primary);
-        box-shadow: 0 2px 6px var(--color-primary-shadow);
+        border: 1px solid var(--color-shadow);
+        box-shadow: 0 2px 6px var(--color-shadow);
     }
 `;
 
 const Label = styled.label`
     flex: 1 0 50px;
     display: inline-block;
-    padding: var(--space-xs);
+    padding: var(--space-sm);
 `;
 
 const LabelTop = styled.label`
@@ -40,11 +40,11 @@ const LabelTop = styled.label`
 const RadioCheckbox = styled.input`
     outline: none;
     transition: all 0.25s ease-in-out;
-    padding: var(--space-xs);
+    padding: var(--space-sm);
 `;
 
 const RCLabel = styled.span`
-    padding: 0 var(--space-xs);
+    padding: 0 var(--space-sm);
 `;
 
 export default function Input(props) {

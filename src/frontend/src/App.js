@@ -28,12 +28,20 @@ export default function App() {
             />
             {theme === "night" && (
                 <style>{`
-                    :root {--color-bg: var(--color-night-bg); --color-text: var(--color-night-text)}
+                    :root {
+                        --color-bg: var(--color-night-bg);
+                        --color-text: var(--color-night-text);
+                        --color-shadow: var(--color-night-shadow);
+                    }
                 `}</style>
             )}
             {theme === "light" && (
                 <style>{`
-                    :root {--color-bg: var(--color-light-bg); --color-text: var(--color-light-text)}
+                    :root {
+                        --color-bg: var(--color-light-bg);
+                        --color-text: var(--color-light-text);
+                        --color-shadow: var(--color-light-shadow);
+                    }
                 `}</style>
             )}
             <Route exact path="/" component={Home} />

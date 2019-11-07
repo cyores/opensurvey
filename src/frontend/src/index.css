@@ -21,11 +21,15 @@
 
     --color-danger: #d30930;
 
+    --color-shadow: rgba(55, 58, 75, 0.08);
+
     /* Holder Color Vars */
     --color-night-bg: rgba(22, 22, 22, 1);
     --color-light-bg: rgba(232, 232, 232, 1);
     --color-night-text: rgba(255, 255, 255, 0.91);
     --color-light-text: rgba(0, 0, 0, 0.91);
+    --color-night-shadow: rgba(74, 20, 140, 0.25);
+    --color-light-shadow: rgba(55, 58, 75, 0.08);
 
     /* Text Sizing */
     --text-base-size: 1em;

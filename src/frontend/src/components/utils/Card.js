@@ -13,9 +13,8 @@ const StyledCard = styled.div`
     flex: 1 0 300px;
     height: 300px;
     margin: var(--space-md);
-    // box-shadow: 0 16px 32px 0 rgba(55, 58, 75, 0.08);
-    box-shadow: 0 16px 32px 0 var(--color-primary-shadow);
-    border: 1px solid var(--color-primary-transparent);
+    box-shadow: 0 16px 32px 0 var(--color-shadow);
+    // border: 1px solid var(--color-shadow);
     border-radius: 1rem;
     background: rgba(0, 0, 0, 0.05);
     transition: 0.25s ease-in-out;

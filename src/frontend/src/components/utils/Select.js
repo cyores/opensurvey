@@ -18,20 +18,20 @@ const StyledSelect = styled.select`
     flex: 6 0 300px;
     font-size: var(--text-base-size);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    padding: var(--space-xs);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--color-shadow);
+    padding: var(--space-sm);
     outline: none;
     transition: all 0.15s ease-in-out;
     &:focus {
-        border: 1px solid var(--color-primary);
+        border: 1px solid var(--color-shadow);
     }
 `;
 
 const Label = styled.label`
     flex: 1 0 50px;
     display: inline-block;
-    padding: var(--space-xs);
+    padding: var(--space-sm);
 `;
 
 const LabelTop = styled.label`
