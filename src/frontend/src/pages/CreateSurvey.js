@@ -7,10 +7,10 @@ import Input from "../components/utils/Input";
 import Textarea from "../components/utils/Textarea";
 import Button from "../components/utils/Button";
 import Error from "../components/utils/Error";
-import ReactModal from "react-modal";
 import PageTransition from "../components/utils/PageTransition";
 import QuestionCS from "../components/QuestionCS";
 import Question from "../components/modals/Question.modal";
+import ModalWrapper from "../components/utils/ModalWrapper";
 
 // actions
 import {
@@ -37,26 +37,6 @@ function mapDispatchToProps(dispatch) {
         refreshSurvey: () => dispatch(refreshSurvey())
     };
 }
-
-const modelStyle = {
-    content: {
-        left: "12vw",
-        right: "12vw",
-        top: "10vh",
-        bottom: "10vh",
-        padding: "var(--space-xl)",
-        borderRadius: "1rem",
-        borderColor: "var(--color-primary)",
-        backgroundColor: "var(--color-bg)",
-        boxShadow: "0 2px 32px var(--color-primary)"
-    },
-    overlay: {
-        backgroundColor: "transparent",
-        backdropFilter: "blur(4px)"
-    }
-};
-
-ReactModal.setAppElement("#root");
 
 class CreateSurvey extends Component {
     constructor(props) {
@@ -245,14 +225,8 @@ class CreateSurvey extends Component {
                                     Create Question
                                 </Button>
                             </Flex>
-                            <ReactModal
-                                isOpen={this.state.modalIsOpen}
-                                style={modelStyle}
-                                closeTimeoutMS={250}
-                                onRequestClose={() =>
-                                    this.setState({ modalIsOpen: false })
-                                }
-                            >
+
+                            <ModalWrapper modalIsOpen={this.state.modalIsOpen}>
                                 {this.state.addModal && (
                                     <Question
                                         mode="create"
@@ -274,7 +248,7 @@ class CreateSurvey extends Component {
                                         }
                                     ></Question>
                                 )}
-                            </ReactModal>
+                            </ModalWrapper>
                         </div>
                     </Flex>
 
