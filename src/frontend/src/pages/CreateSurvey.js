@@ -226,7 +226,12 @@ class CreateSurvey extends Component {
                                 </Button>
                             </Flex>
 
-                            <ModalWrapper modalIsOpen={this.state.modalIsOpen}>
+                            <ModalWrapper
+                                modalIsOpen={this.state.modalIsOpen}
+                                onRequestClose={() =>
+                                    this.setState({ modalIsOpen: false })
+                                }
+                            >
                                 {this.state.addModal && (
                                     <Question
                                         mode="create"

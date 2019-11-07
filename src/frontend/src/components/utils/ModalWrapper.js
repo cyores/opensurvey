@@ -27,6 +27,7 @@ export default function ModalWrapper(props) {
             isOpen={props.modalIsOpen}
             style={modelStyle}
             closeTimeoutMS={250}
+            onRequestClose={props.onRequestClose}
         >
             {props.children}
         </ReactModal>
