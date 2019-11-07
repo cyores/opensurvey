@@ -55,6 +55,7 @@ const RCWrapper = styled.label`
     }
     & input:checked ~ span {
         opacity: 1;
+        background: var(--color-primary);
     }
 `;
 
@@ -74,6 +75,8 @@ const Checkmark = styled.span`
     height: var(--text-lg);
     width: var(--text-lg);
     background: rgba(255, 255, 255, 0.75);
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
     opacity: 0.85;
     transition: all 0.25s ease-in-out;
     &:after {
@@ -84,7 +87,7 @@ const Checkmark = styled.span`
         top: 3px;
         width: 5px;
         height: 10px;
-        border: solid var(--color-primary);
+        border: solid white;
         border-width: 0 3px 3px 0;
         transform: rotate(45deg);
     }
@@ -98,6 +101,7 @@ const Radio = styled.span`
     width: var(--text-lg);
     background: rgba(255, 255, 255, 0.75);
     border-radius: 50%;
+    border: 2px solid var(--color-primary);
     opacity: 0.85;
     transition: all 0.25s ease-in-out;
     &:after {
@@ -109,7 +113,7 @@ const Radio = styled.span`
         border-radius: 50%;
         width: var(--text-sm);
         height: var(--text-sm);
-        background-color: var(--color-primary);
+        background-color: white;
     }
 `;
 
