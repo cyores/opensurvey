@@ -116,33 +116,51 @@ export default function Button(props) {
                 style={props.style}
             >
                 {props.theme === "primary" ? (
-                    <Primary>{props.children}</Primary>
+                    <Primary tabIndex={props.tabIndex}>
+                        {props.children}
+                    </Primary>
                 ) : null}
                 {props.theme === "complement" ? (
-                    <Complement>{props.children}</Complement>
+                    <Complement tabIndex={props.tabIndex}>
+                        {props.children}
+                    </Complement>
                 ) : null}
-                {props.theme === "full" ? <Full>{props.children}</Full> : null}
+                {props.theme === "full" ? (
+                    <Full tabIndex={props.tabIndex}>{props.children}</Full>
+                ) : null}
                 {props.theme === "outline" ? (
-                    <Outline>{props.children}</Outline>
+                    <Outline tabIndex={props.tabIndex}>
+                        {props.children}
+                    </Outline>
                 ) : null}
                 {props.theme === "full-outline" ? (
-                    <FullOutline>{props.children}</FullOutline>
+                    <FullOutline tabIndex={props.tabIndex}>
+                        {props.children}
+                    </FullOutline>
                 ) : null}
                 {props.theme === "danger" ? (
-                    <Danger>{props.children}</Danger>
+                    <Danger tabIndex={props.tabIndex}>{props.children}</Danger>
                 ) : null}
                 {props.theme === "disabled" ? (
-                    <Disabled disabled={props.disabled}>
+                    <Disabled
+                        disabled={props.disabled}
+                        tabIndex={props.tabIndex}
+                    >
                         {props.children}
                     </Disabled>
                 ) : null}
                 {props.theme === "full-disabled" ? (
-                    <FullDisabled disabled={props.disabled}>
+                    <FullDisabled
+                        disabled={props.disabled}
+                        tabIndex={props.tabIndex}
+                    >
                         {props.children}
                     </FullDisabled>
                 ) : null}
                 {props.theme === "transparent" ? (
-                    <Transparent>{props.children}</Transparent>
+                    <Transparent tabIndex={props.tabIndex}>
+                        {props.children}
+                    </Transparent>
                 ) : null}
                 {!props.theme ? <Primary>{props.children}</Primary> : null}
             </Base>
