@@ -77,11 +77,11 @@ const Outline = styled.button`
 `;
 
 const Danger = styled.button`
-    border: 1px solid #d30930;
-    background: #d30930;
+    border: 1px solid var(--color-danger);
+    background: var(--color-danger);
     color: var(--color-night-text);
     &:hover {
-        --box-shadow-color: #d30930;
+        --box-shadow-color: var(--color-danger);
     }
 `;
 

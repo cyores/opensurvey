@@ -76,10 +76,24 @@ class Question extends Component {
         q.possibleAnswers = pas.map(pa => {
             if (pa.index === index) {
                 pa.atext = input.target.value;
+                pa.avalue = input.target.value;
             }
             return pa;
         });
         this.setState({ question: q });
+    }
+
+    removePossibleAnswer(index) {
+        let newPAIndex = this.state.PAindex - 1;
+        let q = this.state.question;
+        let pas = q.possibleAnswers;
+        q.possibleAnswers = pas.reduce((acc, pa) => {
+            if (pa.index === index) return acc;
+            if (pa.index < index) acc.push(pa);
+            else acc.push({ ...pa, index: pa.index - 1 });
+            return acc;
+        }, []);
+        this.setState({ question: q, PAindex: newPAIndex });
     }
 
     submit() {
@@ -205,21 +219,48 @@ class Question extends Component {
                             <Flex>
                                 <h5>Possible Answers</h5>
                             </Flex>
-                            <div style={{ margin: "0 auto", width: "75%" }}>
+                            <div
+                                style={{ margin: "0 auto", width: "75%" }}
+                                key={`pawrapper-${possibleAnswers.length}`}
+                            >
                                 {possibleAnswers.map(ans => (
-                                    <Input
-                                        key={`pa-${ans.index}`}
-                                        type="text"
-                                        label={`Option ${ans.index}`}
-                                        defaultValue={ans.atext}
-                                        placeholder={`Possible answer ${ans.index} text`}
-                                        onChange={input =>
-                                            this.updatePossibleAnswer(
-                                                input,
-                                                ans.index
-                                            )
-                                        }
-                                    />
+                                    <Flex key={`pa-${ans.index}`}>
+                                        <div style={{ flex: "1" }}>
+                                            <Input
+                                                key={`pa-input-${ans.index}`}
+                                                type="text"
+                                                label={`Option ${ans.index}`}
+                                                defaultValue={ans.atext}
+                                                placeholder={`Possible answer ${ans.index} text`}
+                                                onChange={input =>
+                                                    this.updatePossibleAnswer(
+                                                        input,
+                                                        ans.index
+                                                    )
+                                                }
+                                            />
+                                        </div>
+                                        <div style={{ flex: "0" }}>
+                                            <Button
+                                                tabIndex="-1"
+                                                theme="transparent"
+                                                onClick={() =>
+                                                    this.removePossibleAnswer(
+                                                        ans.index
+                                                    )
+                                                }
+                                            >
+                                                <span
+                                                    style={{
+                                                        color:
+                                                            "var(--color-danger)"
+                                                    }}
+                                                >
+                                                    Delete
+                                                </span>
+                                            </Button>
+                                        </div>
+                                    </Flex>
                                 ))}
                             </div>
                             <Flex>
@@ -275,7 +316,11 @@ class Question extends Component {
                                 <b>
                                     {qtext}
                                     {required && (
-                                        <span style={{ color: "#d30930" }}>
+                                        <span
+                                            style={{
+                                                color: "var(--color-danger)"
+                                            }}
+                                        >
                                             {" "}
                                             *
                                         </span>

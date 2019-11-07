@@ -247,7 +247,12 @@ class Survey extends Component {
                             <h6 style={{ margin: 0 }}>
                                 Question {qindex + 1}{" "}
                                 {question.required && (
-                                    <span style={{ color: "#d30930" }}> *</span>
+                                    <span
+                                        style={{ color: "var(--color-danger)" }}
+                                    >
+                                        {" "}
+                                        *
+                                    </span>
                                 )}
                             </h6>
                             <p>
