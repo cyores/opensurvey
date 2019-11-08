@@ -19,6 +19,24 @@ const desktopModelStyle = {
     }
 };
 
+const tabletModelStyle = {
+    content: {
+        left: "3vw",
+        right: "3vw",
+        top: "8vh",
+        bottom: "5vh",
+        padding: "var(--space-md)",
+        borderRadius: "1rem",
+        borderColor: "var(--color-shadow)",
+        backgroundColor: "var(--color-bg)",
+        boxShadow: "0 2px 32px var(--color-shadow)"
+    },
+    overlay: {
+        backgroundColor: "transparent",
+        backdropFilter: "blur(4px)"
+    }
+};
+
 const mobileModelStyle = {
     content: {
         left: "0",
@@ -43,8 +61,11 @@ const mobileModelStyle = {
 ReactModal.setAppElement("#root");
 
 export default function ModalWrapper(props) {
-    let modalStyle =
-        window.innerWidth > 768 ? desktopModelStyle : mobileModelStyle;
+    let modalStyle = null;
+    let width = window.innerWidth;
+    if (width > 1024) modalStyle = desktopModelStyle;
+    else if (width > 768) modalStyle = tabletModelStyle;
+    else modalStyle = mobileModelStyle;
     return (
         <ReactModal
             isOpen={props.modalIsOpen}

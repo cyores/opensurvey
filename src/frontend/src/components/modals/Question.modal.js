@@ -118,7 +118,7 @@ class Question extends Component {
             required,
             index
         } = this.state.question;
-        let isMobile = window.innerWidth < 768;
+        let isMobile = window.innerWidth <= 768;
         return (
             <>
                 <Flex dir="rowleft" style={{ height: "100%" }}>
