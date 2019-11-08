@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { checkDates } from "../utils/index";
-import GreenClock from "../images/clock-green.svg";
-import RedClock from "../images/clock-red.svg";
+import { FiClock } from "react-icons/fi";
 
 // actions
 import { fetchSurvey, postResponse, refreshResponse } from "../actions/index";
@@ -174,21 +173,8 @@ class Survey extends Component {
                                     color: dateColor
                                 }}
                             >
-                                <img
-                                    src={
-                                        dateColor === "green"
-                                            ? GreenClock
-                                            : RedClock
-                                    }
-                                    alt="Clock"
-                                    style={{
-                                        color: dateColor,
-                                        width:
-                                            "calc(0.8 * var(--text-base-size))",
-                                        padding: "0 2px"
-                                    }}
-                                />
-                                <small>{dateText}</small>
+                                <FiClock style={{ padding: "0 2px" }} />
+                                {dateText}
                             </p>
                         </div>
                     </Flex>
@@ -212,21 +198,8 @@ class Survey extends Component {
                                     color: dateColor
                                 }}
                             >
-                                <img
-                                    src={
-                                        dateColor === "green"
-                                            ? GreenClock
-                                            : RedClock
-                                    }
-                                    alt="Clock"
-                                    style={{
-                                        color: dateColor,
-                                        width:
-                                            "calc(0.8 * var(--text-base-size))",
-                                        padding: "0 2px"
-                                    }}
-                                />
-                                <small>{dateText}</small>
+                                <FiClock style={{ padding: "0 2px" }} />
+                                {dateText}
                             </p>
                         </div>
                     </Flex>

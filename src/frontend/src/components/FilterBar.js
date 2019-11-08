@@ -1,10 +1,11 @@
 import React from "react";
 import Flex from "./utils/Flex";
+import { FiGrid } from "react-icons/fi";
+import { FiList } from "react-icons/fi";
 
 // components
 import Input from "./utils/Input";
 import Select from "./utils/Select";
-import Button from "./utils/Button";
 
 const filterOptions = ["Open", "Opening soon", "Closing soon", "Closed"];
 const sortOptions = ["New", "Old", "Popular"];
@@ -14,7 +15,7 @@ export default function FilterBar(props) {
         <Flex>
             <div
                 style={{
-                    flex: "50",
+                    flex: "34 0 300px",
                     paddingRight: "var(--space-xs)",
                     paddingLeft: "var(--space-xs)"
                 }}
@@ -29,7 +30,7 @@ export default function FilterBar(props) {
             </div>
             <div
                 style={{
-                    flex: "15",
+                    flex: "27",
                     paddingRight: "var(--space-xs)",
                     paddingLeft: "var(--space-xs)"
                 }}
@@ -46,7 +47,7 @@ export default function FilterBar(props) {
             </div>
             <div
                 style={{
-                    flex: "15",
+                    flex: "27",
                     paddingRight: "var(--space-xs)",
                     paddingLeft: "var(--space-xs)"
                 }}
@@ -61,23 +62,27 @@ export default function FilterBar(props) {
                     labelTop={true}
                 />
             </div>
-            <div style={{ flex: "20" }}>
+            <div style={{ flex: "12" }}>
                 <Flex>
-                    <Button
-                        theme="transparent"
-                        style={{ marginTop: "7px", fontSize: "var(--text-xl)" }}
-                    >
-                        {/* list */}
-                        &#9776;
-                    </Button>
+                    <FiList
+                        style={{
+                            color: "var(--color-primary)",
+                            fontSize: "var(--text-xl)",
+                            cursor: "pointer",
+                            marginTop: "calc(var(--text-base-size) + 7px)"
+                        }}
+                        onClick={() => console.log("list")}
+                    />
 
-                    <Button
-                        theme="transparent"
-                        style={{ marginTop: "7px", fontSize: "var(--text-xl)" }}
-                    >
-                        {/* grid */}
-                        &#9638;
-                    </Button>
+                    <FiGrid
+                        style={{
+                            color: "var(--color-primary)",
+                            fontSize: "var(--text-xl)",
+                            cursor: "pointer",
+                            marginTop: "calc(var(--text-base-size) + 7px)"
+                        }}
+                        onClick={() => console.log("grid")}
+                    />
                 </Flex>
             </div>
         </Flex>

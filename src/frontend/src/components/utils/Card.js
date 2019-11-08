@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { checkDates } from "../../utils/index";
-import GreenClock from "../../images/clock-green.svg";
-import RedClock from "../../images/clock-red.svg";
 import { Link } from "react-router-dom";
+import { FiClock } from "react-icons/fi";
 
 // components
 import Button from "./Button";
@@ -77,21 +76,8 @@ export default function Card(props) {
                                         color: dateColor
                                     }}
                                 >
-                                    <img
-                                        src={
-                                            dateColor === "green"
-                                                ? GreenClock
-                                                : RedClock
-                                        }
-                                        alt="Clock"
-                                        style={{
-                                            color: dateColor,
-                                            width:
-                                                "calc(0.8 * var(--text-base-size))",
-                                            padding: "0 2px"
-                                        }}
-                                    />
-                                    <small>{dateText}</small>
+                                    <FiClock style={{ padding: "0 2px" }} />
+                                    {dateText}
                                 </p>
                             </div>
                         </Grid>
@@ -113,7 +99,7 @@ export default function Card(props) {
                             padding: "var(--space-sm)"
                         }}
                     >
-                        <Link to={`/survey/${surveyID}`}>
+                        <Link to={isOpen ? `/survey/${surveyID}` : null}>
                             <Button
                                 theme={isOpen ? "full" : "full-disabled"}
                                 style={{ margin: 0 }}
