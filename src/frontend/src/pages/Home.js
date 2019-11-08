@@ -7,10 +7,11 @@ import Flex from "../components/utils/Flex";
 import Card from "../components/utils/Card";
 import Error from "../components/utils/Error";
 import HomeHero from "../components/HomeHero";
+import PageTransition from "../components/utils/PageTransition";
+import FilterBar from "../components/FilterBar";
 
 // actions
 import { fetchSurveys } from "../actions/index";
-import PageTransition from "../components/utils/PageTransition";
 
 const mapStateToProps = state => {
     return {
@@ -44,20 +45,23 @@ class Home extends Component {
                                 <Error error={fetchError} />
                             </Flex>
                         ) : surveys.length > 0 ? (
-                            <Flex dir="rowleft">
-                                {surveys.map((survey, i) => (
-                                    <Card
-                                        key={i}
-                                        title={survey.name}
-                                        desc={survey.desc}
-                                        open={survey.opendate}
-                                        close={survey.closedate}
-                                        buttonText="View"
-                                        surveyID={survey.id}
-                                        numQuestions={survey.numquestions}
-                                    ></Card>
-                                ))}
-                            </Flex>
+                            <>
+                                <FilterBar />
+                                <Flex dir="rowleft">
+                                    {surveys.map((survey, i) => (
+                                        <Card
+                                            key={i}
+                                            title={survey.name}
+                                            desc={survey.desc}
+                                            open={survey.opendate}
+                                            close={survey.closedate}
+                                            buttonText="View"
+                                            surveyID={survey.id}
+                                            numQuestions={survey.numquestions}
+                                        ></Card>
+                                    ))}
+                                </Flex>
+                            </>
                         ) : (
                             <Flex dir="colcenter">
                                 <img src={EmptyImg} width="50%" alt="Empty" />

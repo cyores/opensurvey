@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 
 const StyledSelect = styled.select`
     flex: 6 0 300px;
+    flex: 6 0 150px;
     font-size: var(--text-base-size);
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.75);
@@ -30,6 +31,7 @@ const StyledSelect = styled.select`
 
 const Label = styled.label`
     flex: 1 0 50px;
+    flex: 1 0 25px;
     display: inline-block;
     padding: var(--space-sm);
 `;
