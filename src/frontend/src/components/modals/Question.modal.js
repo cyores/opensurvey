@@ -6,7 +6,6 @@ import Flex from "../utils/Flex";
 import Button from "../utils/Button";
 import Input from "../utils/Input";
 import Select from "../utils/Select";
-import FancySelect from "../utils/FancySelect";
 import Toggle from "../utils/Toggle";
 import Textarea from "../utils/Textarea";
 
@@ -162,7 +161,7 @@ class Question extends Component {
                                     paddingLeft: "var(--space-xs)"
                                 }}
                             >
-                                <FancySelect
+                                <Select
                                     label="Type"
                                     options={questionTypes}
                                     defaultValue={qtype}

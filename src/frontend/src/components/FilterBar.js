@@ -4,7 +4,6 @@ import Flex from "./utils/Flex";
 // components
 import Input from "./utils/Input";
 import Select from "./utils/Select";
-import FancySelect from "./utils/FancySelect";
 import Button from "./utils/Button";
 
 const filterOptions = ["Open", "Opening soon", "Closing soon", "Closed"];
@@ -35,7 +34,7 @@ export default function FilterBar(props) {
                     paddingLeft: "var(--space-xs)"
                 }}
             >
-                <FancySelect
+                <Select
                     label="Filter"
                     options={filterOptions}
                     // defaultValue={}
@@ -52,7 +51,7 @@ export default function FilterBar(props) {
                     paddingLeft: "var(--space-xs)"
                 }}
             >
-                <FancySelect
+                <Select
                     label="Sort by"
                     options={sortOptions}
                     // defaultValue={}
