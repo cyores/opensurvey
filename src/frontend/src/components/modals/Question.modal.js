@@ -118,167 +118,120 @@ class Question extends Component {
             required,
             index
         } = this.state.question;
+        let isMobile = window.innerWidth < 768;
         return (
-            <Flex dir="rowleft" style={{ height: "100%" }}>
-                <div
-                    style={{
-                        flex: "66 0 300px",
-                        paddingRight: "var(--space-md)"
-                    }}
-                >
-                    {this.props.mode === "edit" && (
-                        <h5 style={{ marginTop: 0 }}>Edit Question {index}</h5>
-                    )}
-                    {this.props.mode === "create" && (
-                        <h5 style={{ marginTop: 0 }}>Create Question</h5>
-                    )}
+            <>
+                <Flex dir="rowleft" style={{ height: "100%" }}>
+                    <div
+                        style={{
+                            flex: "66 0 300px"
+                        }}
+                    >
+                        {this.props.mode === "edit" && (
+                            <h5 style={{ marginTop: 0 }}>
+                                Edit Question {index}
+                            </h5>
+                        )}
+                        {this.props.mode === "create" && (
+                            <h5 style={{ marginTop: 0 }}>Create Question</h5>
+                        )}
 
-                    <Input
-                        type="text"
-                        placeholder="Question text"
-                        defaultValue={qtext}
-                        label="Question"
-                        onChange={input => this.handleChange(input, "qtext")}
-                    />
-                    <Textarea
-                        placeholder="Write your question description here (optional)"
-                        label="Description"
-                        defaultValue={qdesc}
-                        onChange={input => this.handleChange(input, "qdesc")}
-                    />
-                    <Flex>
-                        <div
-                            style={{
-                                flex: "45",
-                                paddingRight: "var(--space-md)",
-                                paddingLeft: "var(--space-xs)"
-                            }}
-                        >
-                            <Select
-                                label="Type"
-                                options={questionTypes}
-                                defaultValue={qtype}
-                                onChange={input =>
-                                    this.handleChange(input, "qtype")
-                                }
-                                labelTop={true}
-                            />
-                        </div>
-                        <div
-                            style={{
-                                flex: "45",
-                                paddingRight: "var(--space-md)"
-                            }}
-                        >
-                            <Input
-                                type="number"
-                                min={1}
-                                step={1}
-                                placeholder="Weight"
-                                defaultValue={qweight}
-                                label="Weight"
-                                labelTop={true}
-                                onChange={input =>
-                                    this.handleChange(input, "qweight")
-                                }
-                            />
-                        </div>
-                        <div style={{ flex: "10" }}>
-                            <Toggle
-                                defaultChecked={required}
-                                label="Required"
-                                labelStyle={{
-                                    marginBottom: "8px",
-                                    fontSize: "100%"
-                                }}
-                                onChange={input =>
-                                    this.handleChange(input, "required")
-                                }
-                            />
-                        </div>
-                    </Flex>
-
-                    {qtype === "Text" ? (
-                        qtext.length > 0 ? (
-                            <Flex>
-                                <Button
-                                    theme="complement"
-                                    onClick={() => this.submit()}
-                                >
-                                    {this.props.mode === "edit" && (
-                                        <span>Save Edits</span>
-                                    )}
-                                    {this.props.mode === "create" && (
-                                        <span>Add Question</span>
-                                    )}
-                                </Button>
-                            </Flex>
-                        ) : null
-                    ) : (
-                        <>
-                            <Flex>
-                                <h5>Possible Answers</h5>
-                            </Flex>
+                        <Input
+                            type="text"
+                            placeholder="Question text"
+                            defaultValue={qtext}
+                            label="Question"
+                            onChange={input =>
+                                this.handleChange(input, "qtext")
+                            }
+                        />
+                        <Textarea
+                            placeholder="Write your question description here (optional)"
+                            label="Description"
+                            defaultValue={qdesc}
+                            onChange={input =>
+                                this.handleChange(input, "qdesc")
+                            }
+                        />
+                        <Flex>
                             <div
-                                style={{ margin: "0 auto", width: "75%" }}
-                                key={`pawrapper-${possibleAnswers.length}`}
+                                style={{
+                                    flex: "1 0 350px",
+                                    paddingRight: "var(--space-xs)",
+                                    paddingLeft: "var(--space-xs)"
+                                }}
                             >
-                                {possibleAnswers.map(ans => (
-                                    <Flex key={`pa-${ans.index}`}>
-                                        <div style={{ flex: "1" }}>
-                                            <Input
-                                                key={`pa-input-${ans.index}`}
-                                                type="text"
-                                                label={`Option ${ans.index}`}
-                                                defaultValue={ans.atext}
-                                                placeholder={`Possible answer ${ans.index} text`}
-                                                onChange={input =>
-                                                    this.updatePossibleAnswer(
-                                                        input,
-                                                        ans.index
-                                                    )
-                                                }
-                                            />
-                                        </div>
-                                        <div style={{ flex: "0" }}>
-                                            <Button
-                                                tabIndex="-1"
-                                                theme="transparent"
-                                                onClick={() =>
-                                                    this.removePossibleAnswer(
-                                                        ans.index
-                                                    )
-                                                }
-                                            >
-                                                <span
-                                                    style={{
-                                                        color:
-                                                            "var(--color-danger)"
-                                                    }}
-                                                >
-                                                    Delete
-                                                </span>
-                                            </Button>
-                                        </div>
-                                    </Flex>
-                                ))}
+                                <Select
+                                    label="Type"
+                                    options={questionTypes}
+                                    defaultValue={qtype}
+                                    onChange={input =>
+                                        this.handleChange(input, "qtype")
+                                    }
+                                    labelTop={true}
+                                />
                             </div>
-                            <Flex>
-                                <Button
-                                    theme="primary"
-                                    onClick={() => this.addPossibleAnswer()}
-                                >
-                                    Add Possible Answer
-                                </Button>
-                            </Flex>
-                            {possibleAnswers.length > 0 && qtext.length > 0 && (
+                            <div
+                                style={{
+                                    flex: "1 0 350px",
+                                    paddingRight: "var(--space-xs)",
+                                    paddingLeft: "var(--space-xs)"
+                                }}
+                            >
+                                <Input
+                                    type="number"
+                                    min={1}
+                                    step={1}
+                                    placeholder="Weight"
+                                    defaultValue={qweight}
+                                    label="Weight"
+                                    labelTop={true}
+                                    onChange={input =>
+                                        this.handleChange(input, "qweight")
+                                    }
+                                />
+                            </div>
+                            <div
+                                style={{
+                                    flex: "1 0 100px",
+                                    paddingRight: "var(--space-xs)",
+                                    paddingLeft: "var(--space-xs)",
+                                    marginBottom: "var(--space-md)"
+                                }}
+                            >
+                                <Toggle
+                                    defaultChecked={required}
+                                    label="Required"
+                                    labelStyle={{
+                                        marginBottom: "8px",
+                                        fontSize: "100%"
+                                    }}
+                                    onChange={input =>
+                                        this.handleChange(input, "required")
+                                    }
+                                />
+                            </div>
+                        </Flex>
+
+                        {qtype === "Text" ? (
+                            qtext.length > 0 ? (
+                                <Flex>
+                                    <Button
+                                        theme="complement"
+                                        onClick={() => this.submit()}
+                                    >
+                                        {this.props.mode === "edit" && (
+                                            <span>Save Edits</span>
+                                        )}
+                                        {this.props.mode === "create" && (
+                                            <span>Add Question</span>
+                                        )}
+                                    </Button>
+                                </Flex>
+                            ) : (
                                 <>
-                                    <br></br>
                                     <Flex>
-                                        <Button
-                                            theme="complement"
-                                            onClick={() => this.submit()}
-                                        >
+                                        <Button theme="disabled">
                                             {this.props.mode === "edit" && (
                                                 <span>Save Edits</span>
                                             )}
@@ -287,96 +240,240 @@ class Question extends Component {
                                             )}
                                         </Button>
                                     </Flex>
-                                </>
-                            )}
-                        </>
-                    )}
-                </div>
-                {/* Question Preview */}
-                <div
-                    style={{
-                        flex: "33 0 150px",
-                        borderLeft: "1px solid var(--color-primary)",
-                        paddingLeft: "var(--space-md)",
-                        height: "100%"
-                    }}
-                >
-                    <Flex dir="colcenter" style={{ height: "100%" }}>
-                        <Flex
-                            dir="col"
-                            style={{
-                                flex: "66 0 66px",
-                                width: "100%",
-                                // maxHeight: "66%",
-                                justifyContent: "flex-start"
-                            }}
-                        >
-                            <h5 style={{ margin: 0 }}>Question Preview</h5>
-                            <p>
-                                <b>
-                                    {qtext}
-                                    {required && (
-                                        <span
+                                    <Flex>
+                                        <p
                                             style={{
-                                                color: "var(--color-danger)"
+                                                marginBottom: "var(--space-md)"
                                             }}
                                         >
-                                            {" "}
-                                            *
-                                        </span>
-                                    )}
-                                </b>
-                                <br></br>
-                                {qdesc}
-                            </p>
-
-                            {qtype === "Text" && (
-                                <Input
-                                    type="text"
-                                    label="Answer"
-                                    labelTop={true}
-                                    placeholder="Type your response here"
-                                />
-                            )}
-
-                            {qtype === "Radio" &&
-                                possibleAnswers.map((pa, i) => (
-                                    <Input
-                                        key={`pa-${i}`}
-                                        type="radio"
-                                        label={pa.atext}
-                                    />
-                                ))}
-
-                            {qtype === "Checkbox" &&
-                                possibleAnswers.map((pa, i) => (
-                                    <Input
-                                        key={`pa-${i}`}
-                                        type="checkbox"
-                                        label={pa.atext}
-                                    />
-                                ))}
-                        </Flex>
-                        <Flex
-                            dir="colright"
-                            style={{
-                                flex: "33 0 33px",
-                                width: "100%",
-                                justifyContent: "flex-end"
-                            }}
-                        >
-                            <div>
-                                <Button
-                                    theme="danger"
-                                    onClick={() => this.props.onClose()}
+                                            Your question needs question text.
+                                        </p>
+                                    </Flex>
+                                </>
+                            )
+                        ) : (
+                            <>
+                                <Flex>
+                                    <h5>Possible Answers</h5>
+                                </Flex>
+                                <div
+                                    key={`pawrapper-${possibleAnswers.length}`}
                                 >
-                                    Cancel
-                                </Button>
-                            </div>
+                                    {possibleAnswers.map(ans => (
+                                        <Flex key={`pa-${ans.index}`}>
+                                            <div
+                                                style={
+                                                    isMobile
+                                                        ? { flex: "1 0 100%" }
+                                                        : { flex: "1" }
+                                                }
+                                            >
+                                                <Input
+                                                    key={`pa-input-${ans.index}`}
+                                                    type="text"
+                                                    label={`Option ${ans.index}`}
+                                                    defaultValue={ans.atext}
+                                                    placeholder={`Possible answer ${ans.index} text`}
+                                                    onChange={input =>
+                                                        this.updatePossibleAnswer(
+                                                            input,
+                                                            ans.index
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+                                            <div
+                                                style={
+                                                    isMobile
+                                                        ? { flex: "0" }
+                                                        : { flex: "0" }
+                                                }
+                                            >
+                                                <Button
+                                                    tabIndex="-1"
+                                                    theme="transparent"
+                                                    onClick={() =>
+                                                        this.removePossibleAnswer(
+                                                            ans.index
+                                                        )
+                                                    }
+                                                >
+                                                    <span
+                                                        style={{
+                                                            color:
+                                                                "var(--color-danger)"
+                                                        }}
+                                                    >
+                                                        Delete
+                                                    </span>
+                                                </Button>
+                                            </div>
+                                        </Flex>
+                                    ))}
+                                </div>
+                                <Flex>
+                                    <Button
+                                        theme="primary"
+                                        style={{
+                                            marginBottom: "var(--space-md)"
+                                        }}
+                                        onClick={() => this.addPossibleAnswer()}
+                                    >
+                                        Add Possible Answer
+                                    </Button>
+                                </Flex>
+                                {possibleAnswers.length > 0 &&
+                                qtext.length > 0 ? (
+                                    <>
+                                        <br></br>
+                                        <Flex>
+                                            <Button
+                                                theme="complement"
+                                                onClick={() => this.submit()}
+                                                style={{
+                                                    marginBottom:
+                                                        "var(--space-md)"
+                                                }}
+                                            >
+                                                {this.props.mode === "edit" && (
+                                                    <span>Save Edits</span>
+                                                )}
+                                                {this.props.mode ===
+                                                    "create" && (
+                                                    <span>Add Question</span>
+                                                )}
+                                            </Button>
+                                        </Flex>
+                                    </>
+                                ) : (
+                                    <>
+                                        <br></br>
+                                        <Flex>
+                                            <Button
+                                                theme="disabled"
+                                                style={{
+                                                    marginBottom:
+                                                        "var(--space-md)"
+                                                }}
+                                            >
+                                                {this.props.mode === "edit" && (
+                                                    <span>Save Edits</span>
+                                                )}
+                                                {this.props.mode ===
+                                                    "create" && (
+                                                    <span>Add Question</span>
+                                                )}
+                                            </Button>
+                                        </Flex>
+                                        <Flex>
+                                            <p
+                                                style={{
+                                                    marginBottom:
+                                                        "var(--space-md)"
+                                                }}
+                                            >
+                                                Your question needs question
+                                                text and at least one possible
+                                                answer.
+                                            </p>
+                                        </Flex>
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </div>
+                    {/* Question Preview */}
+                    <div
+                        style={
+                            isMobile
+                                ? { display: "none" }
+                                : {
+                                      flex: "33 0 150px",
+                                      borderLeft:
+                                          "1px solid var(--color-primary)",
+                                      paddingLeft: "var(--space-md)",
+                                      marginLeft: "var(--space-md)",
+                                      height: "100%"
+                                  }
+                        }
+                    >
+                        <Flex dir="colcenter" style={{ height: "100%" }}>
+                            <Flex
+                                dir="col"
+                                style={{
+                                    flex: "66 0 66px",
+                                    width: "100%",
+                                    // maxHeight: "66%",
+                                    justifyContent: "flex-start"
+                                }}
+                            >
+                                <h5 style={{ margin: 0 }}>Question Preview</h5>
+                                <p>
+                                    <b>
+                                        {qtext}
+                                        {required && (
+                                            <span
+                                                style={{
+                                                    color: "var(--color-danger)"
+                                                }}
+                                            >
+                                                {" "}
+                                                *
+                                            </span>
+                                        )}
+                                    </b>
+                                    <br></br>
+                                    {qdesc}
+                                </p>
+
+                                {qtype === "Text" && (
+                                    <Input
+                                        type="text"
+                                        label="Answer"
+                                        labelTop={true}
+                                        placeholder="Type your response here"
+                                    />
+                                )}
+
+                                {qtype === "Radio" &&
+                                    possibleAnswers.map((pa, i) => (
+                                        <Input
+                                            key={`pa-${i}`}
+                                            type="radio"
+                                            label={pa.atext}
+                                        />
+                                    ))}
+
+                                {qtype === "Checkbox" &&
+                                    possibleAnswers.map((pa, i) => (
+                                        <Input
+                                            key={`pa-${i}`}
+                                            type="checkbox"
+                                            label={pa.atext}
+                                        />
+                                    ))}
+                            </Flex>
+                            <Flex
+                                dir="colright"
+                                style={{
+                                    flex: "33 0 33px",
+                                    width: "100%",
+                                    justifyContent: "flex-end"
+                                }}
+                            >
+                                <div>
+                                    <Button
+                                        theme="danger"
+                                        onClick={() => this.props.onClose()}
+                                    >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Flex>
                         </Flex>
-                    </Flex>
-                </div>
-            </Flex>
+                    </div>
+                </Flex>
+            </>
         );
     }
 }

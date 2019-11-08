@@ -12,7 +12,7 @@ import PageTransition from "./utils/PageTransition";
 
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: auto 20fr auto auto;
+    grid-template-columns: auto 60fr auto auto;
     grid-column-gap: var(--space-xxs);
     border-radius: 1rem;
     padding: var(--space-xxs);

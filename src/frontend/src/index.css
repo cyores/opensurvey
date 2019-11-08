@@ -165,6 +165,27 @@ hr {
     top: -100% !important;
 }
 
+@media only screen and (max-width: 768px) {
+    .ReactModal__Overlay {
+        opacity: 1;
+        height: 0 !important;
+        top: 100% !important;
+        transition: all 250ms ease-in-out;
+    }
+    
+    .ReactModal__Overlay--after-open {
+        opacity: 1;
+        height: 100% !important;
+        top: 0 !important;
+    }
+    
+    .ReactModal__Overlay--before-close {
+        opacity: 1;
+        height: 0 !important;
+        top: 100% !important;
+    }
+}
+
 /* Scrollbar */
 /* width */
 /* ::-webkit-scrollbar {
