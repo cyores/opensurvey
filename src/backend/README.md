@@ -2,6 +2,20 @@
 
 This is the code for the Open Survey server, written in Express with a PostgreSQL database.
 
+# Availble Scripts
+
+### `npm run initDB`
+Creates database tables
+
+### `npm run seedDB`
+Creates tables for the database and seeds it with some sample data
+
+### `npm run dev`
+Start the server
+
+### `npm run document`
+Runs the automated documentation writer [(documentation.js)](https://github.com/documentationjs/documentation/)
+
 # Architecture
 
 The server is split into four main layers, each with their own purpose and context. The four layers, in order of depth, are:
