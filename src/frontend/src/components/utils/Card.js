@@ -15,7 +15,7 @@ const StyledCard = styled.div`
     box-shadow: 0 16px 32px 0 var(--color-shadow);
     // border: 1px solid var(--color-shadow);
     border-radius: 1rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.1);
     transition: 0.25s ease-in-out;
     backface-visibility: hidden;
     &:hover {
