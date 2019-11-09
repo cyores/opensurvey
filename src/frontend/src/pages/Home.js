@@ -9,6 +9,7 @@ import Error from "../components/utils/Error";
 import HomeHero from "../components/HomeHero";
 import PageTransition from "../components/utils/PageTransition";
 import FilterBar from "../components/FilterBar";
+import SurveyList from "../components/SurveyList";
 
 // actions
 import { fetchSurveys } from "../actions/index";
@@ -28,8 +29,18 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            layout: "grid"
+        };
+        this.changeLayout = this.changeLayout.bind(this);
+    }
     componentDidMount() {
         this.props.fetchSurveys();
+    }
+    changeLayout(layout) {
+        this.setState({ layout: layout });
     }
     render() {
         const { surveys, isLoading, fetchError } = this.props;
@@ -46,20 +57,38 @@ class Home extends Component {
                             </Flex>
                         ) : surveys.length > 0 ? (
                             <>
-                                <FilterBar />
+                                <FilterBar changeLayout={this.changeLayout} />
                                 <Flex dir="rowleft">
-                                    {surveys.map((survey, i) => (
-                                        <Card
-                                            key={i}
-                                            title={survey.name}
-                                            desc={survey.desc}
-                                            open={survey.opendate}
-                                            close={survey.closedate}
-                                            buttonText="View"
-                                            surveyID={survey.id}
-                                            numQuestions={survey.numquestions}
-                                        ></Card>
-                                    ))}
+                                    {this.state.layout === "grid" &&
+                                        surveys.map((survey, i) => (
+                                            <Card
+                                                key={i}
+                                                title={survey.name}
+                                                desc={survey.desc}
+                                                open={survey.opendate}
+                                                close={survey.closedate}
+                                                buttonText="View"
+                                                surveyID={survey.id}
+                                                numQuestions={
+                                                    survey.numquestions
+                                                }
+                                            ></Card>
+                                        ))}
+                                    {this.state.layout === "list" &&
+                                        surveys.map((survey, i) => (
+                                            <SurveyList
+                                                key={i}
+                                                title={survey.name}
+                                                desc={survey.desc}
+                                                open={survey.opendate}
+                                                close={survey.closedate}
+                                                buttonText="View"
+                                                surveyID={survey.id}
+                                                numQuestions={
+                                                    survey.numquestions
+                                                }
+                                            ></SurveyList>
+                                        ))}
                                 </Flex>
                             </>
                         ) : (

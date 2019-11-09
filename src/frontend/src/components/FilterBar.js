@@ -71,7 +71,7 @@ export default function FilterBar(props) {
                             cursor: "pointer",
                             marginTop: "calc(var(--text-base-size) + 7px)"
                         }}
-                        onClick={() => console.log("list")}
+                        onClick={() => props.changeLayout("list")}
                     />
 
                     <FiGrid
@@ -81,7 +81,7 @@ export default function FilterBar(props) {
                             cursor: "pointer",
                             marginTop: "calc(var(--text-base-size) + 7px)"
                         }}
-                        onClick={() => console.log("grid")}
+                        onClick={() => props.changeLayout("grid")}
                     />
                 </Flex>
             </div>
