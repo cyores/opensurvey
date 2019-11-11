@@ -24,7 +24,7 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSurveys: () => dispatch(fetchSurveys())
+        fetchSurveys: params => dispatch(fetchSurveys(params))
     };
 }
 
@@ -32,15 +32,29 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            layout: "grid"
+            layout: "grid",
+            search: "",
+            filter: "",
+            sort: ""
         };
         this.changeLayout = this.changeLayout.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
     }
     componentDidMount() {
-        this.props.fetchSurveys();
+        this.props.fetchSurveys(null);
     }
     changeLayout(layout) {
         this.setState({ layout: layout });
+    }
+    handleFilterChange(input, param) {
+        console.log("filter change", input.target.value, param);
+        this.setState({ [param]: input.target.value }, () =>
+            this.props.fetchSurveys({
+                search: this.state.search,
+                filter: this.state.filter,
+                sort: this.state.sort
+            })
+        );
     }
     render() {
         const { surveys, isLoading, fetchError } = this.props;
@@ -57,7 +71,10 @@ class Home extends Component {
                             </Flex>
                         ) : surveys.length > 0 ? (
                             <>
-                                <FilterBar changeLayout={this.changeLayout} />
+                                <FilterBar
+                                    changeLayout={this.changeLayout}
+                                    handleChange={this.handleFilterChange}
+                                />
                                 <Flex dir="rowleft">
                                     {this.state.layout === "grid" &&
                                         surveys.map((survey, i) => (

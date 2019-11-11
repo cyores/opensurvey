@@ -11,12 +11,19 @@ import {
     fetchSurveysFailure
 } from "../../actions/index";
 
-const url = process.env.REACT_APP_API_URL + "/surveys";
+const baseURL = process.env.REACT_APP_API_URL + "/surveys";
 
 export default function fetchAll(action$) {
     return action$
         .ofType(FETCH_SURVEYS)
-        .switchMap(() => {
+        .switchMap(action => {
+            let url = baseURL;
+            if (action.params) {
+                url += "?";
+                Object.entries(action.params).forEach(([param, value]) => {
+                    url += param + "=" + value + "&";
+                });
+            }
             return ajax.getJSON(url);
         })
         .map(surveys => fetchSurveysSuccess(surveys))

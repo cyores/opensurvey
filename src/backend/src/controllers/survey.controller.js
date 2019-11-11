@@ -32,10 +32,20 @@ const getAll = async (req, res, next) => {
         if (req.query.search) search = req.query.search;
 
         let filter = [];
-        if (req.query.filter) filter = req.query.filter.split(",");
+        if (req.query.filter) {
+            filter = req.query.filter
+                .toLowerCase()
+                .replace(/\s/g, "")
+                .split(",");
+        }
 
         let sort = null;
-        if (req.query.sort) sort = req.query.sort;
+        if (req.query.sort) {
+            sort = req.query.sort
+                .toLowerCase()
+                .replace(/\s/g, "")
+                .split(",");
+        }
 
         let surveys = await getAllSurveys(search, filter, sort);
         res.status(200).json(surveys);

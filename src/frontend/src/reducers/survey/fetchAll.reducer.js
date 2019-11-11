@@ -1,7 +1,7 @@
 import {
     FETCH_SURVEYS,
     FETCH_SURVEYS_SUCCESS,
-    FETCH_SURVEYS_FAILURE,
+    FETCH_SURVEYS_FAILURE
 } from "../../actions/index";
 
 const initialState = {

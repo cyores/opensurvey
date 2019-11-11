@@ -3,7 +3,7 @@ export const FETCH_SURVEYS = "FETCH_SURVEYS";
 export const FETCH_SURVEYS_SUCCESS = "FETCH_SURVEYS_SUCCESS";
 export const FETCH_SURVEYS_FAILURE = "FETCH_SURVEYS_FAILURE";
 
-export const fetchSurveys = () => ({ type: FETCH_SURVEYS });
+export const fetchSurveys = params => ({ type: FETCH_SURVEYS, params });
 
 export const fetchSurveysSuccess = payload => ({
     type: FETCH_SURVEYS_SUCCESS,

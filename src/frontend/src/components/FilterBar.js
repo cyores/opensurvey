@@ -25,7 +25,9 @@ export default function FilterBar(props) {
                     placeholder="Start typing to search"
                     label="Search"
                     labelTop={true}
-                    // onChange={input => this.handleChange(input, "name")}
+                    onChange={input =>
+                        props.handleChange(input, "search")
+                    }
                 />
             </div>
             <div
@@ -39,9 +41,9 @@ export default function FilterBar(props) {
                     label="Filter"
                     options={filterOptions}
                     // defaultValue={}
-                    // onChange={input =>
-                    //     this.handleChange(input, "qtype")
-                    // }
+                    onChange={input =>
+                        props.handleChange(input, "filter")
+                    }
                     labelTop={true}
                 />
             </div>
@@ -56,9 +58,7 @@ export default function FilterBar(props) {
                     label="Sort by"
                     options={sortOptions}
                     // defaultValue={}
-                    // onChange={input =>
-                    //     this.handleChange(input, "qtype")
-                    // }
+                    onChange={input => props.handleChange(input, "sort")}
                     labelTop={true}
                 />
             </div>

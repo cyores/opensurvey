@@ -67,7 +67,7 @@ export default function SurveyList(props) {
                     {desc ? <span>{desc}</span> : <span>No description.</span>}
                 </div>
                 <div style={{ padding: "var(--space-sm)" }}>
-                    <Link to={isOpen ? `/survey/${surveyID}` : null}>
+                    <Link to={isOpen ? `/survey/${surveyID}` : "/"}>
                         <Button
                             theme={isOpen ? "primary" : "disabled"}
                             style={{ margin: 0 }}
