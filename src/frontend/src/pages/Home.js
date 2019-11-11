@@ -10,6 +10,7 @@ import HomeHero from "../components/HomeHero";
 import PageTransition from "../components/utils/PageTransition";
 import FilterBar from "../components/FilterBar";
 import SurveyList from "../components/SurveyList";
+import Spinner from "../components/utils/Spinner";
 
 // actions
 import { fetchSurveys } from "../actions/index";
@@ -47,7 +48,6 @@ class Home extends Component {
         this.setState({ layout: layout });
     }
     handleFilterChange(input, param) {
-        console.log("filter change", input.target.value, param);
         this.setState({ [param]: input.target.value }, () =>
             this.props.fetchSurveys({
                 search: this.state.search,
@@ -63,7 +63,11 @@ class Home extends Component {
                 <HomeHero />
                 <PageTransition>
                     <div className="container">
-                        {isLoading && <p>Loading . . . </p>}
+                        <FilterBar
+                            changeLayout={this.changeLayout}
+                            handleChange={this.handleFilterChange}
+                        />
+                        {isLoading && <Spinner />}
 
                         {fetchError ? (
                             <Flex>
@@ -71,10 +75,6 @@ class Home extends Component {
                             </Flex>
                         ) : surveys.length > 0 ? (
                             <>
-                                <FilterBar
-                                    changeLayout={this.changeLayout}
-                                    handleChange={this.handleFilterChange}
-                                />
                                 <Flex dir="rowleft">
                                     {this.state.layout === "grid" &&
                                         surveys.map((survey, i) => (
@@ -109,10 +109,18 @@ class Home extends Component {
                                 </Flex>
                             </>
                         ) : (
-                            <Flex dir="colcenter">
-                                <img src={EmptyImg} width="50%" alt="Empty" />
-                                <p>There are no surveys at this time</p>
-                            </Flex>
+                            !isLoading && (
+                                <Flex dir="colcenter">
+                                    <img
+                                        src={EmptyImg}
+                                        width="33%"
+                                        alt="Empty"
+                                    />
+                                    <p>
+                                        There are no surveys matching that query
+                                    </p>
+                                </Flex>
+                            )
                         )}
                     </div>
                 </PageTransition>

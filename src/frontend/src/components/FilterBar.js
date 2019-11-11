@@ -7,8 +7,8 @@ import { FiList } from "react-icons/fi";
 import Input from "./utils/Input";
 import Select from "./utils/Select";
 
-const filterOptions = ["Open", "Opening soon", "Closing soon", "Closed"];
-const sortOptions = ["New", "Old", "Popular"];
+const filterOptions = ["None", "Open", "Opening soon", "Closing soon", "Closed"];
+const sortOptions = ["New", "Old", "AZ"];
 
 export default function FilterBar(props) {
     return (
@@ -40,7 +40,7 @@ export default function FilterBar(props) {
                 <Select
                     label="Filter"
                     options={filterOptions}
-                    // defaultValue={}
+                    defaultValue={"None"}
                     onChange={input =>
                         props.handleChange(input, "filter")
                     }
@@ -57,7 +57,7 @@ export default function FilterBar(props) {
                 <Select
                     label="Sort by"
                     options={sortOptions}
-                    // defaultValue={}
+                    defaultValue={"New"}
                     onChange={input => props.handleChange(input, "sort")}
                     labelTop={true}
                 />

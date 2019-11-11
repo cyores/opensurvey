@@ -41,10 +41,7 @@ const getAll = async (req, res, next) => {
 
         let sort = null;
         if (req.query.sort) {
-            sort = req.query.sort
-                .toLowerCase()
-                .replace(/\s/g, "")
-                .split(",");
+            sort = req.query.sort.toLowerCase().replace(/\s/g, "");
         }
 
         let surveys = await getAllSurveys(search, filter, sort);
