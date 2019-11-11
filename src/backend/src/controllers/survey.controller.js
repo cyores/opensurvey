@@ -3,7 +3,7 @@ const { createSurvey, getAllSurveys, getSurvey } = surveyService;
 
 /**
  * Extracts the survey from the request body, sends it to the survey service, sends HTTP status code.
- * 
+ *
  * @param {Object} req Express request object.
  * @param {Object} res Express response object.
  * @param {Function} next Express next function.
@@ -20,15 +20,27 @@ const postSurvey = async (req, res, next) => {
 };
 
 /**
- * Asks the survey service for all the surveys, sends HTTP status code.
- * 
+ * Asks the survey service for all the surveys following params, sends HTTP status code.
+ *
  * @param {Object} req Express request object.
  * @param {Object} res Express response object.
  * @param {Function} next Express next function.
  */
 const getAll = async (req, res, next) => {
     try {
-        let surveys = await getAllSurveys();
+        console.log(req.query);
+
+        let search = "";
+        if (req.query.search) search = req.query.search;
+
+        let filter = null;
+        if (req.query.filter) filter = req.query.filter.split(",");
+
+        let sort = null;
+        if (req.query.sort) sort = req.query.sort;
+
+        console.log("se fi so", search, filter, sort);
+        let surveys = await getAllSurveys(search, filter, sort);
         res.status(200).json(surveys);
         next();
     } catch (err) {
@@ -39,7 +51,7 @@ const getAll = async (req, res, next) => {
 
 /**
  * Extracts the desired survey ID, asks the survey service for it, sends HTTP status code.
- * 
+ *
  * @param {Object} req Express request object.
  * @param {Object} res Express response object.
  * @param {Function} next Express next function.

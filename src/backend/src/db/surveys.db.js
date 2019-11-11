@@ -24,27 +24,63 @@ const createSurvey = async survey => {
 };
 
 /**
- * Gets all the surveys from the database.
- * 
- * @return {Array} Array of all surveys.
+ * Gets the surveys matching specific parameters.
+ *
+ * @param {string} search Matches with survey names.
+ * @param {Array} filter Filters results by open, openingsoon, closed, closingsoon.
+ * @param {string} sort Sorts results by new, old, or alphabetical
+ * @return {Array} Surveys matching specific parameters.
  */
-const getAllSurveys = async () => {
+const getAllSurveys = async (search, filter, sort) => {
     try {
-        let q =
-            "SELECT " +
-            "surveys.id AS id, " +
-            "name AS name, " +
-            "descrip AS desc, " +
-            "author AS author, " +
-            "creation_date AS creationDate, " +
-            "open_date AS openDate, " +
-            "close_date AS closeDate, " +
-            "COUNT(questions.survey_id) AS numquestions " +
-            "FROM surveys " +
-            "LEFT JOIN questions ON (surveys.id = questions.survey_id) " +
-            "GROUP BY surveys.id " +
-            "ORDER BY surveys.creation_date DESC";
-        let qresult = await db.query(q);
+        let logicOP = ["AND", "OR"];
+        let q = `SELECT 
+            surveys.id AS id,
+            name AS name, 
+            descrip AS desc, 
+            author AS author, 
+            creation_date AS creationDate, 
+            open_date AS openDate, 
+            close_date AS closeDate, 
+            COUNT(questions.survey_id) AS numquestions 
+            FROM surveys 
+            LEFT JOIN questions ON (surveys.id = questions.survey_id) 
+            WHERE name ILIKE $1
+            ${
+                filter.includes("open")
+                    ? ` ${
+                          logicOP[Math.min(filter.indexOf("open"), 1)]
+                      } (surveys.open_date < CURRENT_TIMESTAMP OR surveys.open_date IS null)`
+                    : ""
+            }
+            ${
+                filter.includes("closed")
+                    ? ` ${
+                          logicOP[Math.min(filter.indexOf("closed"), 1)]
+                      } (surveys.close_date < CURRENT_TIMESTAMP OR surveys.open_date > CURRENT_TIMESTAMP)`
+                    : ""
+            }
+            ${
+                filter.includes("openingsoon")
+                    ? ` ${
+                          logicOP[Math.min(filter.indexOf("openingsoon"), 1)]
+                      } (surveys.open_date - interval '14 days' < CURRENT_TIMESTAMP AND NOT surveys.open_date < CURRENT_TIMESTAMP)`
+                    : ""
+            }
+            ${
+                filter.includes("closingsoon")
+                    ? ` ${
+                          logicOP[Math.min(filter.indexOf("open"), 1)]
+                      }  (surveys.close_date - interval '14 days' < CURRENT_TIMESTAMP AND NOT surveys.close_date < CURRENT_TIMESTAMP)`
+                    : ""
+            }
+            GROUP BY surveys.id 
+            ${sort === "new" ? "ORDER BY surveys.creation_date DESC" : ""}
+            ${sort === "old" ? "ORDER BY surveys.creation_date" : ""}
+            ${sort === "az" ? "ORDER BY surveys.name" : ""}
+            `;
+
+        let qresult = await db.query(q, [search + "%"]);
         return qresult.rows;
     } catch (err) {
         throw err;
@@ -53,13 +89,12 @@ const getAllSurveys = async () => {
 
 /**
  * Get the desired survey (including questions and possible answers) from the database.
- * 
+ *
  * @param {int} id ID of the desired survey.
  * @return {Array} Each rows represents a possible answers but also contains the survey and related question data.
  */
 const getSurvey = async id => {
     try {
-
         let q =
             "SELECT " +
             "surveys.id AS survey_id, " +

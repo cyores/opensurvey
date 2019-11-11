@@ -5,7 +5,7 @@ const { possibleAnswersDB } = require("../db/index");
 /**
  * Deconstructs the survey object into its parts (survey, questions, possible answers) and formats each of three
  * into a format the db files are expecting, then calls the respective db files to create.
- * 
+ *
  * @param {Object} survey Survey object of the form {name, desc, author, openDate, closeDate, questions: []}.
  * @returns {int} Placeholder return 1 for now.
  */
@@ -61,13 +61,16 @@ const createSurvey = async survey => {
 };
 
 /**
- * Calls the db to get all surveys.
+ * Calls the db file to get the surveys.
  * 
- * @returns {Array} Result of db call, array of all surveys.
+ * @param {string} search Matches with survey names.
+ * @param {Array} filter Filters results by open, openingsoon, closed, closingsoon.
+ * @param {string} sort Sorts results by new, old, or alphabetical
+ * @return {Array} Surveys matching specific parameters.
  */
-const getAllSurveys = async () => {
+const getAllSurveys = async (search, filter, sort) => {
     try {
-        return await surveysDB.getAllSurveys();
+        return await surveysDB.getAllSurveys(search, filter, sort);
     } catch (err) {
         throw new Error(err.message);
     }
@@ -75,7 +78,7 @@ const getAllSurveys = async () => {
 
 /**
  * Calls the db file to get a survey then formats the result into a JSON object.
- * 
+ *
  * @param {int} id ID of desired survey.
  * @returns {Object} An object representing the survey, questions, and possible answers.
  */
