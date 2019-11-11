@@ -31,9 +31,15 @@ Returns **int** Placeholder return 1 for now.
 
 ## getAllSurveys
 
-Calls the db to get all surveys.
+Calls the db file to get the surveys.
 
-Returns **[Array][2]** Result of db call, array of all surveys.
+### Parameters
+
+-   `search` **[string][2]** Matches with survey names.
+-   `filter` **[Array][3]** Filters results by open, openingsoon, closed, closingsoon.
+-   `sort` **[string][2]** Sorts results by new, old, or alphabetical
+
+Returns **[Array][3]** Surveys matching specific parameters.
 
 ## getSurvey
 
@@ -47,5 +53,7 @@ Returns **[Object][1]** An object representing the survey, questions, and possib
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 

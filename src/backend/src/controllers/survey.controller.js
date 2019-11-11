@@ -28,18 +28,15 @@ const postSurvey = async (req, res, next) => {
  */
 const getAll = async (req, res, next) => {
     try {
-        console.log(req.query);
-
         let search = "";
         if (req.query.search) search = req.query.search;
 
-        let filter = null;
+        let filter = [];
         if (req.query.filter) filter = req.query.filter.split(",");
 
         let sort = null;
         if (req.query.sort) sort = req.query.sort;
 
-        console.log("se fi so", search, filter, sort);
         let surveys = await getAllSurveys(search, filter, sort);
         res.status(200).json(surveys);
         next();

@@ -62,9 +62,15 @@ Returns **int** Database ID of the survey just created.
 
 ## getAllSurveys
 
-Gets all the surveys from the database.
+Gets the surveys matching specific parameters.
 
-Returns **[Array][2]** Array of all surveys.
+### Parameters
+
+-   `search` **[string][2]** Matches with survey names.
+-   `filter` **[Array][3]** Filters results by open, openingsoon, closed, closingsoon.
+-   `sort` **[string][2]** Sorts results by new, old, or alphabetical
+
+Returns **[Array][3]** Surveys matching specific parameters.
 
 ## getSurvey
 
@@ -74,9 +80,11 @@ Get the desired survey (including questions and possible answers) from the datab
 
 -   `id` **int** ID of the desired survey.
 
-Returns **[Array][2]** Each rows represents a possible answers but also contains the survey and related question data.
+Returns **[Array][3]** Each rows represents a possible answers but also contains the survey and related question data.
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 

@@ -32,7 +32,7 @@ Extracts the survey from the request body, sends it to the survey service, sends
 
 ## getAll
 
-Asks the survey service for all the surveys, sends HTTP status code.
+Asks the survey service for all the surveys following params, sends HTTP status code.
 
 ### Parameters
 
