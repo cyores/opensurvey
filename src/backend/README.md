@@ -5,15 +5,19 @@ This is the code for the Open Survey server, written in Express with a PostgreSQ
 # Availble Scripts
 
 ### `npm run initDB`
+
 Creates database tables
 
 ### `npm run seedDB`
+
 Creates tables for the database and seeds it with some sample data
 
 ### `npm run dev`
+
 Start the server
 
 ### `npm run document`
+
 Runs the automated documentation writer [(documentation.js)](https://github.com/documentationjs/documentation/)
 
 # Architecture
@@ -71,11 +75,11 @@ The database files simply perform queries on the Postgres database. The receive 
 
 ## Surveys
 
-| Method | Route             | Description                             | Example                                                    |
-| ------ | ----------------- | --------------------------------------- | ---------------------------------------------------------- |
-| `GET`  | `/api/surveys`    | returns an array of all surveys         |
-| `GET`  | `/api/survey/:id` | returns the survey with the matching id |
-| `POST` | `/api/survey`     | creates the survey                      | { name, desc, author, openDate, closeDate, questions: [] } |
+| Method | Route                                                             | Description                                                                                                                                                                             | Example                                                    |
+| ------ | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `GET`  | `/api/surveys?search={query}&filter={filter options}&sort={sort}` | returns an array of all surveys according to search (by survey name), filter (open, opening soon, closing soon, closed), and sort (new, old, az) parameters. All parameter are optional | `?search=music&filter=open&sort=az`                        |
+| `GET`  | `/api/survey/:id`                                                 | returns the survey with the matching id                                                                                                                                                 |
+| `POST` | `/api/survey`                                                     | creates the survey                                                                                                                                                                      | { name, desc, author, openDate, closeDate, questions: [] } |
 
 ## Responses
 
