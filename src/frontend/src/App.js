@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import CreateSurvey from "./pages/CreateSurvey";
 import Survey from "./pages/Survey";
+import Responses from "./pages/Responses";
 
 export default function App() {
     const darkOnDefault = false;
@@ -51,6 +52,13 @@ export default function App() {
                 path="/survey/:id"
                 render={props => (
                     <Survey key={props.match.params.id} {...props} />
+                )}
+            />
+            <Route
+                exact
+                path="/responses/:id"
+                render={props => (
+                    <Responses key={props.match.params.id} {...props} />
                 )}
             />
             <Footer />

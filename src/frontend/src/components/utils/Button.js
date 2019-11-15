@@ -108,6 +108,13 @@ const Transparent = styled.button`
     color: var(--color-primary);
 `;
 
+const FullTransparent = styled.button`
+    width: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-primary);
+`;
+
 export default function Button(props) {
     return (
         <>
@@ -161,6 +168,11 @@ export default function Button(props) {
                     <Transparent tabIndex={props.tabIndex}>
                         {props.children}
                     </Transparent>
+                ) : null}
+                {props.theme === "full-transparent" ? (
+                    <FullTransparent tabIndex={props.tabIndex}>
+                        {props.children}
+                    </FullTransparent>
                 ) : null}
                 {!props.theme ? <Primary>{props.children}</Primary> : null}
             </Base>

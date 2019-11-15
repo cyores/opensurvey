@@ -84,7 +84,7 @@ class Home extends Component {
                                                 desc={survey.desc}
                                                 open={survey.opendate}
                                                 close={survey.closedate}
-                                                buttonText="View"
+                                                buttonText="Complete Survey"
                                                 surveyID={survey.id}
                                                 numQuestions={
                                                     survey.numquestions
@@ -99,7 +99,7 @@ class Home extends Component {
                                                 desc={survey.desc}
                                                 open={survey.opendate}
                                                 close={survey.closedate}
-                                                buttonText="View"
+                                                buttonText="Complete Survey"
                                                 surveyID={survey.id}
                                                 numQuestions={
                                                     survey.numquestions

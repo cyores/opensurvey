@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 // components
 import Button from "./utils/Button";
+import Flex from "./utils/Flex";
 
 const Wrapper = styled.div`
     flex: 1 0 100%;
@@ -67,14 +68,24 @@ export default function SurveyList(props) {
                     {desc ? <span>{desc}</span> : <span>No description.</span>}
                 </div>
                 <div style={{ padding: "var(--space-sm)" }}>
-                    <Link to={isOpen ? `/survey/${surveyID}` : "/"}>
-                        <Button
-                            theme={isOpen ? "primary" : "disabled"}
-                            style={{ margin: 0 }}
-                        >
-                            {isOpen ? buttonText : "Closed"}
-                        </Button>
-                    </Link>
+                    <Flex>
+                        <Link to={isOpen ? `/responses/${surveyID}` : "/"}>
+                            <Button
+                                theme="full-transparent"
+                                style={{ margin: 0, marginRight: "3px" }}
+                            >
+                                View Results
+                            </Button>
+                        </Link>
+                        <Link to={isOpen ? `/survey/${surveyID}` : "/"}>
+                            <Button
+                                theme={isOpen ? "primary" : "disabled"}
+                                style={{ margin: 0, marginLeft: "3px" }}
+                            >
+                                {isOpen ? buttonText : "Closed"}
+                            </Button>
+                        </Link>
+                    </Flex>
                 </div>
             </Grid>
         </Wrapper>
