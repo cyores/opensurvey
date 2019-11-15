@@ -10,5 +10,6 @@ router.get("/survey/:id", surveyController.getOneSurvey);
 
 // response routes
 router.post("/response", responseController.postResponses);
+router.get("/responses/:id", responseController.getSurveyResponses);
 
 module.exports = router;

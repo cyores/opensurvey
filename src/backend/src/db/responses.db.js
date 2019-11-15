@@ -21,6 +21,19 @@ const createResponses = async responses => {
     }
 };
 
+const getResponses = async id => {
+    try {
+        let qresult = await db.query(
+            "SELECT * FROM responses WHERE survey_id = $1",
+            [id]
+        );
+        return qresult.rows;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
-    createResponses
+    createResponses,
+    getResponses
 };

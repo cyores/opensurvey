@@ -25,6 +25,21 @@ const createResponses = async responses => {
     }
 };
 
+/**
+ * Calls the db file to get all the responses for this survey, formats them, return them.
+ * 
+ * @param {int} id ID of the survey you want the responses for.
+ */
+const getResponses = async id => {
+    try {
+        let responses = await responsesDB.getResponses(id);
+        return responses;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
-    createResponses
+    createResponses,
+    getResponses
 };
