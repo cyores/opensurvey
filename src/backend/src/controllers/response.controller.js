@@ -25,6 +25,8 @@ const postResponses = async (req, res, next) => {
  * @param {Object} req Express request object.
  * @param {Object} res Express response object.
  * @param {Function} next Express next function.
+ *
+ * @return {Array} Array containing the responses (if any).
  */
 const getSurveyResponses = async (req, res, next) => {
     try {

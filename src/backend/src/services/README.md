@@ -12,6 +12,16 @@ Formats the responses into a way the db file is expecting.
 
 Returns **[Array][1]** The result of the responses.db call (array of created responses IDs).
 
+## getResponses
+
+Calls the db file to get all the responses for this survey, formats them, return them.
+
+### Parameters
+
+-   `id` **int** ID of the survey you want the responses for.
+
+Returns **[Array][1]** Array containing the responses (if any).
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 

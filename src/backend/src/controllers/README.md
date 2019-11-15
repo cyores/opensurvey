@@ -12,9 +12,23 @@ Extracts the response from request body, sends it to the response service, sends
 -   `res` **[Object][1]** Express response object.
 -   `next` **[Function][2]** Express next function.
 
+## getSurveyResponses
+
+Extracts survey id from request params and calls the service to get respones from the survey.
+
+### Parameters
+
+-   `req` **[Object][1]** Express request object.
+-   `res` **[Object][1]** Express response object.
+-   `next` **[Function][2]** Express next function.
+
+Returns **[Array][3]** Array containing the responses (if any).
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 
 # SURVEY CONTROLLER 

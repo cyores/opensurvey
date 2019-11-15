@@ -44,6 +44,16 @@ Inserts responses into the responses table.
 
 Returns **[Array][1]** Array containing the ID of all responses just created.
 
+## getResponses
+
+Gets all the associated responses from the database.
+
+### Parameters
+
+-   `id` **int** ID of the survey you want the responses for.
+
+Returns **[Array][1]** Array containing the responses (if any).
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 
