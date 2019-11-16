@@ -85,3 +85,20 @@ export const postResponseFailure = error => ({
 });
 
 export const refreshResponse = () => ({ type: REFRESH_RESPONSE });
+
+// RESPONSE GET
+export const FETCH_RESPONSES = "FETCH_RESPONSES";
+export const FETCH_RESPONSES_SUCCESS = "FETCH_RESPONSES_SUCCESS";
+export const FETCH_RESPONSES_FAILURE = "FETCH_RESPONSES_FAILURE";
+
+export const fetchResponses = id => ({ type: FETCH_RESPONSES, id });
+
+export const fetchResponsesSuccess = payload => ({
+    type: FETCH_RESPONSES_SUCCESS,
+    payload: payload
+});
+
+export const fetchResponsesFailure = error => ({
+    type: FETCH_RESPONSES_FAILURE,
+    payload: error
+});

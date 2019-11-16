@@ -312,7 +312,4 @@ class Survey extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Survey);
+export default connect(mapStateToProps, mapDispatchToProps)(Survey);

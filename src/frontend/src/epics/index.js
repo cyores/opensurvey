@@ -7,10 +7,12 @@ import surveyPost from "./survey/post.epic";
 
 // response
 import responsePost from "./response/post.epic";
+import responseGet from "./response/get.epic";
 
 export const rootEpic = combineEpics(
     surveyFetchAll,
     surveyFetchOne,
     surveyPost,
-    responsePost
+    responsePost,
+    responseGet
 );
