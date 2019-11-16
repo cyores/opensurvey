@@ -25,6 +25,7 @@ class Responses extends Component {
     componentDidMount() {
         this.props.fetchResponses(this.props.match.params.id);
     }
+
     render() {
         const { responses, isLoading, fetchError } = this.props;
         console.log(responses);
@@ -50,12 +51,24 @@ class Responses extends Component {
                 <div className="container">
                     <h2>Survey Results</h2>
                     <hr></hr>
-                    {responses.length === 0 && (
+                    {responses.length === 0 ? (
                         <p>There are no responses to this survey.</p>
+                    ) : (
+                        responses.map((question, i) => (
+                            <div key={`qres-${i}`}>
+                                <h6>
+                                    <b>{question.qtext}</b>
+                                </h6>
+                                {Object.entries(question.responses).map(
+                                    ([res, count], j) => (
+                                        <p key={`rescount-${j}`}>
+                                            {res}: {count}
+                                        </p>
+                                    )
+                                )}
+                            </div>
+                        ))
                     )}
-                    {responses.map(response => (
-                        <p>{response.response}</p>
-                    ))}
                 </div>
             </PageTransition>
         );

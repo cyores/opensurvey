@@ -23,15 +23,28 @@ const createResponses = async responses => {
 
 /**
  * Gets all the associated responses from the database.
- * 
+ *
  * @param {int} id ID of the survey you want the responses for.
- * 
+ *
  * @return {Array} Array containing the responses (if any).
  */
 const getResponses = async id => {
     try {
         let qresult = await db.query(
-            "SELECT * FROM responses WHERE survey_id = $1",
+            `SELECT 
+            questions.id,
+            questions.qtext,
+            questions.qdesc,
+            questions.qtype,
+            questions.qweight,
+            questions.is_required,
+            responses.response,
+            COUNT(responses.response)
+            FROM questions 
+            LEFT OUTER JOIN responses ON questions.id = responses.question_id
+            WHERE responses.survey_id=$1
+            GROUP BY responses.response, questions.id
+            ORDER BY questions.id`,
             [id]
         );
         return qresult.rows;
