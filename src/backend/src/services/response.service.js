@@ -26,7 +26,7 @@ const createResponses = async responses => {
 };
 
 /**
- * Calls the db file to get all the responses for this survey, formats them, return them.
+ * Calls the db file to get all the responses for this survey, formats them, returns them.
  *
  * @param {int} id ID of the survey you want the responses for.
  *

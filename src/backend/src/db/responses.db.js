@@ -22,7 +22,7 @@ const createResponses = async responses => {
 };
 
 /**
- * Gets all the associated responses from the database.
+ * Gets all the associated responses from the database, including question information and count of each response.
  *
  * @param {int} id ID of the survey you want the responses for.
  *

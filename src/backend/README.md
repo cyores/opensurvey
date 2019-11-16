@@ -83,6 +83,7 @@ The database files simply perform queries on the Postgres database. The receive 
 
 ## Responses
 
-| Method | Route           | Description        | Example                        |
-| ------ | --------------- | ------------------ | ------------------------------ |
-| `POST` | `/api/response` | creates a response | { surveyID, questionID, text } |
+| Method | Route                | Description                             | Example                        |
+| ------ | -------------------- | --------------------------------------- | ------------------------------ |
+| `POST` | `/api/response`      | creates a response                      | { surveyID, questionID, text } |
+| `GET`  | `/api/responses/:id` | gets responses belong to that survey id |                                |

@@ -14,7 +14,7 @@ Returns **[Array][1]** The result of the responses.db call (array of created res
 
 ## getResponses
 
-Calls the db file to get all the responses for this survey, formats them, return them.
+Calls the db file to get all the responses for this survey, formats them, returns them.
 
 ### Parameters
 

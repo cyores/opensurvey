@@ -46,7 +46,7 @@ Returns **[Array][1]** Array containing the ID of all responses just created.
 
 ## getResponses
 
-Gets all the associated responses from the database.
+Gets all the associated responses from the database, including question information and count of each response.
 
 ### Parameters
 
