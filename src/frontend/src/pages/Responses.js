@@ -45,6 +45,7 @@ class Responses extends Component {
             survey.open_date,
             survey.close_date
         );
+        const horizontalbar = false;
 
         if (isLoading) {
             return (
@@ -97,7 +98,7 @@ class Responses extends Component {
                         questions.map((question, i) => (
                             <div key={`qres-${i}`}>
                                 <h6 style={{ margin: 0 }}>
-                                    Question {i + 1}{" "} Results
+                                    Question {i + 1} Results
                                     {question.required && (
                                         <span
                                             style={{
@@ -118,13 +119,34 @@ class Responses extends Component {
                                         </>
                                     )}
                                 </p>
-                                <div style={{ height: "30vh" }}>
-                                    <BarGraph
-                                        data={this.formatForGraph(
-                                            question.responses
-                                        )}
-                                    />
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        height: "50vh"
+                                    }}
+                                >
+                                    <div
+                                        style={
+                                            horizontalbar
+                                                ? {
+                                                      height: "100%",
+                                                      transformOrigin:
+                                                          "100% 100%",
+                                                      transform:
+                                                          "rotate(-90deg) scaleY(-1) translate(100%, 100%)"
+                                                  }
+                                                : { height: "100%" }
+                                        }
+                                    >
+                                        <BarGraph
+                                            data={this.formatForGraph(
+                                                question.responses
+                                            )}
+                                            horizontal={horizontalbar}
+                                        />
+                                    </div>
                                 </div>
+                                <br></br>
                                 <br></br>
                             </div>
                         ))
