@@ -11,6 +11,7 @@ import Flex from "../components/utils/Flex";
 import Error from "../components/utils/Error";
 import Spinner from "../components/utils/Spinner";
 import PageTransition from "../components/utils/PageTransition";
+import BarGraph from "../components/utils/BarGraph";
 
 const mapStateToProps = state => {
     return {
@@ -26,6 +27,15 @@ function mapDispatchToProps(dispatch) {
 class Responses extends Component {
     componentDidMount() {
         this.props.fetchResponses(this.props.match.params.id);
+    }
+
+    formatForGraph(responses) {
+        let formatted = [];
+        Object.entries(responses).forEach(([response, count]) => {
+            formatted.push({ key: response, value: count });
+        });
+        console.log(formatted);
+        return formatted;
     }
 
     render() {
@@ -86,16 +96,36 @@ class Responses extends Component {
                     ) : (
                         questions.map((question, i) => (
                             <div key={`qres-${i}`}>
-                                <h6>
-                                    <b>{question.qtext}</b>
+                                <h6 style={{ margin: 0 }}>
+                                    Question {i + 1}{" "} Results
+                                    {question.required && (
+                                        <span
+                                            style={{
+                                                color: "var(--color-danger)"
+                                            }}
+                                        >
+                                            {" "}
+                                            *
+                                        </span>
+                                    )}
                                 </h6>
-                                {Object.entries(question.responses).map(
-                                    ([res, count], j) => (
-                                        <p key={`rescount-${j}`}>
-                                            {res}: {count}
-                                        </p>
-                                    )
-                                )}
+                                <p>
+                                    <b>{question.qtext}</b>
+                                    {question.qdesc && (
+                                        <>
+                                            <br></br>
+                                            {question.qdesc}
+                                        </>
+                                    )}
+                                </p>
+                                <div style={{ height: "30vh" }}>
+                                    <BarGraph
+                                        data={this.formatForGraph(
+                                            question.responses
+                                        )}
+                                    />
+                                </div>
+                                <br></br>
                             </div>
                         ))
                     )}

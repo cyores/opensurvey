@@ -58,7 +58,7 @@ const getResponses = async id => {
                     qdesc: res.qdesc,
                     qtype: res.qtype,
                     qweight: res.qweight,
-                    is_required: res.is_required,
+                    required: res.is_required,
                     responses: {
                         [res.response]: res.count
                     }
