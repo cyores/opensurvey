@@ -61,6 +61,16 @@ Calls the db file to get a survey then formats the result into a JSON object.
 
 Returns **[Object][1]** An object representing the survey, questions, and possible answers.
 
+## getOnlySurvey
+
+Gets just the data about a survey (does not include questions or respones).
+
+### Parameters
+
+-   `id` **int** ID of the desired survey.
+
+Returns **[Object][1]** Data about just the survey.
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String

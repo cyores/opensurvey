@@ -92,6 +92,16 @@ Get the desired survey (including questions and possible answers) from the datab
 
 Returns **[Array][3]** Each rows represents a possible answers but also contains the survey and related question data.
 
+## getOnlySurvey
+
+Gets just the data about a survey (does not include questions or respones).
+
+### Parameters
+
+-   `id` **int** ID of the desired survey.
+
+Returns **[Array][3]** Result of the query.
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
