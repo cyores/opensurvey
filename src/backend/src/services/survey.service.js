@@ -62,7 +62,7 @@ const createSurvey = async survey => {
 
 /**
  * Calls the db file to get the surveys.
- * 
+ *
  * @param {string} search Matches with survey names.
  * @param {Array} filter Filters results by open, openingsoon, closed, closingsoon.
  * @param {string} sort Sorts results by new, old, or alphabetical
@@ -130,8 +130,25 @@ const getSurvey = async id => {
     }
 };
 
+/**
+ * Gets just the data about a survey (does not include questions or respones).
+ *
+ * @param {int} id ID of the desired survey.
+ *
+ * @return {Object} Data about just the survey.
+ */
+const getOnlySurvey = async id => {
+    try {
+        let survey = await surveysDB.getOnlySurvey();
+        return survey[0];
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     createSurvey,
     getAllSurveys,
-    getSurvey
+    getSurvey,
+    getOnlySurvey
 };

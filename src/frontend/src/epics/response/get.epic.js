@@ -19,6 +19,6 @@ export default function fetchOne(action$) {
         .switchMap(action => {
             return ajax.getJSON(url + action.id);
         })
-        .map(survey => fetchResponsesSuccess(survey))
+        .map(data => fetchResponsesSuccess(data))
         .catch(error => Observable.of(fetchResponsesFailure(error)));
 }

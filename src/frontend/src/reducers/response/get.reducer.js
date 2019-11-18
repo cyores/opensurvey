@@ -5,7 +5,19 @@ import {
 } from "../../actions";
 
 const initialState = {
-    responses: [],
+    data: {
+        survey: {
+            id: "",
+            name: "",
+            descrip: "",
+            creation_date: "",
+            open_date: "",
+            close_date: null,
+            image_url: null,
+            author: ""
+        },
+        questions: []
+    },
     isLoading: false,
     fetchError: null
 };
@@ -20,7 +32,7 @@ export default function getAll(state = initialState, action) {
         case FETCH_RESPONSES_SUCCESS:
             return Object.assign({}, state, {
                 ...state,
-                responses: action.payload,
+                data: action.payload,
                 isLoading: false
             });
         case FETCH_RESPONSES_FAILURE:

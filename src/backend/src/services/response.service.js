@@ -1,4 +1,4 @@
-const { responsesDB } = require("../db/index");
+const { responsesDB, surveysDB } = require("../db/index");
 
 /**
  * Formats the responses into a way the db file is expecting.
@@ -34,14 +34,25 @@ const createResponses = async responses => {
  */
 const getResponses = async id => {
     try {
+        let res = {};
+
+        let surveyData = await surveysDB.getOnlySurvey(id);
+
+        res.survey = surveyData[0];
+
         let responses = await responsesDB.getResponses(id);
-        if (responses.length === 0) return responses;
-        let formatted = [];
+
+        if (responses.length === 0) {
+            res.questions = responses;
+            return res;
+        }
+
+        let formattedQRes = [];
         let currQid = -1;
         let question = null;
         responses.forEach(res => {
             if (res.id !== currQid) {
-                if (question) formatted.push(question);
+                if (question) formattedQRes.push(question);
                 question = {
                     qtext: res.qtext,
                     qdesc: res.qdesc,
@@ -57,8 +68,11 @@ const getResponses = async id => {
             }
             currQid = res.id;
         });
-        formatted.push(question);
-        return formatted;
+        formattedQRes.push(question);
+
+        res.questions = formattedQRes;
+
+        return res;
     } catch (err) {
         throw err;
     }

@@ -126,8 +126,27 @@ const getSurvey = async id => {
     }
 };
 
+/**
+ * Gets just the data about a survey (does not include questions or respones).
+ *
+ * @param {int} id ID of the desired survey.
+ *
+ * @return {Array} Result of the query.
+ */
+const getOnlySurvey = async id => {
+    try {
+        let qresult = await db.query(`SELECT * FROM surveys WHERE id = $1`, [
+            id
+        ]);
+        return qresult.rows;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     createSurvey,
     getAllSurveys,
-    getSurvey
+    getSurvey,
+    getOnlySurvey
 };

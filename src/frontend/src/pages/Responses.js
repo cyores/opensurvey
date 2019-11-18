@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { checkDates } from "../utils/index";
 
 // actions
 import { fetchResponses } from "../actions/index";
+import { FiClock } from "react-icons/fi";
 
 // components
 import Flex from "../components/utils/Flex";
@@ -12,7 +14,7 @@ import PageTransition from "../components/utils/PageTransition";
 
 const mapStateToProps = state => {
     return {
-        responses: state.fetchAllResponsesReducer.responses
+        data: state.fetchAllResponsesReducer.data
     };
 };
 
@@ -27,8 +29,13 @@ class Responses extends Component {
     }
 
     render() {
-        const { responses, isLoading, fetchError } = this.props;
-        console.log(responses);
+        const { data, isLoading, fetchError } = this.props;
+        const { survey, questions } = data;
+        const { dateText, dateColor } = checkDates(
+            survey.open_date,
+            survey.close_date
+        );
+
         if (isLoading) {
             return (
                 <div className="container">
@@ -49,12 +56,35 @@ class Responses extends Component {
         return (
             <PageTransition>
                 <div className="container">
-                    <h2>Survey Results</h2>
+                    <Flex>
+                        <div style={{ flex: "66 0 300px" }}>
+                            <h2>RESULTS: {survey.name}</h2>
+                        </div>
+                        <div style={{ flex: "33 0 150px" }}>
+                            <p
+                                style={{
+                                    fontWeight: 700,
+                                    float: "right",
+                                    color: dateColor
+                                }}
+                            >
+                                <FiClock style={{ padding: "0 2px" }} />
+                                {dateText}
+                            </p>
+                        </div>
+                    </Flex>
+
+                    {survey.descrip.length > 0 && <p>{survey.descrip}</p>}
+                    {survey.author.length > 0 && (
+                        <p>
+                            Survey Author: <b>{survey.author}</b>
+                        </p>
+                    )}
                     <hr></hr>
-                    {responses.length === 0 ? (
+                    {questions.length === 0 ? (
                         <p>There are no responses to this survey.</p>
                     ) : (
-                        responses.map((question, i) => (
+                        questions.map((question, i) => (
                             <div key={`qres-${i}`}>
                                 <h6>
                                     <b>{question.qtext}</b>
