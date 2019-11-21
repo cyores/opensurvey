@@ -12,6 +12,7 @@ import Error from "../components/utils/Error";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
 import PageTransition from "../components/utils/PageTransition";
+import Spinner from "../components/utils/Spinner";
 
 const mapStateToProps = state => {
     return {
@@ -133,7 +134,17 @@ class Survey extends Component {
         if (isLoading) {
             return (
                 <div className="container">
-                    <p>Loading . . . </p>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexFlow: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100vh"
+                        }}
+                    >
+                        <Spinner />
+                    </div>
                 </div>
             );
         }
