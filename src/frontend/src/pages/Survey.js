@@ -13,6 +13,7 @@ import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
 import PageTransition from "../components/utils/PageTransition";
 import Spinner from "../components/utils/Spinner";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = state => {
     return {
@@ -170,6 +171,7 @@ class Survey extends Component {
         }
 
         if (postSuccess) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
             return (
                 <div className="container">
                     <Flex>
@@ -189,7 +191,16 @@ class Survey extends Component {
                             </p>
                         </div>
                     </Flex>
+                    <hr></hr>
                     <h6>Survey submitted!</h6>
+                    <Link to={`/responses/${survey.id}`}>
+                        <Button
+                            theme="primary"
+                            style={{ margin: "var(--space-sm) 0" }}
+                        >
+                            View Responses
+                        </Button>
+                    </Link>
                 </div>
             );
         }

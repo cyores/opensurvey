@@ -73,6 +73,7 @@ class CreateSurvey extends Component {
         );
 
         if (postSuccess) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
             return (
                 <div className="container">
                     <h2>Create New Survey</h2>
