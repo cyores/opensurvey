@@ -22,7 +22,7 @@ INSERT INTO questions (survey_id, qtext, qdesc, qtype, qweight, is_required)
 
 INSERT INTO possible_answers (survey_id, question_id, atext, avalue) 
     VALUES  (2, 2, '0 - 3 hours', '0 - 3'),
-            (2, 2, '4 - 7 hours', '3 - 6'),
+            (2, 2, '4 - 7 hours', '4 - 7'),
             (2, 2, '8 - 10 hours', '8 - 10'),
             (2, 2, 'More than 10 hours', '11+');
 

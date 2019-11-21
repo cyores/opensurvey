@@ -62,9 +62,9 @@
 
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
 
-html {
+/* html {
     scroll-behavior: smooth;
-}
+} */
 
 body {
     margin: 0;
