@@ -67,6 +67,10 @@ The back and front end are individually documented.
 
 ![Survey](./screenshots/survey.png)
 
+#### Results Page
+
+![Results](./screenshots/results.png)
+
 #### Sitched (full) Home Page
 
 ![Survey](./screenshots/stitchedhome.png)
