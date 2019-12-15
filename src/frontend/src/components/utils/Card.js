@@ -99,7 +99,7 @@ export default function Card(props) {
                             padding: "var(--space-sm)"
                         }}
                     >
-                        <Link to={isOpen ? `/responses/${surveyID}` : "/"}>
+                        <Link to={`/responses/${surveyID}`}>
                             <Button
                                 theme="full-transparent"
                                 style={{ margin: 0, marginBottom: "3px" }}

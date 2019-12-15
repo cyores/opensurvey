@@ -70,7 +70,7 @@ const getAllSurveys = async (search, filter, sort) => {
             ${
                 filter.includes("closingsoon")
                     ? ` ${
-                          logicOP[Math.min(filter.indexOf("open"), 1)]
+                          logicOP[Math.min(filter.indexOf("closingsoon"), 1)]
                       }  (surveys.close_date - interval '14 days' < CURRENT_TIMESTAMP AND NOT surveys.close_date < CURRENT_TIMESTAMP)`
                     : ""
             }
