@@ -80,7 +80,7 @@ const getAllSurveys = async (search, filter, sort) => {
             ${sort === "old" ? "ORDER BY surveys.creation_date" : ""}
             ${sort === "az" ? "ORDER BY surveys.name" : ""}
             `;
-console.log(filter)
+
         let qresult = await db.query(q, [search + "%"]);
         return qresult.rows;
     } catch (err) {
