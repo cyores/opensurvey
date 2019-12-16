@@ -50,7 +50,8 @@ const getAllSurveys = async (search, filter, sort) => {
                 filter.includes("open")
                     ? ` ${
                           logicOP[Math.min(filter.indexOf("open"), 1)]
-                      } (surveys.open_date < CURRENT_TIMESTAMP OR surveys.open_date IS null)`
+                      } ((surveys.open_date < CURRENT_TIMESTAMP OR surveys.open_date IS null) 
+                        AND (surveys.close_date > CURRENT_TIMESTAMP OR surveys.close_date IS NULL))`
                     : ""
             }
             ${
@@ -79,7 +80,7 @@ const getAllSurveys = async (search, filter, sort) => {
             ${sort === "old" ? "ORDER BY surveys.creation_date" : ""}
             ${sort === "az" ? "ORDER BY surveys.name" : ""}
             `;
-
+console.log(filter)
         let qresult = await db.query(q, [search + "%"]);
         return qresult.rows;
     } catch (err) {
